@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Dashboard | Home</title>
+    <title>Admin Dashboard | Home</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 </head>
 <body>
@@ -12,23 +12,25 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3" style="margin-top: 45px">
-                <h4>User Dashboard</h4><br>
+                <h4>Admin Dashboard</h4><br>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Phone</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ Auth::guard('web')->user()->name }}</td>
-                            <td>{{ Auth::guard('web')->user()->email }}</td>
+                            <td scope="row">{{ Auth::guard('admin')->user()->name }}</td>
+                            <td>{{ Auth::guard('admin')->user()->email }}</td>
+                            <td>{{ Auth::guard('admin')->user()->phone }}</td>
                             <td>
-                                <a href="{{ route('user.logout') }}" onclick="event.preventDefault();document.
+                                <a href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.
                                 getElementById('logout-form').submit();">Logout</a>
-                                <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
+                                <form action="{{ route('admin.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
                             </td>
                         </tr>
                     </tbody>

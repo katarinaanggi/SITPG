@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Login</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <title>Admin Login</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Poppins');
         /* BASIC */
@@ -283,8 +283,8 @@
 <body>
     <div class="wrapper fadeInDown">
         <div id="formContent" >
-            <h4 class="active fadeIn first">User Login</h4>
-            <form method="POST" action="{{ route('user.check') }}" autocomplete="off">
+            <h4 class="active fadeIn first">Admin Login</h4>
+            <form method="POST" action="{{ route('admin.check') }}" autocomplete="off">
                 @if (Session::get('fail'))
                 <div class="alert alert-danger">
                     {{ Session::get('fail') }}
