@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/upload', [MainBeritaController::class, 'store']);
+// Route::get('/', [MainBeritaController::class, 'index']);
+Route::get('get/{file_name}', [MainBeritaController::class, 'downloadFile'])->name('downloadFile');;
+
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -49,7 +53,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::view('/home','dashboard.admin.home')->name('home');
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
         Route::get('/berita', [MainBeritaController::class,'index'])->name('berita');
-        // Route::post('user', 'UserController@index')->name('user');
+        Route::get('/add-berita', [MainBeritaController::class,'add'])->name('add_berita');
+        Route::post('/store-berita', [MainBeritaController::class, 'store'])->name('store_berita');
+        Route::get('/delete-berita/{id}', [MainBeritaController::class, 'destroy'])->name('delete_berita');
+        
+        // Route::post('/upload', [MainBeritaController::class, 'upload']);
     }); 
 
 });

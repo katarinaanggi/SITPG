@@ -19,6 +19,7 @@ class AdminController extends Controller
         ]);
 
         $creds = $request->only('email','password');
+        // $password = bcrypt($request->password);
         if(Auth::guard('admin')->attempt($creds)){
             return redirect()->route('admin.home');
         }
