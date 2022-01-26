@@ -52,11 +52,18 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
         Route::view('/home','dashboard.admin.home')->name('home');
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+        //Berita
         Route::get('/berita', [MainBeritaController::class,'index'])->name('berita');
         Route::get('/add-berita', [MainBeritaController::class,'add'])->name('add_berita');
         Route::post('/store-berita', [MainBeritaController::class, 'store'])->name('store_berita');
+        Route::get('/edit-berita/{id}', [MainBeritaController::class, 'edit'])->name('edit_berita');
+        Route::patch('/update-berita/{id}', [MainBeritaController::class, 'update'])->name('update_berita');
         Route::get('/delete-berita/{id}', [MainBeritaController::class, 'destroy'])->name('delete_berita');
+        Route::get('/delete-berita/{id}/{filename}', [MainBeritaController::class, 'destroyFile'])->name('delete_file');
+
         
+        
+        // Alert::warning('Are you sure?', 'This record and it`s details will be permanantly lost if updated!');
         // Route::post('/upload', [MainBeritaController::class, 'upload']);
     }); 
 

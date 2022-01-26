@@ -159,11 +159,6 @@
         </div>
     </div>
     <section class="section">
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <strong>{{ $message }}</strong>
-            </div>
-        @endif
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Daftar Berita</h4>
@@ -189,60 +184,16 @@
                                     <a href="{{ route('downloadFile', $value->nama_file) }}"><i class="bi bi-cloud-arrow-down-fill"></i></a>
                                 @endif 
                             </td>    
-                            <td><a class="button" href="" data-bs-toggle="modal" data-bs-target="#inlineForm">
-                                    <span class="text-warning"><i class="bi bi-pencil-square"></i></span></a>&nbsp;&nbsp;
+                            <td><a href="{{ route('admin.edit_berita', $value->id) }}"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;&nbsp;
 
-                                    <!--login form Modal -->
-                                    <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
-                                    aria-labelledby="myModalLabel33" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                        role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myModalLabel33">Edit Berita</h4>
-                                                <button type="button" class="close" data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <i data-feather="x"></i>
-                                                </button>
-                                            </div>
-                                            <form action="#" enctype="multipart/form-data" method="POST">
-                                                <div class="modal-body">
-                                                    <label>Judul: </label>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" 
-                                                            value="{{ $value->judul }}">
-                                                    </div>
-                                                    <label>Isi: </label>
-                                                    <div class="form-group">
-                                                        <textarea type="text" class="form-control">{{ $value->isi }}</textarea>
-                                                    </div>
-                                                    <div class="custom-file">                                    
-                                                        <label class="custom-file-upload" for="file">
-                                                            <i class="bi bi-cloud-upload-fill">{{ $value->nama_file }}</i></label>
-                                                        <input id="file" name='file' type="file" style="display:none;" onchange="namafile()">
-                                                        <label id="file-name">
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light-secondary"
-                                                        data-bs-dismiss="modal">
-                                                        <i class="bx bx-x d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">Close</span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary ml-1"
-                                                        data-bs-dismiss="modal">
-                                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">login</span>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
                                 </div>
-
-                                <a href="{{ route('admin.delete_berita', $value->id) }}" class="button delete-confirm" data-id="{{ $value->id }}">
-                                    <span class="text-danger"><i class="bi bi-trash-fill"></i></span></a>
+                                @if ($value->nama_file)
+                                    <a href="{{ route('admin.delete_file', ['id'=>$value->id, 'filename'=>$value->nama_file]) }}" class="button delete-confirm"
+                                        data-id="{{ $value->id }}"><i class="bi bi-trash-fill text-danger"></i></a>
+                                @else
+                                    <a href="{{ route('admin.delete_berita', $value->id) }}" class="button delete-confirm" 
+                                        data-id="{{ $value->id }}"><i class="bi bi-trash-fill text-danger"></i></span></a>
+                                @endif
                             </td>                        
                         </tr>
                         @endforeach   
@@ -269,8 +220,6 @@
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/mazer.js') }}"></script>
-    <script src="assets/js/extensions/sweetalert2.js"></script>
-    <script src="assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
