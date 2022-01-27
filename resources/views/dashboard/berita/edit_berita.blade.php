@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="assets/vendors/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
 
     <title>Edit Berita</title>
     <style>
@@ -43,7 +43,7 @@
 <body>
     @include('sweetalert::alert')
     <div class="container mt-5">
-        <form id="editform" action="{{ route('admin.update_berita', $berita->id) }}" method="post" enctype="multipart/form-data">
+        <form id="editform" action="{{ route('admin.update_berita', $berita->id) }}" method="post" enctype="multipart/form-data" onsubmit="return submitForm(this)">
             <h3 class="text-center mb-5">Edit Berita</h3>
             @csrf
             @method('PATCH')
@@ -109,21 +109,19 @@
 <!-- filepond -->
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
  <script type="text/javascript">
-    // function submitForm(form) {
-    //     swal({
-    //         title: "Are you sure?",
-    //         text: 'This record and it`s details will be permanantly updated!',
-    //         icon: "warning",
-    //         buttons: ["Cancel", "Yes!"],
-    //         dangerMode: true,
-    //     })
-    //     .then(function (value) {
-    //         if (value) {
-    //             window.location = "redirectURL";
-    //         }
-    //     });
-    //     return false;
-    // }
+    function submitForm(form) {
+        swal({
+            title: "Are you sure?",
+            text: 'This record and it`s details will be permanantly updated!',
+            icon: "warning",
+            buttons: ["Cancel", "Yes!"],
+            dangerMode: true,
+        })
+        .then(function() {
+            form.submit();
+        });
+        return false;
+    }
 
     function namafile(){
         var filename = document.getElementById("file").files[0].name;

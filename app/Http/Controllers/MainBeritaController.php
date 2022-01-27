@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Alert;
-// use RealRashid\SweetAlert\Facades\Alert;
-// or
 // use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class MainBeritaController extends Controller
 {
@@ -88,7 +87,7 @@ class MainBeritaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\book  $book
+     * @param  \App\Models\Berita  $Berita
      * @return \Illuminate\Http\Response
      */
     public function edit($id){        
@@ -100,7 +99,7 @@ class MainBeritaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\book  $book
+     * @param  \App\Models\Berita  $Berita
      * @return \Illuminate\Http\Response
      */
     public function update(Request $value, $id){
