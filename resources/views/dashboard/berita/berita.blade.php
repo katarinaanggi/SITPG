@@ -164,7 +164,7 @@
                 <h4 class="card-title">Daftar Berita</h4>
             </div>
             <div class="card-body">
-                <a class="btn btn-primary" href="{{ route('admin.add_berita') }}">+Add Book Data</a><br /><br />
+                <a class="btn btn-primary" href="{{ route('admin.add_berita') }}">+Add New Berita</a><br /><br />
                 <table class="table table-inverse table-responsive table-hover">
                     <thead class="thead-inverse">
                         <tr>
