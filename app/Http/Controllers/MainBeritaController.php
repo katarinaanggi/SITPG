@@ -22,7 +22,8 @@ class MainBeritaController extends Controller
      */
     public function index(){
         // return view('berita');
-        $berita = DB::table('berita')->get();
+        // $berita = DB::table('berita')->get();
+        $berita = Berita::latest()->get();
         return view('dashboard.berita.berita',[
             'berita' => $berita]);
     }
@@ -46,7 +47,7 @@ class MainBeritaController extends Controller
 
         $rules = [
 			'judul' => 'required|string|max:50|min:5',
-			'isi' => 'required|string|max:1024|min:10',
+			'isi' => 'required|string|min:10',
 		];
 		$validator = Validator::make($request->all(),$rules);
 

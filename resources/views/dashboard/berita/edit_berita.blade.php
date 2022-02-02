@@ -43,7 +43,7 @@
 <body>
     @include('sweetalert::alert')
     <div class="container mt-5">
-        <form id="editform" action="{{ route('admin.update_berita', $berita->id) }}" method="post" enctype="multipart/form-data" onsubmit="return submitForm(this)">
+        <form action="{{ route('admin.update_berita', $berita->id) }}" method="post" enctype="multipart/form-data" >
             <h3 class="text-center mb-5">Edit Berita</h3>
             @csrf
             @method('PATCH')
@@ -84,7 +84,7 @@
                                     <label id="file-name"></label>
                                 </div>
                                 
-                                <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">
+                                <button type="submit" name="submit" class="btn btn-primary btn-block mt-4" onclick="return confirm('Are you sure to update this data?')">
                                     Save
                                 </button>
                         </div>

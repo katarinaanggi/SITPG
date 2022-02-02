@@ -1,0 +1,47 @@
+body {
+    background-color: #fcf6fd;
+}
+
+a {
+    color: #790995;
+}
+
+.bi-heart-fill {
+    color: red;
+}
+
+a:hover {
+    color: #5F0775;
+}
+
+.btn, .btn:focus, .btn:active, .btn:visited, .btn:hover {
+    background-color: #F9E7FE;
+    color :#790995 !important;
+    /* : #ffb46e; */
+}
+
+.sidebar-menu .sidebar-item.active .sidebar-link {
+    background-color: #790995 !important;
+}
+
+.sidebar-wrapper .menu .sidebar-link i, .sidebar-wrapper .menu .sidebar-link svg{
+    color: #3D044B;
+}
+
+.sidebar-wrapper .menu .sidebar-title, .sidebar-wrapper .menu .sidebar-link span {
+    color: #57066B;
+}
+
+h3, h6, .card-title a {
+    color: #642C72 !important;
+}
+
+.dropdown-item {
+    color: #3D044B;
+}
+
+.bi {
+    position:relative; 
+    top: calc(50% - 10px);
+    color: #790995;
+}

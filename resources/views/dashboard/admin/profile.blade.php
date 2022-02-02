@@ -14,58 +14,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/ungu.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg" type="image/x-icon') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
-
-    <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
-        
-        .wrapper {
-            display: table;
-            height: 100%;
-            width: 100%;
-        }
-        
-        .card {
-            display: block; 
-            margin-bottom: 20px;
-            line-height: 1.42857143;
-            background-color: #fff;
-            border-radius: 2px;
-            box-shadow: 0 2px 5px 0 rgba(213, 186, 235, 0.37),0 2px 10px 0 rgba(213, 186, 235, 0.37); 
-            transition: box-shadow .25s; 
-            border-radius: 20px;
-        }
-        .card:hover {
-            box-shadow: 0 8px 17px 0 rgba(213, 186, 235, 0.37),0 6px 20px 0 rgba(213, 186, 235, 0.37);
-        }
-         
-        .card-content {
-        padding:15px;
-        text-align:left;
-        }
-        .card-title {
-        margin-top:0px;
-        font-weight: 700;
-        font-size: 1.65em;
-        }
-
-        .card-title a {
-            color: #000;
-            text-decoration: none !important;
-        }
-
-        .read-more-show{
-        cursor:pointer;
-        color: #C411F1;
-        }
-        .read-more-hide{
-        cursor:pointer;
-        color: #C411F1;
-        }
-    
-        .hide_content{
-        display: none;
-        }
-    </style>
 </head>
 <body>
     @include('sweetalert::alert')
@@ -83,21 +31,23 @@
         <ul class="menu">
             <li class="sidebar-title">Menu</li>
             
-             <li class="sidebar-item active" >
-                <a id="yuyu" href="{{ route('admin.home') }}" class='sidebar-link' >
+            <li
+                class="sidebar-item  ">
+                <a href="{{ route('admin.home') }}" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             
             {{-- Kelola Berita --}}
-            <li class="sidebar-item">
+            <li
+                class="sidebar-item">
                 <a href="{{ route('admin.berita') }}" class='sidebar-link'>
                     <i class="bi bi-newspaper"></i>
                     <span>Berita</span>
                 </a>
             </li>
-
+            
             <li class="sidebar-title">Data</li>
             
             <li
@@ -119,7 +69,7 @@
             <li class="sidebar-title">Setting</li>
 
             <li
-                class="sidebar-item">
+                class="sidebar-item active">
                 <a href="{{ route('admin.profile') }}" class='sidebar-link'>
                     <i class="bi bi-person-fill"></i>
                     <span>Profile</span>
@@ -184,92 +134,17 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Selamat Datang di Sistem Informasi Tunjangan Profesi Guru</h3>
-                <p class="text-subtitle text-muted">Sistem Informasi Tunjangan Profesi Guru ini disediakan oleh operator Dinas Pendidikan dan Kebudayaan Provinsi Jawa Tengah.</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Dashboard</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
-    
-    @if ($berita->count())
-        <div class="card">
-            <div class="card-content">
-                <div class="card-body text-center">
-                    <h4 class="card-title">
-                        <a href="#">{{ $berita[0]->judul }}</a>
-                    </h4>
-                    <p class="card-text" style=" text-align: justify;">
-                        @if(strlen($berita[0]->isi) > 500)
-                            {{ substr($berita[0]->isi,0,500) }}<span 
-                                class="read-more-show hide_content">More<i class="bi bi-chevron-down"></i></span><span 
-                                class="read-more-content">{{ substr($berita[0]->isi,500,strlen($berita[0]->isi)) }}<span 
-                                class="read-more-hide hide_content">Less <i class="bi bi-chevron-up"></i></span> </span>
-                        @else
-                            {{ $berita[0] }}
-                        @endif
-                    </p>
-                    <p class="card-text"><small class="text-muted">{{ \Carbon\Carbon::parse($berita[0]->created_at)->diffForHumans() }}</small></p>
-                </div>
-            </div>
-            <div class="card-footer d-flex card-read-more" style="justify-content: space-between; background-color:#F3CFFC">
-                <button class="btn btn-light">Read More</button>
-                @if ($berita[0]->nama_file)
-                    <a href="{{ route('downloadFile', $berita[0]->nama_file) }}">
-                        <i class="bi bi-cloud-arrow-down-fill float-right" style="font-size:26px; "></i>
-                    </a>
-                @endif 
-            </div>
-        </div>
-    @else 
-    <p>None</p>  
-    @endif
-
-    <section class="wrapper">
-        <div class="container">
-            <div class="row">
-                @foreach ($berita->skip(1) as $value)
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">{{ $value->judul }}</a>
-                                </h4>
-                                <p class="card-text " >
-                                    @if(strlen($value->isi) > 50)
-                                        {{ substr($value->isi,0,50) }}<span 
-                                            class="read-more-show hide_content">More<i class="bi bi-chevron-down"></i></span><span 
-                                            class="read-more-content">{{ substr($value->isi,50,strlen($value->isi)) }}<span 
-                                            class="read-more-hide hide_content">Less <i class="bi bi-chevron-up"></i></span> </span>
-                                    @else
-                                        {{ $value->isi }}
-                                    @endif
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between">
-                            <span><small class="text-muted">{{ \Carbon\Carbon::parse($value->created_at)->diffForHumans() }}</small></span>
-                            <button class="btn btn-light">Read More</button>
-                        </div>
-                        {{-- <div class="card-footer d-flex card-read-more">
-                            <a href="#" class="btn btn-link btn-block" id="berita"><small>Read More</small></a>
-                            @if ($value->nama_file)
-                                <a href="{{ route('downloadFile', $value->nama_file) }}"><i class="bi bi-cloud-arrow-down-fill"></i></a>
-                            @endif 
-                        </div> --}}
-                    </div>
-                </div>
-                @endforeach 
-            </div>
-        </div>
-    </section>      
-    
 </div>
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
@@ -290,23 +165,5 @@
     <script src="{{ asset('assets/js/mazer.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        // Hide the extra content initially:
-        $('.read-more-content').addClass('hide_content')
-        $('.read-more-show, .read-more-hide').removeClass('hide_content')
-
-        // Set up the toggle effect:
-        $('.read-more-show').on('click', function(e) {
-            $(this).next('.read-more-content').removeClass('hide_content');
-            $(this).addClass('hide_content');
-            e.preventDefault();
-        });
-        $('.read-more-hide').on('click', function(e) {
-            var p = $(this).parent('.read-more-content');
-            p.addClass('hide_content');
-            p.prev('.read-more-show').removeClass('hide_content'); // Hide only the preceding "Read More"
-            e.preventDefault();
-        });
-    </script>
 </body>
 </html>

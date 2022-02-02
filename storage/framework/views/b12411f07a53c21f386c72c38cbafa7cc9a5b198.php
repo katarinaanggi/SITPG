@@ -7,16 +7,16 @@
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">   
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/ungu.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg" type="image/x-icon') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/app.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/ungu.css')); ?>">
+    <link rel="shortcut icon" href="<?php echo e(asset('assets/images/favicon.svg" type="image/x-icon')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/sweetalert2/sweetalert2.min.css')); ?>">
 
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+        @import  url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
         
         .wrapper {
             display: table;
@@ -68,14 +68,14 @@
     </style>
 </head>
 <body>
-    @include('sweetalert::alert')
+    <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
     <div class="sidebar-header">
         <div class="d-flex justify-content-between">
             <div class="logo">
-                <a href="{{ route('admin.home') }}">SITPG</a>
+                <a href="<?php echo e(route('admin.home')); ?>">SITPG</a>
             </div>
         </div>
     </div>
@@ -84,15 +84,15 @@
             <li class="sidebar-title">Menu</li>
             
              <li class="sidebar-item active" >
-                <a id="yuyu" href="{{ route('admin.home') }}" class='sidebar-link' >
+                <a id="yuyu" href="<?php echo e(route('admin.home')); ?>" class='sidebar-link' >
                     <i class="bi bi-grid-fill"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             
-            {{-- Kelola Berita --}}
+            
             <li class="sidebar-item">
-                <a href="{{ route('admin.berita') }}" class='sidebar-link'>
+                <a href="<?php echo e(route('admin.berita')); ?>" class='sidebar-link'>
                     <i class="bi bi-newspaper"></i>
                     <span>Berita</span>
                 </a>
@@ -120,7 +120,7 @@
 
             <li
                 class="sidebar-item">
-                <a href="{{ route('admin.profile') }}" class='sidebar-link'>
+                <a href="<?php echo e(route('admin.profile')); ?>" class='sidebar-link'>
                     <i class="bi bi-person-fill"></i>
                     <span>Profile</span>
                 </a>
@@ -149,28 +149,28 @@
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
-                                            <h6 class="mb-0 text-gray-600">{{ Auth::guard('admin')->user()->name }}</h6>
+                                            <h6 class="mb-0 text-gray-600"><?php echo e(Auth::guard('admin')->user()->name); ?></h6>
                                             <p class="mb-0 text-sm text-gray-600">Administrator</p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="{{ asset('assets/images/faces/1.jpg') }}">
+                                                <img src="<?php echo e(asset('assets/images/faces/1.jpg')); ?>">
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" style="min-width: 11rem;">
                                     <li>
-                                        <h6 class="dropdown-header">Hello, {{ Auth::guard('admin')->user()->name }}!</h6>
+                                        <h6 class="dropdown-header">Hello, <?php echo e(Auth::guard('admin')->user()->name); ?>!</h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="icon-mid bi bi-person me-2"></i> My
+                                    <li><a class="dropdown-item" href="<?php echo e(route('admin.profile')); ?>"><i class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a></li>
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.
+                                        <a class="dropdown-item" href="<?php echo e(route('admin.logout')); ?>" onclick="event.preventDefault();document.
                                         getElementById('logout-form').submit();"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
-                                        <form action="{{ route('admin.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
+                                        <form action="<?php echo e(route('admin.logout')); ?>" method="post" class="d-none" id="logout-form"><?php echo csrf_field(); ?></form>
                                     </li>
                                 </ul>
                             </div>
@@ -197,75 +197,72 @@
         </div>
     </div>
     
-    @if ($berita->count())
+    <?php if($berita->count()): ?>
         <div class="card">
             <div class="card-content">
                 <div class="card-body text-center">
                     <h4 class="card-title">
-                        <a href="#">{{ $berita[0]->judul }}</a>
+                        <a href="#"><?php echo e($berita[0]->judul); ?></a>
                     </h4>
                     <p class="card-text" style=" text-align: justify;">
-                        @if(strlen($berita[0]->isi) > 500)
-                            {{ substr($berita[0]->isi,0,500) }}<span 
+                        <?php if(strlen($berita[0]->isi) > 500): ?>
+                            <?php echo e(substr($berita[0]->isi,0,500)); ?><span 
                                 class="read-more-show hide_content">More<i class="bi bi-chevron-down"></i></span><span 
-                                class="read-more-content">{{ substr($berita[0]->isi,500,strlen($berita[0]->isi)) }}<span 
+                                class="read-more-content"><?php echo e(substr($berita[0]->isi,500,strlen($berita[0]->isi))); ?><span 
                                 class="read-more-hide hide_content">Less <i class="bi bi-chevron-up"></i></span> </span>
-                        @else
-                            {{ $berita[0] }}
-                        @endif
+                        <?php else: ?>
+                            <?php echo e($berita[0]); ?>
+
+                        <?php endif; ?>
                     </p>
-                    <p class="card-text"><small class="text-muted">{{ \Carbon\Carbon::parse($berita[0]->created_at)->diffForHumans() }}</small></p>
+                    <p class="card-text"><small class="text-muted"><?php echo e(\Carbon\Carbon::parse($berita[0]->created_at)->diffForHumans()); ?></small></p>
                 </div>
             </div>
             <div class="card-footer d-flex card-read-more" style="justify-content: space-between; background-color:#F3CFFC">
                 <button class="btn btn-light">Read More</button>
-                @if ($berita[0]->nama_file)
-                    <a href="{{ route('downloadFile', $berita[0]->nama_file) }}">
+                <?php if($berita[0]->nama_file): ?>
+                    <a href="<?php echo e(route('downloadFile', $berita[0]->nama_file)); ?>">
                         <i class="bi bi-cloud-arrow-down-fill float-right" style="font-size:26px; "></i>
                     </a>
-                @endif 
+                <?php endif; ?> 
             </div>
         </div>
-    @else 
+    <?php else: ?> 
     <p>None</p>  
-    @endif
+    <?php endif; ?>
 
     <section class="wrapper">
         <div class="container">
             <div class="row">
-                @foreach ($berita->skip(1) as $value)
+                <?php $__currentLoopData = $berita->skip(1); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#">{{ $value->judul }}</a>
+                                    <a href="#"><?php echo e($value->judul); ?></a>
                                 </h4>
                                 <p class="card-text " >
-                                    @if(strlen($value->isi) > 50)
-                                        {{ substr($value->isi,0,50) }}<span 
+                                    <?php if(strlen($value->isi) > 50): ?>
+                                        <?php echo e(substr($value->isi,0,50)); ?><span 
                                             class="read-more-show hide_content">More<i class="bi bi-chevron-down"></i></span><span 
-                                            class="read-more-content">{{ substr($value->isi,50,strlen($value->isi)) }}<span 
+                                            class="read-more-content"><?php echo e(substr($value->isi,50,strlen($value->isi))); ?><span 
                                             class="read-more-hide hide_content">Less <i class="bi bi-chevron-up"></i></span> </span>
-                                    @else
-                                        {{ $value->isi }}
-                                    @endif
+                                    <?php else: ?>
+                                        <?php echo e($value->isi); ?>
+
+                                    <?php endif; ?>
                                 </p>
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <span><small class="text-muted">{{ \Carbon\Carbon::parse($value->created_at)->diffForHumans() }}</small></span>
+                            <span><small class="text-muted"><?php echo e(\Carbon\Carbon::parse($value->created_at)->diffForHumans()); ?></small></span>
                             <button class="btn btn-light">Read More</button>
                         </div>
-                        {{-- <div class="card-footer d-flex card-read-more">
-                            <a href="#" class="btn btn-link btn-block" id="berita"><small>Read More</small></a>
-                            @if ($value->nama_file)
-                                <a href="{{ route('downloadFile', $value->nama_file) }}"><i class="bi bi-cloud-arrow-down-fill"></i></a>
-                            @endif 
-                        </div> --}}
+                        
                     </div>
                 </div>
-                @endforeach 
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
             </div>
         </div>
     </section>      
@@ -285,9 +282,9 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/mazer.js') }}"></script>
+    <script src="<?php echo e(asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap.bundle.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/mazer.js')); ?>"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
     <script type="text/javascript">
@@ -309,4 +306,4 @@
         });
     </script>
 </body>
-</html>
+</html><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/dashboard/admin/home.blade.php ENDPATH**/ ?>

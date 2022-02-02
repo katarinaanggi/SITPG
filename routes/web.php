@@ -21,12 +21,9 @@ Route::get('/', function () {
 });
 
 Route::post('/upload', [MainBeritaController::class, 'store']);
-// Route::get('/', [MainBeritaController::class, 'index']);
 Route::get('get/{file_name}', [MainBeritaController::class, 'downloadFile'])->name('downloadFile');;
 
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('user')->name('user.')->group(function(){
 
@@ -50,7 +47,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
     });
 
     Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
-        Route::view('/home','dashboard.admin.home')->name('home');
+        Route::get('/home',[AdminController::class, 'index'])->name('home');
+        Route::view('/profile','dashboard.admin.profile')->name('profile');
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
         //Berita
         Route::get('/berita', [MainBeritaController::class,'index'])->name('berita');
@@ -60,11 +58,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::patch('/update-berita/{id}', [MainBeritaController::class, 'update'])->name('update_berita');
         Route::get('/delete-berita/{id}', [MainBeritaController::class, 'destroy'])->name('delete_berita');
         Route::get('/delete-berita/{id}/{filename}', [MainBeritaController::class, 'destroyFile'])->name('delete_file');
-
-        
-        
-        // Alert::warning('Are you sure?', 'This record and it`s details will be permanantly lost if updated!');
-        // Route::post('/upload', [MainBeritaController::class, 'upload']);
     }); 
 
 });

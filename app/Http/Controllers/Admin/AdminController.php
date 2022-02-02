@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Berita;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -31,5 +33,11 @@ class AdminController extends Controller
     function logout(){
         Auth::guard('admin')->logout();
         return redirect('/');
+    }
+
+    public function index(){
+        $berita = Berita::latest()->get();
+        return view('dashboard.admin.home',[
+            'berita' => $berita]);
     }
 }
