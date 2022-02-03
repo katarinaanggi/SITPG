@@ -7,7 +7,7 @@ a {
 }
 
 .bi-heart-fill {
-    color: red;
+    color: red !important;
 }
 
 a:hover {
@@ -32,8 +32,8 @@ a:hover {
     color: #57066B;
 }
 
-h3, h6, .card-title a {
-    color: #642C72 !important;
+h1, h3, h6, .card-title a {
+    color: #57066B !important;
 }
 
 .dropdown-item {
@@ -44,4 +44,19 @@ h3, h6, .card-title a {
     position:relative; 
     top: calc(50% - 10px);
     color: #790995;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #C411F1;
+    color: white;
+}
+
+.btn-save, .btn-save:focus, .btn-save:active, .btn-save:visited, .btn-save:hover{
+    background-color: #4E0660; 
+    color: white !important;
+}
+
+.form-control:focus {
+    border-color: #ff80ff;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
 }

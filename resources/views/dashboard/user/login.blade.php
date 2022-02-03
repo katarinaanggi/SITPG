@@ -11,13 +11,13 @@
         @import url('https://fonts.googleapis.com/css?family=Poppins');
         /* BASIC */
         body {
-            background-color: #56baed;
+            background-color: #8D0AAD;
             font-family: "Poppins", sans-serif;
             height: 100vh;
         }
 
         a {
-            color: #92badd;
+            color: #E8A0F9;
             display:inline-block;
             text-decoration: none;
             font-weight: 400;
@@ -78,14 +78,14 @@
         /* TABS */
         h4.active {
             color: #0d0d0d;
-            border-bottom: 2px solid #5fbae9;
+            border-bottom: 2px solid #E8A0F9;
         }
 
 
 
         /* FORM TYPOGRAPHY*/
         button.button  {
-            background-color: #56baed;
+            background-color: #D659F5;
             font-weight: bold;
             border: none;
             color: white;
@@ -95,8 +95,8 @@
             display: inline-block;
             text-transform: uppercase;
             font-size: 13px;
-            -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-            box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+            -webkit-box-shadow: 0 10px 30px 0 rgba(201, 95, 233, 0.493);
+            box-shadow: 0 10px 30px 0 rgba(201, 95, 233, 0.493);
             -webkit-border-radius: 5px 5px 5px 5px;
             border-radius: 5px 5px 5px 5px;
             margin: 5px 20px 40px 20px;
@@ -108,7 +108,7 @@
         }
 
         button.button:hover  {
-            background-color: #39ace7;
+            background-color: #C411F1;
         }
 
         input[type=email], input[type=password] {
@@ -134,7 +134,13 @@
 
         input[type=email]:focus, input[type=password]:focus {
             background-color: #fff;
-            border-bottom: 2px solid #5fbae9;
+            border-bottom: 2px solid #E8A0F9;
+            border-color: #E8A0F9;
+        }
+
+        .form-control:focus {
+            border-color: #ff80ff;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
         }
 
         input[type=email]::placeholder, input[type=password]::placeholder {
@@ -232,7 +238,7 @@
             bottom: -10px;
             width: 0;
             height: 2px;
-            background-color: #56baed;
+            background-color: #E8A0F9;
             content: "";
             transition: width 0.2s;
         }

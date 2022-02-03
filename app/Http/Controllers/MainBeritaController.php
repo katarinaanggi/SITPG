@@ -25,6 +25,7 @@ class MainBeritaController extends Controller
         // $berita = DB::table('berita')->get();
         $berita = Berita::latest()->get();
         return view('dashboard.berita.berita',[
+            'title' => "Berita Dashboard",
             'berita' => $berita]);
     }
 
@@ -80,7 +81,7 @@ class MainBeritaController extends Controller
 				return redirect()->route('admin.berita')->with('success', 'Data berhasil ditambahkan');
 			}
 			catch(Exception $e){
-				return redirect()->route('admin.add_berita')->with('failure', 'Data belum berhasil ditambahkan');
+				return redirect()->route('admin.add_berita')->with('error', 'Data belum berhasil ditambahkan');
 			}
 		}
     }
@@ -106,7 +107,7 @@ class MainBeritaController extends Controller
     public function update(Request $value, $id){
         $rules = [
 			'judul' => 'required|string|max:50|min:5',
-			'isi' => 'required|string|max:1024|min:10',
+			'isi' => 'required|string|min:10',
 		];
 		$validator = Validator::make($value->all(),$rules);
 
@@ -140,7 +141,7 @@ class MainBeritaController extends Controller
 				return redirect()->route('admin.berita')->with('success', 'Data berhasil diubah');
 			}
 			catch(Exception $e){
-				return redirect()->route('admin.edit_berita',$value->id)->with('failure', 'Data belum berhasil diubah');
+				return redirect()->route('admin.edit_berita',$value->id)->with('error', 'Data belum berhasil diubah');
 			}
 		}
     }

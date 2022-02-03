@@ -16,8 +16,10 @@
     <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script> --}}
 
     <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/ungu.css') }}">
 
     <title>Add Berita</title>
     <style>
@@ -44,12 +46,12 @@
 </head>
 
 <body>
-
     <div class="container mt-5">
+        <a href="{{route('admin.berita')}}"><i class="bi bi-x-lg"></i></a>
         <form action="{{ route('admin.store_berita') }}" method="post" enctype="multipart/form-data">
             <h3 class="text-center mb-5">Add New Berita</h3>
             @csrf
-            @if ($message = Session::get('failure'))
+            @if ($message = Session::get('error'))
                 <div class="alert alert-danger">
                     <strong>{{ $message }}</strong>
                 </div>
@@ -91,7 +93,7 @@
                                         data-max-file-size="50MB" data-max-files="1">
                                 </div> --}}
                                 
-                                <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">
+                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4">
                                     Add New Berita
                                 </button>
                         </div>

@@ -9,11 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    
     <link rel="stylesheet" href="{{ asset('assets/vendors/toastify/toastify.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/ungu.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
 
     <title>Edit Berita</title>
@@ -43,11 +44,12 @@
 <body>
     @include('sweetalert::alert')
     <div class="container mt-5">
+        <a href="{{route('admin.berita')}}"><i class="bi bi-x-lg"></i></a>
         <form action="{{ route('admin.update_berita', $berita->id) }}" method="post" enctype="multipart/form-data" >
             <h3 class="text-center mb-5">Edit Berita</h3>
             @csrf
             @method('PATCH')
-            @if ($message = Session::get('failure'))
+            @if ($message = Session::get('error'))
                 <div class="alert alert-danger">
                     <strong>{{ $message }}</strong>
                 </div>
@@ -83,10 +85,11 @@
                                     <input id="file" name='file' type="file" style="display:none;" onchange="namafile()">
                                     <label id="file-name"></label>
                                 </div>
-                                
-                                <button type="submit" name="submit" class="btn btn-primary btn-block mt-4" onclick="return confirm('Are you sure to update this data?')">
+
+                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Are you sure to update this data?')">
                                     Save
                                 </button>
+
                         </div>
                     </div>
                 </div>

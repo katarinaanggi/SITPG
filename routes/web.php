@@ -48,8 +48,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
         Route::get('/home',[AdminController::class, 'index'])->name('home');
-        Route::view('/profile','dashboard.admin.profile')->name('profile');
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+        //Profile
+        Route::view('/profile','dashboard.admin.profile', ['title' => 'Profile'])->name('profile');
+        Route::patch('/save-profile/{id}',[AdminController::class, 'changeProfile'])->name('changeProfile');
+        Route::patch('/change-password/{id}',[AdminController::class, 'changePassword'])->name('changePassword');
+        
         //Berita
         Route::get('/berita', [MainBeritaController::class,'index'])->name('berita');
         Route::get('/add-berita', [MainBeritaController::class,'add'])->name('add_berita');
