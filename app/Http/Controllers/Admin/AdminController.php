@@ -38,7 +38,7 @@ class AdminController extends Controller
     }
 
     public function index(){
-        $berita = Berita::latest()->get();
+        $berita = Berita::latest("updated_at")->get();
         return view('dashboard.admin.home',[
             'title' => "Admin Dashboard",
             'berita' => $berita]);

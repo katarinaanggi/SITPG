@@ -16,33 +16,40 @@
             </div>
         </div>
     </div>
+
+            
     
     <?php if($berita->count()): ?>
-        <div class="card">
+        <div class="card" id="news">
             <div class="card-content">
                 <div class="card-body text-center">
+                    <div class="tags">
+                        <div class="tag">New!</div>
+                    </div>
                     <h4 class="card-title">
-                        <a href="#"><?php echo e($berita[0]->judul); ?></a>
+                        <a href="<?php echo e(route('admin.detail_berita', $berita[0]->id)); ?>"><?php echo e($berita[0]->judul); ?></a>
                     </h4>
-                    <p class="card-text" style=" text-align: justify;">
+                    <p class="card-text isinya">
                         <?php if(strlen($berita[0]->isi) > 500): ?>
-                            <?php echo e(substr($berita[0]->isi,0,500)); ?><span 
-                                class="read-more-show hide_content">More<i class="bi bi-chevron-down"></i></span><span 
-                                class="read-more-content"><?php echo e(substr($berita[0]->isi,500,strlen($berita[0]->isi))); ?><span 
-                                class="read-more-hide hide_content">Less <i class="bi bi-chevron-up"></i></span> </span>
+                            <?php echo substr($berita[0]->isi,0,500); ?>. . .
                         <?php else: ?>
-                            <?php echo e($berita[0]); ?>
+                            <?php echo $berita[0]->isi; ?>
 
                         <?php endif; ?>
                     </p>
-                    <p class="card-text"><small class="text-muted"><?php echo e(\Carbon\Carbon::parse($berita[0]->created_at)->diffForHumans()); ?></small></p>
+                    <div class="date"><?php echo e(\Carbon\Carbon::parse($berita[0]->created_at)->diffForHumans()); ?></div>
                 </div>
             </div>
-            <div class="card-footer d-flex card-read-more" style="justify-content: space-between; background-color:#F3CFFC">
-                <button class="btn btn-light">Read More</button>
+            <div id="cf" class="card-footer d-flex">
+                
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#viewDetails" data-bs-backdrop="false">
+                        Read More
+                    </button>
+
                 <?php if($berita[0]->nama_file): ?>
                     <a href="<?php echo e(route('downloadFile', $berita[0]->nama_file)); ?>">
-                        <i class="bi bi-cloud-arrow-down-fill float-right" style="font-size:26px; "></i>
+                        <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
                     </a>
                 <?php endif; ?> 
             </div>
@@ -50,26 +57,47 @@
     <?php else: ?> 
     <p>None</p>  
     <?php endif; ?>
+   
+    <!-- Modal -->
+    <div class="modal fade" id="viewDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel"><?php echo e($berita[0]->judul); ?></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="card-text"><small class="text-muted">Created at <?php echo e($berita[0]->created_at->format('d-m-Y')); ?> by Admin</small></p> 
+                <p style="text-align: justify; text-justify: inter-word;"><?php echo $berita[0]->isi; ?></p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <?php if($berita[0]->nama_file): ?>
+                    <a href="<?php echo e(route('downloadFile', $berita[0]->nama_file)); ?>" class="mr-auto"> Download file 
+                        
+                    </a>
+                <?php endif; ?>
+                <button type="button" class="btn btn-save" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
     <section class="wrapper">
         <div class="container">
             <div class="row">
                 <?php $__currentLoopData = $berita->skip(1); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card bcard-hover">
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="#"><?php echo e($value->judul); ?></a>
+                                    <a href="<?php echo e(route('admin.detail_berita', $value->id)); ?>"><?php echo e($value->judul); ?></a>
                                 </h4>
                                 <p class="card-text " >
                                     <?php if(strlen($value->isi) > 50): ?>
-                                        <?php echo e(substr($value->isi,0,50)); ?><span 
-                                            class="read-more-show hide_content">More<i class="bi bi-chevron-down"></i></span><span 
-                                            class="read-more-content"><?php echo e(substr($value->isi,50,strlen($value->isi))); ?><span 
-                                            class="read-more-hide hide_content">Less <i class="bi bi-chevron-up"></i></span> </span>
+                                        <?php echo substr($value->isi,0,50); ?>. . .
                                     <?php else: ?>
-                                        <?php echo e($value->isi); ?>
+                                        <?php echo $value->isi; ?>
 
                                     <?php endif; ?>
                                 </p>
@@ -77,9 +105,8 @@
                         </div>
                         <div class="card-footer d-flex justify-content-between">
                             <span><small class="text-muted"><?php echo e(\Carbon\Carbon::parse($value->created_at)->diffForHumans()); ?></small></span>
-                            <button class="btn btn-light">Read More</button>
+                            <a href="<?php echo e(route('admin.detail_berita', $value->id)); ?>" style="display: inline-block; font-weight: 700; letter-spacing: 1.5px;">READ MORE</a>
                         </div>
-                        
                     </div>
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 

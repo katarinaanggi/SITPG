@@ -37,16 +37,22 @@
                     <tbody>
                         @foreach ($berita as $key => $value)
                         <tr>
-                            <td>{{ $value->judul }}</td>
-                            <td>{{ $value->isi }}</td>
+                            <td><a href="{{ route('admin.detail_berita', $value->id) }}" >{{ $value->judul }}</a></td>
+                            <td>
+                                @if(strlen($value->isi) > 75)
+                                    {!! substr($value->isi,0,75) !!}. . .
+                                @else
+                                    {!! $value->isi !!}
+                                @endif
+                            </td>
                             <td style="white-space: nowrap">
                                 @if ($value->nama_file)
                                     <a href="{{ route('downloadFile', $value->nama_file) }}"><i class="bi bi-cloud-arrow-down-fill"></i></a>
+                                @else
+                                    <p> </p>
                                 @endif 
                             </td>    
                             <td><a href="{{ route('admin.edit_berita', $value->id) }}"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;&nbsp;
-
-                                </div>
                                 @if ($value->nama_file)
                                     <a href="{{ route('admin.delete_file', ['id'=>$value->id, 'filename'=>$value->nama_file]) }}" class="button delete-confirm"
                                         data-id="{{ $value->id }}"><i class="bi bi-trash-fill text-danger"></i></a>
@@ -59,6 +65,9 @@
                         @endforeach   
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center">
+                    {!! $berita->links() !!}
+                </div>
             </div>
         </div>
     </section>

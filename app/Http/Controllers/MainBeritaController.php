@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Berita;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 // use Alert;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 
 class MainBeritaController extends Controller
@@ -21,12 +22,26 @@ class MainBeritaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        // return view('berita');
-        // $berita = DB::table('berita')->get();
-        $berita = Berita::latest()->get();
+        $berita = Berita::latest()->paginate(10);
         return view('dashboard.berita.berita',[
             'title' => "Berita Dashboard",
             'berita' => $berita]);
+
+        
+    }
+
+    /**
+     * Display a listing of berita.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewDetail($id){
+        $berita = Berita::find($id);
+        return view('dashboard.berita.detail',[
+            'title' => "Detail Berita",
+            'berita' => $berita]);
+
+        
     }
 
     /**
@@ -132,11 +147,13 @@ class MainBeritaController extends Controller
                     $fileName = time().'_'.$file->getClientOriginalName();
                     $filePath = $file->storeAs('uploads', $fileName, 'public');
                 }
+                $current_timestamp = Carbon::now()->toDateTimeString();
                 DB::table('berita')->where('id', $id)->update([
                     'judul' => $value->judul,
                     'isi' => $value->isi,
                     'nama_file' => $fileName,
-                    'file_path' => $filePath
+                    'file_path' => $filePath,
+                    'updated_at' => $current_timestamp
                 ]);
 				return redirect()->route('admin.berita')->with('success', 'Data berhasil diubah');
 			}

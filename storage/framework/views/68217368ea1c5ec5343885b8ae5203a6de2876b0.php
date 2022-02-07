@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/app.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/ungu.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/responsive_card.css')); ?>">
     <link rel="shortcut icon" href="<?php echo e(asset('assets/images/favicon.svg" type="image/x-icon')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/sweetalert2/sweetalert2.min.css')); ?>">
 
@@ -23,12 +24,16 @@
             height: 100%;
             width: 100%;
         }
+
+        :root {
+            --transition-time: 0.3s;
+        }
         
         .card {
             display: block; 
             margin-bottom: 20px;
             line-height: 1.42857143;
-            background-color: #fff;
+            background-color: white;
             border-radius: 2px;
             box-shadow: 0 2px 5px 0 rgba(213, 186, 235, 0.37),0 2px 10px 0 rgba(213, 186, 235, 0.37); 
             transition: box-shadow .25s; 
@@ -39,13 +44,13 @@
         }
          
         .card-content {
-        padding:15px;
-        text-align:left;
+            padding:15px;
+            text-align:left;
         }
         .card-title {
-        margin-top:0px;
-        font-weight: 700;
-        font-size: 1.65em;
+            margin-top:0px;
+            font-weight: 700;
+            font-size: 1.65em;
         }
 
         .card-title a {
@@ -53,18 +58,118 @@
             text-decoration: none !important;
         }
 
-        .read-more-show{
-        cursor:pointer;
-        color: #C411F1;
+        /* Card bawahnya */
+        .bcard-hover {
+            transition: all 0.25s ease-in;
+            border-bottom: 5px solid transparent;
         }
-        .read-more-hide{
-        cursor:pointer;
-        color: #C411F1;
+        .bcard-hover:hover {
+            transform: translateY(-5px);
+            border: none;
+            border-bottom: 5px solid #790995;
         }
-    
-        .hide_content{
-        display: none;
+
+        /* New! Card */
+        #news {
+            --bg-filter-opacity: 0.5;
+            padding: 1em;
+            align-items: flex-end;
+            transition: all, var(--transition-time);
+            position: relative;
+            overflow: hidden;
+            background-color: var(--ungu);
+            color: var(--bg);
         }
+
+        #news:hover {
+            transform: rotate(0);
+            color: var(--ungu);
+        }
+
+        #news:before {
+            background: #F3CFFC;
+            width: 250%;
+            height: 250%;
+        }
+
+        .date {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1em;
+            padding: 1em;
+            line-height: 1em;
+            opacity: .8;
+            color: var(--bg);
+        }
+
+        #news:hover .date {
+            color: var(--ungu)
+        }
+
+        #news:hover .card-content .card-body h4 a, #news:hover .card-footer a i {
+            color: var(--ungu) !important
+        }
+
+        #news .card-content .card-body h4 a, #news .card-footer a i {
+            color: var(--bg) !important
+        }
+
+        #cf {
+            justify-content: space-between; 
+            background-color:var(--ungu);
+            transition: all, var(--transition-time);
+        }
+
+        #news:hover #cf {
+            background-color: #F3CFFC;
+        }
+
+        .tags {
+            display: flex;
+            animation: blinker 1s linear infinite;
+        }
+
+        .tag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 1em;
+            background: #F9E7FE;
+            border-radius: 0.3rem;
+            padding: 0 1em;
+            margin-right: 0.5em;
+            line-height: 1.8em;
+            color: var(--ungudark);
+            transition: all, var(--transition-time);
+        }
+
+        #news:hover .tags .tag {
+            background: var(--ungu);
+            color: var(--bg)
+        }
+
+        .card:before, .card:after {
+            content: '';
+            transform: scale(0);
+            transform-origin: top left;
+            border-radius: 50%;
+            position: absolute;
+            left: -50%;
+            top: -50%;
+            z-index: -5;
+            transition: all, var(--transition-time);
+            transition-timing-function: ease-in-out;
+        }
+
+        .card:hover:before, .card:hover:after {
+            transform: scale(1);
+        }
+
+        @keyframes  blinker {  
+            50% { opacity: 0; }
+        }
+
     </style>
 </head>
 <body>
@@ -141,6 +246,7 @@
     <script src="<?php echo e(asset('assets/js/bootstrap.bundle.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/mazer.js')); ?>"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
@@ -183,5 +289,6 @@
             document.getElementById("file-name").textContent = filename;
         }
     </script>
+        
 </body>
 </html><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/layouts/main.blade.php ENDPATH**/ ?>

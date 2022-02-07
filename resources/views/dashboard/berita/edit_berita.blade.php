@@ -101,6 +101,7 @@
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 
 <!-- filepond validation -->
 <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
@@ -130,6 +131,11 @@
         var filename = document.getElementById("file").files[0].name;
         document.getElementById("file-name").textContent = filename;
     }
+    ClassicEditor
+        .create( document.querySelector( '#isi' ) )
+        .catch( error => {
+            console.error( error );
+    } );
 </script>
 
 <script src="{{ asset('assets/js/mazer.js') }}"></script>

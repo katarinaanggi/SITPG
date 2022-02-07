@@ -1,9 +1,19 @@
+:root {
+    --ungu: #790995;
+    --white: #ffffff;
+    --ungudark: #4E0660;
+    --ungudark2: #3D044B;
+    --ungumuda2: #57066B;
+    --ungumuda: #C411F1;
+    --bg: #fcf6fd;
+  }
+
 body {
-    background-color: #fcf6fd;
+    background-color: var(--bg);
 }
 
 a {
-    color: #790995;
+    color: var(--ungu);
 }
 
 .bi-heart-fill {
@@ -11,48 +21,48 @@ a {
 }
 
 a:hover {
-    color: #5F0775;
+    color: var(--ungumuda2);
 }
 
 .btn, .btn:focus, .btn:active, .btn:visited, .btn:hover {
     background-color: #F9E7FE;
-    color :#790995 !important;
+    color :var(--ungu) !important;
     /* : #ffb46e; */
 }
 
 .sidebar-menu .sidebar-item.active .sidebar-link {
-    background-color: #790995 !important;
+    background-color: var(--ungu) !important;
 }
 
 .sidebar-wrapper .menu .sidebar-link i, .sidebar-wrapper .menu .sidebar-link svg{
-    color: #3D044B;
+    color: var(--ungudark2);
 }
 
 .sidebar-wrapper .menu .sidebar-title, .sidebar-wrapper .menu .sidebar-link span {
-    color: #57066B;
+    color: var(--ungumuda2);
 }
 
 h1, h3, h6, .card-title a {
-    color: #57066B !important;
+    color: var(--ungumuda2) !important;
 }
 
 .dropdown-item {
-    color: #3D044B;
+    color: var(--ungudark2);
 }
 
 .bi {
     position:relative; 
     top: calc(50% - 10px);
-    color: #790995;
+    color: var(--ungu);
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: #C411F1;
+    background-color: var(--ungumuda);
     color: white;
 }
 
 .btn-save, .btn-save:focus, .btn-save:active, .btn-save:visited, .btn-save:hover{
-    background-color: #4E0660; 
+    background-color: var(--ungudark); 
     color: white !important;
 }
 

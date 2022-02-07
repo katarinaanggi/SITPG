@@ -37,16 +37,23 @@
                     <tbody>
                         <?php $__currentLoopData = $berita; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td><?php echo e($value->judul); ?></td>
-                            <td><?php echo e($value->isi); ?></td>
+                            <td><a href="<?php echo e(route('admin.detail_berita', $value->id)); ?>" ><?php echo e($value->judul); ?></a></td>
+                            <td>
+                                <?php if(strlen($value->isi) > 75): ?>
+                                    <?php echo substr($value->isi,0,75); ?>. . .
+                                <?php else: ?>
+                                    <?php echo $value->isi; ?>
+
+                                <?php endif; ?>
+                            </td>
                             <td style="white-space: nowrap">
                                 <?php if($value->nama_file): ?>
                                     <a href="<?php echo e(route('downloadFile', $value->nama_file)); ?>"><i class="bi bi-cloud-arrow-down-fill"></i></a>
+                                <?php else: ?>
+                                    <p> </p>
                                 <?php endif; ?> 
                             </td>    
                             <td><a href="<?php echo e(route('admin.edit_berita', $value->id)); ?>"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;&nbsp;
-
-                                </div>
                                 <?php if($value->nama_file): ?>
                                     <a href="<?php echo e(route('admin.delete_file', ['id'=>$value->id, 'filename'=>$value->nama_file])); ?>" class="button delete-confirm"
                                         data-id="<?php echo e($value->id); ?>"><i class="bi bi-trash-fill text-danger"></i></a>
@@ -59,6 +66,10 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center">
+                    <?php echo $berita->links(); ?>
+
+                </div>
             </div>
         </div>
     </section>

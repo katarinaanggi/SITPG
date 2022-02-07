@@ -57,6 +57,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         
         //Berita
         Route::get('/berita', [MainBeritaController::class,'index'])->name('berita');
+        Route::get('/detail-berita/{id}', [MainBeritaController::class,'viewDetail'])->name('detail_berita');
         Route::get('/add-berita', [MainBeritaController::class,'add'])->name('add_berita');
         Route::post('/store-berita', [MainBeritaController::class, 'store'])->name('store_berita');
         Route::get('/edit-berita/{id}', [MainBeritaController::class, 'edit'])->name('edit_berita');

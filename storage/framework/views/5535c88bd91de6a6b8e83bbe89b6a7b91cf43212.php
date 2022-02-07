@@ -49,7 +49,7 @@
         <form action="<?php echo e(route('admin.store_berita')); ?>" method="post" enctype="multipart/form-data">
             <h3 class="text-center mb-5">Add New Berita</h3>
             <?php echo csrf_field(); ?>
-            <?php if($message = Session::get('failure')): ?>
+            <?php if($message = Session::get('error')): ?>
                 <div class="alert alert-danger">
                     <strong><?php echo e($message); ?></strong>
                 </div>
@@ -100,6 +100,7 @@
 
     <script src="<?php echo e(asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/bootstrap.bundle.min.js')); ?>"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 
 <!-- filepond validation -->
 <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
@@ -147,8 +148,12 @@
             }
         }
     });
+    ClassicEditor
+        .create( document.querySelector( '#isi' ) )
+        .catch( error => {
+            console.error( error );
+    } );
 </script>
-
 <script src="<?php echo e(asset('assets/js/mazer.js')); ?>"></script>
 </body>
 </html><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/dashboard/berita/add_berita.blade.php ENDPATH**/ ?>
