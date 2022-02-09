@@ -25,7 +25,7 @@
             </div>
             <div class="card-body">
                 <a class="btn" href="<?php echo e(route('admin.add_berita')); ?>">+Add New Berita</a><br /><br />
-                <table class="table table-inverse table-responsive table-hover">
+                <table class="table table-inverse table-responsive table-hover" id="beritaTable">
                     <thead class="thead-inverse">
                         <tr>
                             <th>Judul</th>
@@ -66,10 +66,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
-                    <?php echo $berita->links(); ?>
-
-                </div>
+                
             </div>
         </div>
     </section>

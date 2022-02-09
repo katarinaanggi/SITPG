@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>500</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/pages/error.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/500error.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/app.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/pages/error.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/500error.css')); ?>">
     <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed:100,200,300,400" rel="stylesheet">
 
 </head>
@@ -47,3 +47,4 @@
   </script>
 </body>
 </html>
+<?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/errors/500.blade.php ENDPATH**/ ?>

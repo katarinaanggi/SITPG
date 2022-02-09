@@ -1,9 +1,14 @@
 <?php
 
+use App\Models\User;
+use App\Models\Berita;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\MainBeritaController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,13 +47,28 @@ Route::prefix('user')->name('user.')->group(function(){
 Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::middleware(['guest:admin','PreventBackHistory'])->group(function () {
-        Route::view('/login','dashboard.admin.login') ->name('login');
+        Route::view('/login','dashboard.admin.login')->name('login');
         Route::post('/check',[AdminController::class,'check'])->name('check');
     });
 
     Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
         Route::get('/home',[AdminController::class, 'index'])->name('home');
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+        //User Management
+        Route::get('/user-management',[UserManagementController::class, 'index'])->name('userManagement');
+        Route::get('/add-user', [UserManagementController::class,'create'])->name('add_user');
+        Route::post('/store-user', [UserManagementController::class, 'store'])->name('store_user');
+        Route::get('/detail-user/{id}', [UserManagementController::class,'show'])->name('detail_user');
+        Route::get('/edit-user/{id}', [UserManagementController::class, 'edit'])->name('edit_user');
+        Route::patch('/update-user/{id}', [UserManagementController::class, 'update'])->name('update_user');
+        Route::get('/delete-user/{id}', [UserManagementController::class, 'destroy'])->name('delete_user');
+        Route::get('/data-user', function() {
+            return DataTables::of(User::query())
+                ->addColumn('action', 'action')
+                ->make(true);
+        })->name('data_user');
+        Route::post('/get-kota', [UserManagementController::class, 'getKota'])->name('get_kota');
 
         //Profile
         Route::view('/profile','dashboard.admin.profile', ['title' => 'Profile'])->name('profile');

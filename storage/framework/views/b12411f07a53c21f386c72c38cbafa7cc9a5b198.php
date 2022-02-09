@@ -16,8 +16,6 @@
             </div>
         </div>
     </div>
-
-            
     
     <?php if($berita->count()): ?>
         <div class="card" id="news">
@@ -54,33 +52,32 @@
                 <?php endif; ?> 
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="viewDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"><?php echo e($berita[0]->judul); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="card-text"><small class="text-muted">Created at <?php echo e($berita[0]->created_at->format('d-m-Y')); ?> by Admin</small></p> 
+                    <p style="text-align: justify; text-justify: inter-word;"><?php echo $berita[0]->isi; ?></p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <?php if($berita[0]->nama_file): ?>
+                        <a href="<?php echo e(route('downloadFile', $berita[0]->nama_file)); ?>" class="mr-auto"> 
+                            Download file 
+                        </a>
+                    <?php endif; ?>
+                    <button type="button" class="btn btn-save" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
     <?php else: ?> 
-    <p>None</p>  
+        <p class="text-center">Not Found</p> 
     <?php endif; ?>
-   
-    <!-- Modal -->
-    <div class="modal fade" id="viewDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel"><?php echo e($berita[0]->judul); ?></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="card-text"><small class="text-muted">Created at <?php echo e($berita[0]->created_at->format('d-m-Y')); ?> by Admin</small></p> 
-                <p style="text-align: justify; text-justify: inter-word;"><?php echo $berita[0]->isi; ?></p>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <?php if($berita[0]->nama_file): ?>
-                    <a href="<?php echo e(route('downloadFile', $berita[0]->nama_file)); ?>" class="mr-auto"> Download file 
-                        
-                    </a>
-                <?php endif; ?>
-                <button type="button" class="btn btn-save" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-        </div>
-    </div>
 
     <section class="wrapper">
         <div class="container">

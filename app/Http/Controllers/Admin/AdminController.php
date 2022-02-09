@@ -23,12 +23,12 @@ class AdminController extends Controller
         ]);
 
         $creds = $request->only('email','password');
-        // $password = bcrypt($request->password);
+        $password = bcrypt($request->password);
         if(Auth::guard('admin')->attempt($creds)){
             return redirect()->route('admin.home');
         }
         else{
-            return redirect()->route('admin.login')->with('fail','Incorrect credentials');
+            return redirect()->route('admin.login')->with('fail',$password);
         }
     }
 

@@ -36,9 +36,9 @@
             
             <li
                 class="sidebar-item <?php echo e(($title == 'Data User') ? 'active' : ''); ?>">
-                <a href="#" class='sidebar-link'>
+                <a href="<?php echo e(route('admin.userManagement')); ?>" class='sidebar-link'>
                     <i class="bi bi-pen-fill"></i>
-                    <span>Data User</span>
+                    <span>User Management</span>
                 </a>
             </li>
 

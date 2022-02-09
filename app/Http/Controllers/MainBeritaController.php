@@ -9,7 +9,6 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-// use Alert;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,7 +21,7 @@ class MainBeritaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $berita = Berita::latest()->paginate(10);
+        $berita = Berita::get();
         return view('dashboard.berita.berita',[
             'title' => "Berita Dashboard",
             'berita' => $berita]);
@@ -40,8 +39,6 @@ class MainBeritaController extends Controller
         return view('dashboard.berita.detail',[
             'title' => "Detail Berita",
             'berita' => $berita]);
-
-        
     }
 
     /**
