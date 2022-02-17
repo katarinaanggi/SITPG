@@ -40,17 +40,17 @@
                     <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Name: </label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="text" class="form-control" id="name" name="name"  value="{{ old('name') }}">
                             </div>
 
                             <div class="form-group">
                                 <label for="email">Email: </label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" required value="{{ old('email') }}">
                             </div>
                             
                             <div class="form-group">
                                 <label for="phone">Phone: </label>
-                                <input type="number" class="form-control" id="phone" name="phone" required>
+                                <input type="number" class="form-control" id="phone" name="phone" required value="{{ old('phone') }}">
                             </div>
 
                             <div class="row">
@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <label for="cabdin" >Cabang Dinas: </label>
                                         <select class="form-control choices" id="cabdin" name="cabdin" required>
-                                            <option value="0">--pilih wilayah cabang dinas--</option>
+                                            <option value="">--pilih wilayah cabang dinas--</option>
                                             @foreach($cabdin as $cd)
                                                 <option value="{{ $cd->id }}">{{ $cd->nama}}</option>
                                             @endforeach
@@ -71,6 +71,7 @@
                                         <select class="form-control" id="kota" name="kota" required>
                                             <option value="0">--pilih wilayah kabupaten/kota--</option>
                                         </select>
+                                        <input type="text" id="hdnPreviousValue" style="display: none" value="{{ old('kota') }}">
                                     </div>
                                 </div>
                             </div>
@@ -102,6 +103,29 @@
             </div>
         </div>
     </form>
+@endsection
 
-    
+@section('script')
+    <script type="text/javascript">
+        const togglePassword = document.querySelector('#togglePassword');
+        const togglePassword2 = document.querySelector('#togglePassword2');
+        const password = document.querySelector('#password');
+        const cpassword = document.querySelector('#cpassword');
+        
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            $(this).toggleClass("bi-eye bi-eye-slash");
+        });
+        togglePassword2.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = cpassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            cpassword.setAttribute('type', type);
+            // toggle the eye slash icon
+            $(this).toggleClass("bi-eye bi-eye-slash");
+        });
+
+    </script>
 @endsection

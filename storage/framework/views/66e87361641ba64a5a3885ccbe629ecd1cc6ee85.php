@@ -46,4 +46,28 @@
     </section>
 </div>    
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('datatable'); ?>
+    <script>
+        $(document).ready( function () {
+            $('#userTable').DataTable(
+                {
+                    processing: true,
+                    serverSide: true,
+                    ajax: '<?php echo route('admin.data_user'); ?>',
+                    columns: [
+                        { data: 'id', name: 'id' },
+                        { data: 'name', name: 'name' },
+                        { data: 'email', name: 'email' },
+                        { data: 'phone', name: 'phone' },
+                        { data: 'cabdin', name: 'cabdin' },
+                        { data: 'kota', name: 'kota' },
+                        { data: 'action', name: 'action' }
+                    ],
+                    scrollX: true
+                }
+            );
+        } );
+    </script>
+<?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/dashboard/usermanagement/userManage.blade.php ENDPATH**/ ?>

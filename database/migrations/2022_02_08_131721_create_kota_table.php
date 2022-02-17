@@ -16,8 +16,8 @@ class CreateKotaTable extends Migration
         Schema::create('kota', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_cabdin');
-            $table->string('nama');
-             $table->foreign('id_cabdin')->references('id')->on('cabdin');
+            $table->string('nama_kota');
+            $table->foreign('id_cabdin')->references('id')->on('cabdin');
         });
     }
 

@@ -28,8 +28,8 @@
             
             <li
                 class="sidebar-item  {{ ($title == 'Data Guru') ? 'active' : '' }}">
-                <a href="form-layout.html" class='sidebar-link'>
-                    <i class="bi bi-file-earmark-medical-fill"></i>
+                <a href="{{ route('admin.guru') }}" class='sidebar-link'>
+                    <i class="bi bi-server"></i>
                     <span>Data Guru</span>
                 </a>
             </li>
@@ -37,7 +37,7 @@
             <li
                 class="sidebar-item {{ ($title == 'Data User') ? 'active' : '' }}">
                 <a href="{{ route('admin.userManagement') }}" class='sidebar-link'>
-                    <i class="bi bi-pen-fill"></i>
+                    <i class="bi bi-people-fill"></i>
                     <span>User Management</span>
                 </a>
             </li>
@@ -47,7 +47,7 @@
             <li
                 class="sidebar-item {{ ($title == 'Profile') ? 'active' : '' }}">
                 <a href="{{ route('admin.profile') }}" class='sidebar-link'>
-                    <i class="bi bi-person-fill"></i>
+                    <i class="bi bi-person-circle"></i>
                     <span>Profile</span>
                 </a>
             </li>

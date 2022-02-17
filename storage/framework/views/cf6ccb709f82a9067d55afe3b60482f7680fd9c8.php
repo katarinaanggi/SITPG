@@ -72,4 +72,12 @@
     </section>
 </div>    
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('datatable'); ?>
+<script>
+    $(document).ready( function () {
+        $('#beritaTable').DataTable();
+    } );
+</script>
+<?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/dashboard/berita/berita.blade.php ENDPATH**/ ?>

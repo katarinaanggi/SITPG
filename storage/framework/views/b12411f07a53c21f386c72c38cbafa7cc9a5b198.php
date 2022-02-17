@@ -16,6 +16,17 @@
             </div>
         </div>
     </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-6">
+            <form action="<?php echo e(route('admin.home')); ?>">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search.." name="search" value="<?php echo e(request('search')); ?>">
+                    <button class="btn btn-save" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
     
     <?php if($berita->count()): ?>
         <div class="card" id="news">
@@ -46,7 +57,7 @@
                     </button>
 
                 <?php if($berita[0]->nama_file): ?>
-                    <a href="<?php echo e(route('downloadFile', $berita[0]->nama_file)); ?>">
+                    <a href="<?php echo e(route('downloadFile', $berita[0]->nama_file)); ?>" data-bs-toggle="tooltip" title=<?php echo e($berita[0]->nama_file); ?>>
                         <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
                     </a>
                 <?php endif; ?> 

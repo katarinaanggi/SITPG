@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Guru;
 use App\Models\User;
 use App\Models\Berita;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\MainBeritaController;
 use App\Http\Controllers\Admin\AdminController;
@@ -54,6 +56,21 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
         Route::get('/home',[AdminController::class, 'index'])->name('home');
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+        //Data Guru
+        Route::get('/guru',[GuruController::class, 'index'])->name('guru');
+        Route::get('/add-guru', [GuruController::class,'create'])->name('add_guru');
+        Route::post('/store-guru', [GuruController::class, 'store'])->name('store_guru');
+        Route::get('/detail-guru/{id}', [GuruController::class,'show'])->name('detail_guru');
+        Route::get('/edit-guru/{id}', [GuruController::class, 'edit'])->name('edit_guru');
+        Route::patch('/update-guru/{id}', [GuruController::class, 'update'])->name('update_guru');
+        Route::get('/delete-guru/{id}', [GuruController::class, 'destroy'])->name('delete_guru');
+        Route::get('/delete-all-guru', [GuruController::class, 'destroyAll'])->name('deleteAll_guru');
+        Route::get('/data-guru', function() {
+            return DataTables::of(Guru::join('kota', 'gurus.kota', '=', 'kota.id')->get(['gurus.*', 'kota.nama_kota']))
+                ->addColumn('action', 'dashboard.guru.action')
+                ->make(true);
+        })->name('data_guru');
 
         //User Management
         Route::get('/user-management',[UserManagementController::class, 'index'])->name('userManagement');

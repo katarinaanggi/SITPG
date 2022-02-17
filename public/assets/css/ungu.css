@@ -5,11 +5,16 @@
     --ungudark2: #3D044B;
     --ungumuda2: #57066B;
     --ungumuda: #C411F1;
+    --ungumuda3: #F9E7FE;
     --bg: #fcf6fd;
   }
 
 body {
     background-color: var(--bg);
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--ungudark2);
 }
 
 a {
@@ -25,7 +30,7 @@ a:hover {
 }
 
 .btn, .btn:focus, .btn:active, .btn:visited, .btn:hover {
-    background-color: #F9E7FE;
+    background-color: var(--ungumuda3);
     color :var(--ungu) !important;
     /* : #ffb46e; */
 }
@@ -69,4 +74,23 @@ h1, h3, h6, .card-title a {
 .form-control:focus {
     border-color: #ff80ff;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+}
+
+.form-check-input {
+    border: 1.5px solid #dce7f1;
+    width: 17px;
+    height: 17px;
+}
+
+.form-check-input:checked {
+    background-color: var(--ungu);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--ungudark2);
+    background-color: var(--ungumuda3);
+}
+
+.nav-tabs .nav-link.active:after {
+    background-color: var(--ungu);
 }

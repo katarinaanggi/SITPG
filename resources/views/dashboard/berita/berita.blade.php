@@ -73,3 +73,11 @@
     </section>
 </div>    
 @endsection
+
+@section('datatable')
+<script>
+    $(document).ready( function () {
+        $('#beritaTable').DataTable();
+    } );
+</script>
+@endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Admin;
 use App\Models\Berita;
 use Illuminate\Http\Request;
@@ -38,17 +39,20 @@ class AdminController extends Controller
     }
 
     public function index(){
-        $berita = Berita::latest("updated_at")->get();
+        $berita = Berita::latest("updated_at")->search(request(['search']))->get();
         return view('dashboard.admin.home',[
             'title' => "Admin Dashboard",
-            'berita' => $berita]);
+            'berita' => $berita
+        ]);
     }
 
     function changeProfile(Request $request, $id){
+        $current_timestamp = Carbon::now()->toDateTimeString();
         DB::table('admins')->where('id', $id)->update([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone
+            'phone' => $request->phone,
+            'updated_at' => $current_timestamp
         ]);
         return redirect()->route('admin.profile')->with('success', 'Personal Information berhasil diubah');
     }
@@ -69,8 +73,10 @@ class AdminController extends Controller
         ]);
 
         //Change Password
+        $current_timestamp = Carbon::now()->toDateTimeString();
         $user = Auth::guard('admin')->user();
         $user->password = bcrypt($request->get('newpassword'));
+        $user->updated_at = $current_timestamp;
         $user->save();
 
         return redirect()->route('admin.profile')->with("success","Password successfully changed!");

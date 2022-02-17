@@ -48,3 +48,27 @@
     </section>
 </div>    
 @endsection
+
+@section('datatable')
+    <script>
+        $(document).ready( function () {
+            $('#userTable').DataTable(
+                {
+                    processing: true,
+                    serverSide: true,
+                    ajax: '{!! route('admin.data_user') !!}',
+                    columns: [
+                        { data: 'id', name: 'id' },
+                        { data: 'name', name: 'name' },
+                        { data: 'email', name: 'email' },
+                        { data: 'phone', name: 'phone' },
+                        { data: 'cabdin', name: 'cabdin' },
+                        { data: 'kota', name: 'kota' },
+                        { data: 'action', name: 'action' }
+                    ],
+                    scrollX: true
+                }
+            );
+        } );
+    </script>
+@endsection

@@ -15,4 +15,19 @@ class Berita extends Model
         'nama_file',
         'file_path'
     ];
+
+    /**
+     * Scope a query to only include popular users.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSearch($query, array $keywords)
+    {
+        $query->when( $keywords['search'] ?? false, function( $query, $search) {
+            return $query->where('judul', 'like', '%'. $search . '%' )
+                         ->orWhere('isi', 'like', '%' . $search . '%' )
+                         ->orWhere('nama_file', 'like', '%' . $search . '%' );
+        });
+    }
 }

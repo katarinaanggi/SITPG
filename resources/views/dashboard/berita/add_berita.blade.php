@@ -72,12 +72,12 @@
                         <div class="card-body">
                                 <div class="form-group">
                                     <label for="judul">Judul: </label>
-                                    <input type="text" class="form-control" id="judul" name="judul">
+                                    <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="isi">Isi: </label>
-                                    <textarea type="text" class="form-control" id="isi" name="isi"></textarea>
+                                    <textarea type="text" class="form-control" id="isi" name="isi" value="{{ old('isi') }}"></textarea>
                                 </div>
                                 
                                 <div class="custom-file">                                    

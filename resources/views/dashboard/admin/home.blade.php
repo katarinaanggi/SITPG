@@ -16,6 +16,17 @@
             </div>
         </div>
     </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-6">
+            <form action="{{ route('admin.home') }}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search.." name="search" value="{{ request('search') }}">
+                    <button class="btn btn-save" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
     
     @if ($berita->count())
         <div class="card" id="news">
@@ -45,7 +56,7 @@
                     </button>
 
                 @if ($berita[0]->nama_file)
-                    <a href="{{ route('downloadFile', $berita[0]->nama_file) }}">
+                    <a href="{{ route('downloadFile', $berita[0]->nama_file) }}" data-bs-toggle="tooltip" title={{$berita[0]->nama_file}}>
                         <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
                     </a>
                 @endif 

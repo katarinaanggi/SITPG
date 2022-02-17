@@ -16,7 +16,7 @@ class CreateBeritaTable extends Migration
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('isi');
+            $table->text('isi');
             $table->string('nama_file')->nullable();
             $table->string('file_path')->nullable();
             $table->timestamps();
