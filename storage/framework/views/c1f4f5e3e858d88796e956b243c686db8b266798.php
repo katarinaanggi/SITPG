@@ -21,11 +21,21 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Daftar User</h4>
+                <h4 class="card-title">Daftar Guru</h4>
             </div>
             <div class="card-body">
                 <a class="btn" href="<?php echo e(route('admin.add_guru')); ?>">+Add New Guru</a>
                 <a class="btn btn-save" href="<?php echo e(route('admin.deleteAll_guru')); ?>" id="delall">Delete All Data</a><br /><br />
+                <form action="<?php echo e(route('admin.file_import')); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
+                    <div class="form-group mb-4" >
+                        <label>Import File</label>
+                        <div class="input-group mb-3">
+                            <input type="file" id="importfile" name="file" class="form-control" aria-describedby="button-addon2">
+                            <button class="btn btn-save" type="submit" id="button-addon2">Import</button>
+                        </div>
+                    </div>
+                </form>
                 <table class="table table-inverse table-responsive table-hover" id="guruTable">
                     <thead class="thead-inverse">
                         <tr>
@@ -50,6 +60,15 @@
                             <th>Jan</th>
                             <th>Feb</th>
                             <th>Mar</th>
+                            <th>Apr</th>
+                            <th>Mei</th>
+                            <th>Jun</th>
+                            <th>Jul</th>
+                            <th>Agu</th>
+                            <th>Sep</th>
+                            <th>Okt</th>
+                            <th>Nov</th>
+                            <th>Des</th>
                             <th>Jumlah</th>
                             <th>Pajak (%)</th>
                             <th>Nominal Pajak</th>
@@ -60,6 +79,7 @@
                     <tbody>
                     </tbody>
                 </table>
+                <a class="btn btn-save mt-3" href="<?php echo e(route('admin.file_export')); ?>">Export All Data</a>
             </div>
         </div>
     </section>
@@ -69,40 +89,117 @@
 <?php $__env->startSection('datatable'); ?>
 <script>
     $(document).ready( function () {
+        $('#guruTable thead tr')
+            .clone(true)
+            .addClass('filters')
+            .appendTo('#guruTable thead');
+
         var s = $('#guruTable').DataTable(
             {
                 processing: true,
                 serverSide: true,
+                scrollX: true,
+                scrollY: 500,
+                scrollCollapse: true,
+                orderCellsTop: true,
+                fixedHeader: true,
+                fixedColumns: true,
                 ajax: '<?php echo route('admin.data_guru'); ?>',
                 columns: [
                     { data: 'action', name: 'action' },
-                    { data: 'id', name: 'gurus.id' },
-                    { data: 'nrg', name: 'gurus.nrg' },
-                    { data: 'no_peserta', name: 'gurus.no_peserta' },
-                    { data: 'nuptk', name: 'gurus.nuptk' },
-                    { data: 'no_sk', name: 'gurus.no_sk' },
-                    { data: 'nama', name: 'gurus.nama' },
-                    { data: 'jenjang', name: 'gurus.jenjang' },
-                    { data: 'tempat_tugas', name: 'gurus.tempat_tugas' },
-                    { data: 'nama_kota', name: 'kota.nama_kota' },
-                    { data: 'nip', name: 'gurus.nip' },
-                    { data: 'nama_bank', name: 'gurus.nama_bank' },
-                    { data: 'kantor_cabang', name: 'gurus.kantor_cabang' },
-                    { data: 'no_rek', name: 'gurus.no_rek' },
-                    { data: 'nama_rek', name: 'gurus.nama_rek' },
-                    { data: 'pangkat', name: 'gurus.pangkat' },
-                    { data: 'masa_kerja', name: 'gurus.masa_kerja' },
-                    { data: 'gaji_pokok', name: 'gurus.gaji_pokok' },
-                    { data: 'jan', name: 'gurus.jan' },
-                    { data: 'feb', name: 'gurus.feb' },
-                    { data: 'mar', name: 'gurus.mar' },
-                    { data: 'jumlah', name: 'gurus.jumlah' },
-                    { data: 'pajak', name: 'gurus.pajak' },
-                    { data: 'nom_pajak', name: 'gurus.nom_pajak' },
-                    { data: 'bpjs', name: 'gurus.bpjs' },
-                    { data: 'jumlah_diterima', name: 'gurus.jumlah_diterima' }
+                    { data: 'id', name: 'id' },
+                    { data: 'nrg', name: 'nrg' },
+                    { data: 'no_peserta', name: 'no_peserta' },
+                    { data: 'nuptk', name: 'nuptk' },
+                    { data: 'no_sk', name: 'no_sk' },
+                    { data: 'nama', name: 'nama' },
+                    { data: 'jenjang', name: 'jenjang' },
+                    { data: 'tempat_tugas', name: 'tempat_tugas' },
+                    { data: 'kota', name: 'kota' },
+                    { data: 'nip', name: 'nip' },
+                    { data: 'nama_bank', name: 'nama_bank' },
+                    { data: 'kantor_cabang', name: 'kantor_cabang' },
+                    { data: 'no_rek', name: 'no_rek' },
+                    { data: 'nama_rek', name: 'nama_rek' },
+                    { data: 'pangkat', name: 'pangkat' },
+                    { data: 'masa_kerja', name: 'masa_kerja' },
+                    { data: 'gaji_pokok', name: 'gaji_pokok' },
+                    { data: 'jan', name: 'jan' },
+                    { data: 'feb', name: 'feb' },
+                    { data: 'mar', name: 'mar' },
+                    { data: 'apr', name: 'apr' },
+                    { data: 'mei', name: 'mei' },
+                    { data: 'jun', name: 'jun' },
+                    { data: 'jul', name: 'jul' },
+                    { data: 'agu', name: 'agu' },
+                    { data: 'sep', name: 'sep' },
+                    { data: 'okt', name: 'okt' },
+                    { data: 'nov', name: 'nov' },
+                    { data: 'des', name: 'des' },
+                    { data: 'jumlah', name: 'jumlah' },
+                    { data: 'pajak', name: 'pajak' },
+                    { data: 'nom_pajak', name: 'nom_pajak' },
+                    { data: 'bpjs', name: 'bpjs' },
+                    { data: 'jumlah_diterima', name: 'jumlah_diterima' }
                 ],
-                scrollX: true,
+                dom: 'lrtipB',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: 'Export Current Page',
+                        title: 'SITPG Data TPG TW I 2022',
+                        exportOptions: {
+                            columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 ]
+                        }
+                    }
+                ],
+                initComplete: function () {
+                    var api = this.api();
+        
+                    // For each column
+                    api
+                        .columns(':gt(0)')
+                        .eq(0)
+                        .each(function (colIdx) {
+                            // Set the header cell to contain the input element
+                            var cell = $('.filters th').eq(
+                                $(api.column(colIdx).header()).index()
+                            );
+                            var title = $(cell).text();
+                            $(cell).html('<input type="text" style="width:100%" placeholder="' + title + '" />');
+        
+                            // On every keypress in this input
+                            $(
+                                'input',
+                                $('.filters th').eq($(api.column(colIdx).header()).index())
+                            )
+                                .off('keyup change')
+                                .on('keyup change', function (e) {
+                                    e.stopPropagation();
+        
+                                    // Get the search value
+                                    $(this).attr('title', $(this).val());
+                                    var regexr = '({search})'; //$(this).parents('th').find('select').val();
+        
+                                    var cursorPosition = this.selectionStart;
+                                    // Search the column for that value
+                                    api
+                                        .column(colIdx)
+                                        .search(
+                                            this.value != ''
+                                                ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                                : '',
+                                            this.value != '',
+                                            this.value == ''
+                                        )
+                                        .draw();
+        
+                                    $(this)
+                                        .focus()[0]
+                                        .setSelectionRange(cursorPosition, cursorPosition);
+                                });
+                        });
+                },
             }
         );
     } );

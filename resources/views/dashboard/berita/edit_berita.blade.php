@@ -30,7 +30,7 @@
         }
 
         .container {
-            max-width: 500px;
+            max-width: 800px;
         }
 
         dl, ol, ul {
@@ -79,7 +79,7 @@
                                 </div>
                                 
                                 <div class="custom-file">                                    
-                                    <label>Tersimpan: {{ $berita->nama_file}}</label>
+                                    <label>Tersimpan: {{ substr($berita->nama_file, 11, strlen($berita->nama_file)) }}</label>
                                     <br><label class="custom-file-upload" for="file">
                                         <i class="bi bi-cloud-upload-fill"></i>&nbsp;Pilih file baru: </label>
                                     <input id="file" name='file' type="file" style="display:none;" onchange="namafile()">

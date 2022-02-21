@@ -3,8 +3,10 @@
 use App\Models\Guru;
 use App\Models\User;
 use App\Models\Berita;
+use App\Imports\GurusImport;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\User\UserController;
@@ -56,6 +58,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
         Route::get('/home',[AdminController::class, 'index'])->name('home');
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+        Route::post('/file-import', [AdminController::class, 'fileImport'])->name('file_import');
+        Route::get('file-export', [AdminController::class, 'fileExport'])->name('file_export');
 
         //Data Guru
         Route::get('/guru',[GuruController::class, 'index'])->name('guru');
@@ -67,7 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/delete-guru/{id}', [GuruController::class, 'destroy'])->name('delete_guru');
         Route::get('/delete-all-guru', [GuruController::class, 'destroyAll'])->name('deleteAll_guru');
         Route::get('/data-guru', function() {
-            return DataTables::of(Guru::join('kota', 'gurus.kota', '=', 'kota.id')->get(['gurus.*', 'kota.nama_kota']))
+            return DataTables::of(Guru::query())
                 ->addColumn('action', 'dashboard.guru.action')
                 ->make(true);
         })->name('data_guru');

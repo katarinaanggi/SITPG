@@ -34,7 +34,7 @@
         }
 
         .container {
-            max-width: 500px;
+            max-width: 800px;
         }
 
         dl, ol, ul {

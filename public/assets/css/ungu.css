@@ -7,6 +7,8 @@
     --ungumuda: #C411F1;
     --ungumuda3: #F9E7FE;
     --bg: #fcf6fd;
+    --hover: #F3CFFC;
+    --readonly: #ede9ef;
   }
 
 body {
@@ -93,4 +95,9 @@ h1, h3, h6, .card-title a {
 
 .nav-tabs .nav-link.active:after {
     background-color: var(--ungu);
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: var(--readonly);
+    opacity: 1;
 }

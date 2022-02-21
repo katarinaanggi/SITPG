@@ -12,4 +12,9 @@ class Kota extends Model
     protected $fillable = [
         'nama_kota'
     ];
+
+    public function gurus()
+    {
+        return $this->hasMany(Gurus::class);
+    }
 }

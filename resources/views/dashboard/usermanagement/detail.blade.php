@@ -29,35 +29,35 @@
                     <div class="card-body">
                             <div class="form-group">
                                 <label for="id">ID: </label>
-                                <input type="text" class="form-control" id="id" name="id" value="{{$user->id}}">
+                                <input type="text" class="form-control" id="id" name="id" value="{{$user->id}}" readonly>
                             </div>
 
                             <div class="form-group">
                                 <label for="name">Name: </label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}">
+                                <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}" readonly>
                             </div>
 
                             <div class="form-group">
                                 <label for="email">Email: </label>
-                                <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}">
+                                <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}" readonly>
                             </div>
                             
                             <div class="form-group">
                                 <label for="phone">Phone: </label>
-                                <input type="number" class="form-control" id="phone" name="phone" value="{{$user->phone}}">
+                                <input type="number" class="form-control" id="phone" name="phone" value="{{$user->phone}}" readonly>
                             </div>
 
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="cabdin" >Cabang Dinas: </label>
-                                        <input type="text" class="form-control" id="cabdin" name="cabdin" value="{{$user->cabdin}}">
+                                        <input type="text" class="form-control" id="cabdin" name="cabdin" value="{{$user->cabdin}}" readonly>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="kota" >Kabupaten/Kota: </label>
-                                        <input type="text" class="form-control" id="kota" name="kota" value="{{$user->kota}}">
+                                        <input type="text" class="form-control" id="kota" name="kota" value="{{$user->kota}}" readonly>
                                 </div>
                             </div>
                             

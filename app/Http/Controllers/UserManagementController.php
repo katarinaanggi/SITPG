@@ -70,7 +70,7 @@ class UserManagementController extends Controller
 			'name' => 'required|string|max:50|min:5',
 			'email' => 'required|email|unique:users,email',
 			'phone' => 'required|numeric|min:5',
-			'cabdin' => 'required|in:1,2,3,45,6,7,8,9,10,11,12,13',
+			'cabdin' => 'required|in:1,2,3,4,5,6,7,8,9,10,11,12,13',
 			'kota' => 'required',
 			'password' => 'required|min:5',
             'cpassword' => 'required|min:5|same:password',
@@ -140,9 +140,9 @@ class UserManagementController extends Controller
     {
         $rules = [
 			'name' => 'required|string|max:50|min:5',
-			'email' => 'required|email',
+			'email' => 'required|email|unique:users,email',
 			'phone' => 'required|numeric|min:5',
-			'cabdin' => 'required',
+			'cabdin' => 'required|in:1,2,3,4,5,6,7,8,9,10,11,12,13',
 			'kota' => 'required',
 		];
 		$validator = Validator::make($value->all(),$rules);

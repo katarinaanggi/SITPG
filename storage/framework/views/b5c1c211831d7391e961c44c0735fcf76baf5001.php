@@ -35,7 +35,7 @@
             </li>
             
             <li
-                class="sidebar-item <?php echo e(($title == 'Data User') ? 'active' : ''); ?>">
+                class="sidebar-item <?php echo e(($title == 'User Management') ? 'active' : ''); ?>">
                 <a href="<?php echo e(route('admin.userManagement')); ?>" class='sidebar-link'>
                     <i class="bi bi-people-fill"></i>
                     <span>User Management</span>
@@ -51,6 +51,18 @@
                     <span>Profile</span>
                 </a>
             </li>
+
+            <li
+                class="sidebar-item <?php echo e(($title == 'Logout') ? 'active' : ''); ?>">
+                <a class="sidebar-link" href="<?php echo e(route('admin.logout')); ?>"
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    <i class="bi bi-box-arrow-left "></i>
+                    <span>Logout</span>
+                </a>
+                <form action="<?php echo e(route('admin.logout')); ?>" method="post" class="d-none" id="logout-form"><?php echo csrf_field(); ?></form>
+            </li>
+
+                
 
         </ul>
     </div>

@@ -1,0 +1,212 @@
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+@import url('https://fonts.googleapis.com/css?family=Archivo+Black');
+
+.wrapper {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.dtfc-right-top-blocker{
+    background-color: transparent !important
+}
+
+.headline {
+    font-family: "Archivo Black", sans-serif;
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 40px;
+}
+
+.article p {
+    text-align: justify;
+}
+
+.author {
+    margin-right: 1rem;
+    color: rgb(128, 128, 128);
+    font-style: bold;
+    font-family: "Nunito";
+} 
+
+aside {
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+blockquote {
+    text-indent: 0.5rem;
+    box-shadow: -10px 0px 0px var(--ungumuda);
+    margin-top: 5rem; 
+}
+
+figcaption {
+    font-weight: bold;
+    background: linear-gradient(to right, var(--ungumuda2), #190994);
+    /* -webkit-background-clip: text; */
+    -webkit-text-fill-color: transparent;
+}
+
+.sub-entry{
+    width: 50%;
+    float: left;
+}
+
+.truncate {
+    max-width:50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+:root {
+    --transition-time: 0.3s;
+}
+
+.card {
+    display: block; 
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(213, 186, 235, 0.37),0 2px 10px 0 rgba(213, 186, 235, 0.37); 
+    transition: box-shadow .25s; 
+    border-radius: 20px;
+}
+.card:hover {
+    box-shadow: 0 8px 17px 0 rgba(213, 186, 235, 0.37),0 6px 20px 0 rgba(213, 186, 235, 0.37);
+}
+    
+.card-content {
+    padding:15px;
+    text-align:left;
+}
+.card-title {
+    margin-top:0px;
+    font-weight: 700;
+    font-size: 1.65em;
+}
+
+.card-title a {
+    color: #000;
+    text-decoration: none !important;
+}
+
+.choices__inner{
+    border: 1px solid #dce7f1;
+    background-color: white
+}
+
+/* Card bawahnya */
+.bcard-hover {
+    transition: all 0.25s ease-in;
+    border-bottom: 5px solid transparent;
+}
+.bcard-hover:hover {
+    transform: translateY(-5px);
+    border: none;
+    border-bottom: 5px solid var(--ungu);
+}
+
+/* New! Card */
+#news {
+    --bg-filter-opacity: 0.5;
+    padding: 1em;
+    align-items: flex-end;
+    transition: all, var(--transition-time);
+    position: relative;
+    overflow: hidden;
+    background-color: var(--ungu);
+    color: var(--bg);
+}
+
+#news:hover {
+    transform: rotate(0);
+    color: var(--ungu);
+}
+
+#news:before {
+    background: var(--hover);
+    width: 250%;
+    height: 250%;
+}
+
+.date {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1em;
+    padding: 1em;
+    line-height: 1em;
+    opacity: .8;
+    color: var(--bg);
+}
+
+#news:hover .date {
+    color: var(--ungu)
+}
+
+#news:hover .card-content .card-body h4 a, #news:hover .card-footer a i {
+    color: var(--ungu) !important
+}
+
+#news .card-content .card-body h4 a, #news .card-footer a i {
+    color: var(--bg) !important
+}
+
+#cf {
+    justify-content: space-between; 
+    background-color:var(--ungu);
+    transition: all, var(--transition-time);
+}
+
+#news:hover #cf {
+    background-color: var(--hover);
+}
+
+.tags {
+    display: flex;
+    animation: blinker 1s linear infinite;
+}
+
+.tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1em;
+    background: var(--ungumuda3);
+    border-radius: 0.3rem;
+    padding: 0 1em;
+    margin-right: 0.5em;
+    line-height: 1.8em;
+    color: var(--ungudark);
+    transition: all, var(--transition-time);
+}
+
+#news:hover .tags .tag {
+    background: var(--ungu);
+    color: var(--bg)
+}
+
+.card:before, .card:after {
+    content: '';
+    transform: scale(0);
+    transform-origin: top left;
+    border-radius: 50%;
+    position: absolute;
+    left: -50%;
+    top: -50%;
+    z-index: -5;
+    transition: all, var(--transition-time);
+    transition-timing-function: ease-in-out;
+}
+
+.card:hover:before, .card:hover:after {
+    transform: scale(1);
+}
+
+@keyframes blinker {  
+    50% { opacity: 0; }
+}

@@ -35,7 +35,7 @@
             </li>
             
             <li
-                class="sidebar-item {{ ($title == 'Data User') ? 'active' : '' }}">
+                class="sidebar-item {{ ($title == 'User Management') ? 'active' : '' }}">
                 <a href="{{ route('admin.userManagement') }}" class='sidebar-link'>
                     <i class="bi bi-people-fill"></i>
                     <span>User Management</span>
@@ -51,6 +51,18 @@
                     <span>Profile</span>
                 </a>
             </li>
+
+            <li
+                class="sidebar-item {{ ($title == 'Logout') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('admin.logout') }}"
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    <i class="bi bi-box-arrow-left "></i>
+                    <span>Logout</span>
+                </a>
+                <form action="{{ route('admin.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
+            </li>
+
+                
 
         </ul>
     </div>

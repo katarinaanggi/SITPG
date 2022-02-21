@@ -60,7 +60,7 @@
                                         <select class="form-control choices" id="cabdin" name="cabdin" required>
                                             <option value="">--pilih wilayah cabang dinas--</option>
                                             <?php $__currentLoopData = $cabdin; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cd): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option value="<?php echo e($cd->id); ?>" <?php echo e(old('cabdin') == $cd->id ? 'selected' : ''); ?>><?php echo e($cd->nama); ?></option>
+                                                <option value="<?php echo e($cd->id); ?>"><?php echo e($cd->nama); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>

@@ -15,303 +15,318 @@
         </div>
     </div>
 </div>
-    <form action="<?php echo e(route('admin.store_guru')); ?>" method="post">
-        <?php echo csrf_field(); ?>
-        <?php if($message = Session::get('error')): ?>
-            <div class="alert alert-danger">
-                <strong><?php echo e($message); ?></strong>
-            </div>
-        <?php endif; ?>
-
-        <div class="col-12 col-md-12">
-            <div class="card">
-                <div class="card-content">
-                    <a href="<?php echo e(route('admin.guru')); ?>"><i class="bi bi-x-lg"></i></a>
-                    <div class="card-header"><h3 class="text-center">Create New Guru</h3></div>
-                    <div class="card-body">
-                        <div class="form-group row mb-3">
-                            <label for="nrg" class="col-sm-3 col-form-label">NRG: </label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="nrg" name="nrg" value="<?php echo e(old('nrg')); ?>">
-                                <?php $__errorArgs = ['nrg'];
+<form action="<?php echo e(route('admin.store_guru')); ?>" method="post">
+    <?php echo csrf_field(); ?>
+    <?php if($message = Session::get('error')): ?>
+    <div class="alert alert-danger">
+        <strong><?php echo e($message); ?></strong>
+    </div>
+    <?php endif; ?>
+    
+    <div class="col-12 col-md-12">
+        <div class="card">
+            <div class="card-content">
+                <a href="<?php echo e(route('admin.guru')); ?>"><i class="bi bi-x-lg"></i></a>
+                <div class="card-header"><h3 class="text-center">Create New Guru</h3></div>
+                <div class="card-body">
+                    <div class="form-group row mb-3">
+                        <label for="no_peserta" class="col-sm-3 col-form-label">No. Peserta: </label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="no_peserta" name="no_peserta" value="<?php echo e(old('no_peserta')); ?>">
+                            <?php $__errorArgs = ['no_peserta'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                <div class="text-danger">*<?php echo e($message); ?></div>
+                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="form-group row mb-3">
-                            <label for="no_peserta" class="col-sm-3 col-form-label">No. Peserta: </label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="no_peserta" name="no_peserta" value="<?php echo e(old('no_peserta')); ?>">
-                                <?php $__errorArgs = ['no_peserta'];
+                    <div class="form-group row mb-3">
+                        <label for="nama" class="col-sm-3 col-form-label">Nama: </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="nama" name="nama" value="<?php echo e(old('nama')); ?>">
+                            <?php $__errorArgs = ['nama'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                <div class="text-danger">*<?php echo e($message); ?></div>
+                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                            </div>
                         </div>
-
-                        <div class="form-group row mb-3">
-                            <label for="nuptk" class="col-sm-3 col-form-label">NUPTK: </label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="nuptk" name="nuptk" value="<?php echo e(old('nuptk')); ?>">
-                                <?php $__errorArgs = ['nuptk'];
+                    </div>
+                    
+                    <div class="form-group row mb-3">
+                        <label for="nip" class="col-sm-3 col-form-label">NIP: </label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="nip" name="nip" value="<?php echo e(old('nip')); ?>">
+                            <?php $__errorArgs = ['nip'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                <div class="text-danger">*<?php echo e($message); ?></div>
+                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="form-group row mb-3">
-                            <label for="no_sk" class="col-sm-3 col-form-label">No. SK: </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="no_sk" name="no_sk" value="<?php echo e(old('no_sk')); ?>">
-                                <?php $__errorArgs = ['no_sk'];
+                    <div class="row mt-5">
+                        <div class="col">
+                            <h5 >Kepegawaian</h5>
+                            <div class="form-group row mb-3">
+                                <label for="nrg" class="col-sm-3 col-form-label">NRG: </label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="nrg" name="nrg" value="<?php echo e(old('nrg')); ?>">
+                                    <?php $__errorArgs = ['nrg'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-3">
-                            <label for="nama" class="col-sm-3 col-form-label">Nama: </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nama" name="nama" value="<?php echo e(old('nama')); ?>">
-                                <?php $__errorArgs = ['nama'];
+        
+        
+                            <div class="form-group row mb-3">
+                                <label for="nuptk" class="col-sm-3 col-form-label">NUPTK: </label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="nuptk" name="nuptk" value="<?php echo e(old('nuptk')); ?>">
+                                    <?php $__errorArgs = ['nuptk'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-3">
-                            <label class="col-sm-3 col-form-label">Jenjang: </label>
-                            <div class="col-sm-9">
-                                <label class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" id="s1" name="jenjang" value="pengawas" <?php echo e((old('jenjang') == 'pengawas') ? 'checked' : ''); ?>> Pengawas <br/>
-                                        <input type="radio" class="form-check-input" id="s2" name="jenjang" value="slb" <?php echo e((old('jenjang') == 'slb') ? 'checked' : ''); ?>> SLB <br/>
-                                        <input type="radio" class="form-check-input" id="s3" name="jenjang" value="smk" <?php echo e((old('jenjang') == 'smk') ? 'checked' : ''); ?>> SMK <br/>
-                                        <input type="radio" class="form-check-input" id="s3" name="jenjang" value="sma" <?php echo e((old('jenjang') == 'sma') ? 'checked' : ''); ?>> SMA <br/>
+        
+                            <div class="form-group row mb-3">
+                                <label for="no_sk" class="col-sm-3 col-form-label">No. SK: </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="no_sk" name="no_sk" value="<?php echo e(old('no_sk')); ?>">
+                                    <?php $__errorArgs = ['no_sk'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                            </div>
+        
+        
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 col-form-label">Jenjang: </label>
+                                <div class="col-sm-9">
+                                    <label class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" id="pengawas" name="jenjang" value="PENGAWAS" <?php echo e((old('jenjang') == 'PENGAWAS') ? 'checked' : ''); ?>> Pengawas <br/>
+                                            <input type="radio" class="form-check-input" id="slb" name="jenjang" value="SLB" <?php echo e((old('jenjang') == 'SLB') ? 'checked' : ''); ?>> SLB <br/>
+                                            <input type="radio" class="form-check-input" id="smk" name="jenjang" value="SMK" <?php echo e((old('jenjang') == 'SMK') ? 'checked' : ''); ?>> SMK <br/>
+                                            <input type="radio" class="form-check-input" id="sma" name="jenjang" value="SMA" <?php echo e((old('jenjang') == 'SMA') ? 'checked' : ''); ?>> SMA <br/>
+                                        </label>
                                     </label>
-                                </label>
-                                <?php $__errorArgs = ['jenjang'];
+                                    <?php $__errorArgs = ['jenjang'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-3">
-                            <label for="tempat_tugas" class="col-sm-3 col-form-label">Tempat Tugas: </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="tempat_tugas" name="tempat_tugas" value="<?php echo e(old('tempat_tugas')); ?>">
-                                <?php $__errorArgs = ['tempat_tugas'];
+        
+                            <div class="form-group row mb-3">
+                                <label for="tempat_tugas" class="col-sm-3 col-form-label">Tempat Tugas: </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="tempat_tugas" name="tempat_tugas" value="<?php echo e(old('tempat_tugas')); ?>">
+                                    <?php $__errorArgs = ['tempat_tugas'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-3">
-                            <label for="kota" class="col-sm-3 col-form-label">Kabupaten/Kota: </label>
-                            <div class="col-sm-9">
-                                <select class="form-control choices" id="kota" name="kota" >
-                                    <option value="">--pilih wilayah kabupaten/kota--</option>
-                                    <?php $__currentLoopData = $kota; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($k->id); ?>" <?php echo e(old('kota') == $k->id ? 'selected' : ''); ?>><?php echo e($k->nama_kota); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
-                                <?php $__errorArgs = ['kota'];
+        
+                            <div class="form-group row mb-3">
+                                <label for="kota" class="col-sm-3 col-form-label">Kabupaten/Kota: </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control choices" id="kota" name="kota" >
+                                        <option value="">--pilih wilayah kabupaten/kota--</option>
+                                        <?php $__currentLoopData = $kota; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($k->nama_kota); ?>" <?php echo e(old('kota') == $k->nama_kota ? 'selected' : ''); ?>><?php echo e($k->nama_kota); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                    <?php $__errorArgs = ['kota'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-3">
-                            <label for="nip" class="col-sm-3 col-form-label">NIP: </label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="nip" name="nip" value="<?php echo e(old('nip')); ?>">
-                                <?php $__errorArgs = ['nip'];
+                        <div class="col">
+                            <h5 >Rekening</h5>
+                            <div class="form-group row mb-3">
+                                <label for="nama_bank" class="col-sm-3 col-form-label">Nama Bank: </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="nama_bank" name="nama_bank" value="<?php echo e(old('nama_bank')); ?>">
+                                    <?php $__errorArgs = ['nama_bank'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-3">
-                            <label for="nama_bank" class="col-sm-3 col-form-label">Nama Bank: </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nama_bank" name="nama_bank" value="<?php echo e(old('nama_bank')); ?>">
-                                <?php $__errorArgs = ['nama_bank'];
+        
+                            <div class="form-group row mb-3">
+                                <label for="kantor_cabang" class="col-sm-3 col-form-label">Kantor Cabang: </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="kantor_cabang" name="kantor_cabang" value="<?php echo e(old('kantor_cabang')); ?>">
+                                    <?php $__errorArgs = ['kantor_cabang'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-3">
-                            <label for="kantor_cabang" class="col-sm-3 col-form-label">Kantor Cabang: </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="kantor_cabang" name="kantor_cabang" value="<?php echo e(old('kantor_cabang')); ?>">
-                                <?php $__errorArgs = ['kantor_cabang'];
+        
+                            <div class="form-group row mb-3">
+                                <label for="no_rek" class="col-sm-3 col-form-label">No. Rekening: </label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="no_rek" name="no_rek" value="<?php echo e(old('no_rek')); ?>">
+                                    <?php $__errorArgs = ['no_rek'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-3">
-                            <label for="no_rek" class="col-sm-3 col-form-label">No. Rekening: </label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="no_rek" name="no_rek" value="<?php echo e(old('no_rek')); ?>">
-                                <?php $__errorArgs = ['no_rek'];
+        
+                            <div class="form-group row mb-3">
+                                <label for="nama_rek" class="col-sm-3 col-form-label">Nama Rekening: </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="nama_rek" name="nama_rek" value="<?php echo e(old('nama_rek')); ?>">
+                                    <?php $__errorArgs = ['nama_rek'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group row mb-3">
-                            <label for="nama_rek" class="col-sm-3 col-form-label">Nama Rekening: </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nama_rek" name="nama_rek" value="<?php echo e(old('nama_rek')); ?>">
-                                <?php $__errorArgs = ['nama_rek'];
+                    <div class="row mt-4">   
+                        <h5 >Pendapatan</h5>            
+                        <div class="col"> 
+                            <div class="form-group row mb-3">
+                                <label for="pangkat" class="col-sm-3 col-form-label">Pangkat/Golongan: </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control choices" id="pangkat" name="pangkat" >
+                                        <option value="">--pilih pangkat/golongan--</option>
+                                        <option value="I/a" <?php echo e(old('pangkat') == 'I/a' ? 'selected' : ''); ?>>I/A</option>
+                                        <option value="I/b" <?php echo e(old('pangkat') == 'I/b' ? 'selected' : ''); ?>>I/B</option>
+                                        <option value="I/c" <?php echo e(old('pangkat') == 'I/c' ? 'selected' : ''); ?>>I/C</option>
+                                        <option value="I/d" <?php echo e(old('pangkat') == 'I/d' ? 'selected' : ''); ?>>I/D</option>
+                                        <option value="II/a" <?php echo e(old('pangkat') == 'II/a' ? 'selected' : ''); ?>>II/A</option>
+                                        <option value="II/b" <?php echo e(old('pangkat') == 'II/b' ? 'selected' : ''); ?>>II/B</option>
+                                        <option value="II/c" <?php echo e(old('pangkat') == 'II/c' ? 'selected' : ''); ?>>II/C</option>
+                                        <option value="II/d" <?php echo e(old('pangkat') == 'II/d' ? 'selected' : ''); ?>>II/D</option>
+                                        <option value="III/a" <?php echo e(old('pangkat') == 'III/a' ? 'selected' : ''); ?>>III/A</option>
+                                        <option value="III/b" <?php echo e(old('pangkat') == 'III/b' ? 'selected' : ''); ?>>III/B</option>
+                                        <option value="III/c" <?php echo e(old('pangkat') == 'III/c' ? 'selected' : ''); ?>>III/C</option>
+                                        <option value="III/d" <?php echo e(old('pangkat') == 'III/d' ? 'selected' : ''); ?>>III/D</option>
+                                        <option value="IV/a" <?php echo e(old('pangkat') == 'IV/a' ? 'selected' : ''); ?>>IV/A</option>
+                                        <option value="IV/b" <?php echo e(old('pangkat') == 'IV/b' ? 'selected' : ''); ?>>IV/B</option>
+                                        <option value="IV/c" <?php echo e(old('pangkat') == 'IV/c' ? 'selected' : ''); ?>>IV/C</option>
+                                        <option value="IV/d" <?php echo e(old('pangkat') == 'IV/d' ? 'selected' : ''); ?>>IV/D</option>
+                                    </select>
+                                    <?php $__errorArgs = ['pangkat'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-3">
-                            <label for="pangkat" class="col-sm-3 col-form-label">Pangkat/Golongan: </label>
-                            <div class="col-sm-9">
-                                <select class="form-control choices" id="pangkat" name="pangkat" >
-                                    <option value="">--pilih pangkat/golongan--</option>
-                                    <option value="ii/a" <?php echo e(old('pangkat') == 'ii/a' ? 'selected' : ''); ?>>II/A</option>
-                                    <option value="ii/b" <?php echo e(old('pangkat') == 'ii/b' ? 'selected' : ''); ?>>II/B</option>
-                                    <option value="ii/c" <?php echo e(old('pangkat') == 'ii/c' ? 'selected' : ''); ?>>II/C</option>
-                                    <option value="ii/d" <?php echo e(old('pangkat') == 'ii/d' ? 'selected' : ''); ?>>II/D</option>
-                                    <option value="iii/a" <?php echo e(old('pangkat') == 'iii/a' ? 'selected' : ''); ?>>III/A</option>
-                                    <option value="iii/b" <?php echo e(old('pangkat') == 'iii/b' ? 'selected' : ''); ?>>III/B</option>
-                                    <option value="iii/c" <?php echo e(old('pangkat') == 'iii/c' ? 'selected' : ''); ?>>III/C</option>
-                                    <option value="iii/d" <?php echo e(old('pangkat') == 'iii/d' ? 'selected' : ''); ?>>III/D</option>
-                                    <option value="iv/a" <?php echo e(old('pangkat') == 'iv/a' ? 'selected' : ''); ?>>IV/A</option>
-                                    <option value="iv/b" <?php echo e(old('pangkat') == 'iv/b' ? 'selected' : ''); ?>>IV/B</option>
-                                    <option value="iv/c" <?php echo e(old('pangkat') == 'iv/c' ? 'selected' : ''); ?>>IV/C</option>
-                                    <option value="iv/d" <?php echo e(old('pangkat') == 'iv/d' ? 'selected' : ''); ?>>IV/D</option>
-                                </select>
-                                <?php $__errorArgs = ['pangkat'];
+        
+                            <div class="form-group row mb-3">
+                                <label for="masa_kerja" class="col-sm-3 col-form-label">Masa Kerja: </label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="masa_kerja" name="masa_kerja" value="<?php echo e(old('masa_kerja')); ?>">
+                                    <?php $__errorArgs = ['masa_kerja'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
+                                        <div class="text-danger">*<?php echo e($message); ?></div>
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-3">
-                            <label for="masa_kerja" class="col-sm-3 col-form-label">Masa Kerja: </label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="masa_kerja" name="masa_kerja" value="<?php echo e(old('masa_kerja')); ?>">
-                                <?php $__errorArgs = ['masa_kerja'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                    <div class="text-danger">*<?php echo e($message); ?></div>
-                                <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            </div>
-                        </div>
-
-                        <div class="itung">
-
+        
                             <div class="form-group row mb-3">
                                 <label for="gaji_pokok" class="col-sm-3 col-form-label">Gaji Pokok: </label>
                                 <div class="col-sm-9">
@@ -329,6 +344,9 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
 
+                        </div>
+                        
+                        <div class="col">
                             <div class="form-group row mb-3">
                                 <label for="triw" class="col-sm-3 col-form-label">Triwulan: </label>
                                 <div class="col-sm-9">
@@ -354,8 +372,8 @@ unset($__errorArgs, $__bag); ?>
 
                             <div class="tw-I">
                                 <div class="form-group row mb-3">
-                                    <label for="jan" class="col-sm-3 col-form-label">Januari: </label>
-                                    <div class="col-sm-9">
+                                    <label for="jan" class="col-sm-4 col-form-label">Januari: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="jan" name="jan" value="<?php echo e(old('jan')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -369,10 +387,10 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
-
+        
                                 <div class="form-group row mb-3">
-                                    <label for="feb" class="col-sm-3 col-form-label">Februari: </label>
-                                    <div class="col-sm-9">
+                                    <label for="feb" class="col-sm-4 col-form-label">Februari: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="feb" name="feb" value="<?php echo e(old('feb')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -386,10 +404,10 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
-
+        
                                 <div class="form-group row mb-3">
-                                    <label for="mar" class="col-sm-3 col-form-label">Maret: </label>
-                                    <div class="col-sm-9">
+                                    <label for="mar" class="col-sm-4 col-form-label">Maret: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="mar" name="mar" value="<?php echo e(old('mar')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -406,8 +424,8 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="tw-II" style="display: none">
                                 <div class="form-group row mb-3">
-                                    <label for="apr" class="col-sm-3 col-form-label">April: </label>
-                                    <div class="col-sm-9">
+                                    <label for="apr" class="col-sm-4 col-form-label">April: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="apr" name="apr" value="<?php echo e(old('apr')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -423,8 +441,8 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
         
                                 <div class="form-group row mb-3">
-                                    <label for="mei" class="col-sm-3 col-form-label">Mei: </label>
-                                    <div class="col-sm-9">
+                                    <label for="mei" class="col-sm-4 col-form-label">Mei: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="mei" name="mei" value="<?php echo e(old('mei')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -440,8 +458,8 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
         
                                 <div class="form-group row mb-3">
-                                    <label for="jun" class="col-sm-3 col-form-label">Juni: </label>
-                                    <div class="col-sm-9">
+                                    <label for="jun" class="col-sm-4 col-form-label">Juni: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="jun" name="jun" value="<?php echo e(old('jun')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -458,8 +476,8 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="tw-III" style="display: none">
                                 <div class="form-group row mb-3">
-                                    <label for="jul" class="col-sm-3 col-form-label">Juli: </label>
-                                    <div class="col-sm-9">
+                                    <label for="jul" class="col-sm-4 col-form-label">Juli: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="jul" name="jul" value="<?php echo e(old('jul')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -475,8 +493,8 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
         
                                 <div class="form-group row mb-3">
-                                    <label for="agu" class="col-sm-3 col-form-label">Agustus: </label>
-                                    <div class="col-sm-9">
+                                    <label for="agu" class="col-sm-4 col-form-label">Agustus: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="agu" name="agu" value="<?php echo e(old('agu')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -492,8 +510,8 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
         
                                 <div class="form-group row mb-3">
-                                    <label for="sep" class="col-sm-3 col-form-label">September: </label>
-                                    <div class="col-sm-9">
+                                    <label for="sep" class="col-sm-4 col-form-label">September: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="sep" name="sep" value="<?php echo e(old('sep')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -510,8 +528,8 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="tw-IV" style="display: none">
                                 <div class="form-group row mb-3">
-                                    <label for="okt" class="col-sm-3 col-form-label">Oktober: </label>
-                                    <div class="col-sm-9">
+                                    <label for="okt" class="col-sm-4 col-form-label">Oktober: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="okt" name="okt" value="<?php echo e(old('okt')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -527,8 +545,8 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
         
                                 <div class="form-group row mb-3">
-                                    <label for="nov" class="col-sm-3 col-form-label">November: </label>
-                                    <div class="col-sm-9">
+                                    <label for="nov" class="col-sm-4 col-form-label">November: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="nov" name="nov" value="<?php echo e(old('nov')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -544,8 +562,8 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
         
                                 <div class="form-group row mb-3">
-                                    <label for="des" class="col-sm-3 col-form-label">Desember: </label>
-                                    <div class="col-sm-9">
+                                    <label for="des" class="col-sm-4 col-form-label">Desember: </label>
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" id="des" name="des" value="<?php echo e(old('des')); ?>">
                                         <?php $__errorArgs = ['gaji_pokok'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -560,41 +578,43 @@ unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <code><hr></code>
+                    </div>
 
-                            <div class="form-group row mb-3">
-                                <label for="jumlah" class="col-sm-3 col-form-label">Jumlah: </label>
-                                <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="jumlah" name="jumlah" value="<?php echo e(old('jumlah')); ?>">
-                                    <?php $__errorArgs = ['jumlah'];
+                    <div class="row">
+                        <div class="form-group row mb-3">
+                            <label for="jumlah" class="col-sm-3 col-form-label">Jumlah: </label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="jumlah" name="jumlah" value="<?php echo e(old('jumlah')); ?>">
+                                <?php $__errorArgs = ['jumlah'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                        <div class="text-danger">*<?php echo e($message); ?></div>
-                                    <?php unset($message);
+                                    <div class="text-danger">*<?php echo e($message); ?></div>
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                </div>
                             </div>
-
-                            <div class="form-group row mb-3">
-                                <label for="pajak" class="col-sm-3 col-form-label">Pajak (%): </label>
-                                <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="pajak" name="pajak" value="<?php echo e(old('pajak')); ?>">
-                                    <?php $__errorArgs = ['pajak'];
+                        </div>
+    
+                        <div class="form-group row mb-3">
+                            <label for="pajak" class="col-sm-3 col-form-label">Pajak (%): </label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="pajak" name="pajak" value="<?php echo e(old('pajak')); ?>">
+                                <?php $__errorArgs = ['pajak'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                        <div class="text-danger">*<?php echo e($message); ?></div>
-                                    <?php unset($message);
+                                    <div class="text-danger">*<?php echo e($message); ?></div>
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                </div>
                             </div>
-
                         </div>
 
                         <div class="form-group row mb-3">
@@ -613,7 +633,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-
+    
                         <div class="form-group row mb-3">
                             <label for="bpjs" class="col-sm-3 col-form-label">BPJS (Max 1%): </label>
                             <div class="col-sm-9">
@@ -630,7 +650,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-
+    
                         <div class="form-group row mb-3">
                             <label for="jumlah_diterima" class="col-sm-3 col-form-label">Jumlah Diterima: </label>
                             <div class="col-sm-9">
@@ -647,11 +667,11 @@ endif;
 unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
-
-                        <button type="submit" name="submit" class="btn btn-save btn-block mt-4">
-                            Add New User
-                        </button>
                     </div>
+
+                    <button type="submit" name="submit" class="btn btn-save btn-block mt-4">
+                        Add New User
+                    </button>
                 </div>
             </div>
         </div>
@@ -682,7 +702,13 @@ unset($__errorArgs, $__bag); ?>
         var bpjs = document.getElementById('bpjs');
         var diterima = document.getElementById('jumlah_diterima');
 
-        $(".itung").keyup(function(){
+        $(".row").keyup(function(){
+            jml.value = Number(jan.value) + Number(feb.value) + Number(mar.value) + Number(apr.value) + Number(mei.value) + Number(jun.value) + Number(jul.value) + Number(agu.value) + Number(sep.value) + Number(okt.value) + Number(nov.value) + Number(des.value);
+            nom.value = jml.value*pajak.value/100;
+            diterima.value = Number(jml.value) - Number(nom.value) - Number(bpjs.value);
+        }); 
+
+        $("#gaji_pokok").keyup(function(){
             var triw = $('#triw').find(":selected").text();
             switch(triw){
                 case 'I':
@@ -725,6 +751,7 @@ unset($__errorArgs, $__bag); ?>
             nom.value = jml.value*pajak.value/100;
             diterima.value = Number(jml.value) - Number(nom.value) - Number(bpjs.value);
         });
+
         $("#triw").change(function(){
             var triw = $('#triw').find(":selected").text();
             switch(triw){
@@ -766,9 +793,7 @@ unset($__errorArgs, $__bag); ?>
                     break;
             }
         });
-        $("#bpjs").keyup(function(){
-            diterima.value = Number(jml.value) - Number(nom.value) - Number(this.value);
-        });        
+        
     })
 </script>    
 <?php $__env->stopSection(); ?>

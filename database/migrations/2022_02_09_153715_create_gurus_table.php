@@ -15,22 +15,22 @@ class CreateGurusTable extends Migration
     {
         Schema::create('gurus', function (Blueprint $table) {
             $table->id();
-            $table->string('nrg');
-            $table->string('no_peserta');
-            $table->string('nuptk');
-            $table->string('no_sk');
+            $table->string('nrg')->nullable();
+            $table->string('no_peserta')->nullable();
+            $table->string('nuptk')->unique();
+            $table->string('no_sk')->nullable();
             $table->string('nama');
-            $table->string('jenjang');
-            $table->string('tempat_tugas');
-            $table->string('kota');
-            $table->string('nip');
-            $table->string('nama_bank');
-            $table->string('kantor_cabang');
-            $table->string('no_rek');
-            $table->string('nama_rek');
-            $table->string('pangkat');
-            $table->integer('masa_kerja');
-            $table->integer('gaji_pokok');
+            $table->string('jenjang')->nullable();
+            $table->string('tempat_tugas')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('nip')->unique();
+            $table->string('nama_bank')->nullable();
+            $table->string('kantor_cabang')->nullable();
+            $table->string('no_rek')->nullable();
+            $table->string('nama_rek')->nullable();
+            $table->string('pangkat')->nullable();
+            $table->integer('masa_kerja')->nullable();
+            $table->integer('gaji_pokok')->nullable();
             $table->integer('jan')->nullable();
             $table->integer('feb')->nullable();
             $table->integer('mar')->nullable();
@@ -44,11 +44,10 @@ class CreateGurusTable extends Migration
             $table->integer('nov')->nullable();
             $table->integer('des')->nullable();
             $table->integer('jumlah')->nullable();
-            $table->integer('pajak');
-            $table->integer('nom_pajak');
-            $table->integer('bpjs');
-            $table->integer('jumlah_diterima');
-            $table->timestamps();
+            $table->integer('pajak')->nullable();
+            $table->integer('nom_pajak')->nullable();
+            $table->integer('bpjs')->nullable();
+            $table->integer('jumlah_diterima')->nullable();
         });
     }
 

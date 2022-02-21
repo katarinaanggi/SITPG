@@ -42,7 +42,7 @@
                         <div class="form-group row mb-3">
                             <label for="no_peserta" class="col-sm-3 col-form-label">No. Peserta: </label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="no_peserta" name="no_peserta" value="<?php echo e($guru->no_peserta); ?>">
+                                <input type="text" class="form-control" id="no_peserta" name="no_peserta" value="<?php echo e($guru->no_peserta); ?>">
                                 <?php $__errorArgs = ['no_peserta'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -76,7 +76,7 @@ unset($__errorArgs, $__bag); ?>
                         <div class="form-group row mb-3">
                             <label for="nip" class="col-sm-3 col-form-label">NIP: </label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="nip" name="nip" value="<?php echo e($guru->nip); ?>">
+                                <input type="text" class="form-control" id="nip" name="nip" value="<?php echo e($guru->nip); ?>">
                                 <?php $__errorArgs = ['nip'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -96,7 +96,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="form-group row mb-3">
                                     <label for="nrg" class="col-sm-3 col-form-label">NRG: </label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="nrg" name="nrg" value="<?php echo e($guru->nrg); ?>">
+                                        <input type="text" class="form-control" id="nrg" name="nrg" value="<?php echo e($guru->nrg); ?>">
                                         <?php $__errorArgs = ['nrg'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -113,7 +113,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="form-group row mb-3">
                                     <label for="nuptk" class="col-sm-3 col-form-label">NUPTK: </label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="nuptk" name="nuptk" value="<?php echo e($guru->nuptk); ?>">
+                                        <input type="text" class="form-control" id="nuptk" name="nuptk" value="<?php echo e($guru->nuptk); ?>">
                                         <?php $__errorArgs = ['nuptk'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -149,10 +149,10 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="col-sm-9">
                                         <label class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" id="s1" name="jenjang" value="pengawas" <?php echo e(($guru->jenjang == 'pengawas') ? 'checked' : ''); ?>> Pengawas <br/>
-                                                <input type="radio" class="form-check-input" id="s2" name="jenjang" value="slb" <?php echo e(($guru->jenjang == 'slb') ? 'checked' : ''); ?>> SLB <br/>
-                                                <input type="radio" class="form-check-input" id="s3" name="jenjang" value="smk" <?php echo e(($guru->jenjang == 'smk') ? 'checked' : ''); ?>> SMK <br/>
-                                                <input type="radio" class="form-check-input" id="s3" name="jenjang" value="sma" <?php echo e(($guru->jenjang == 'sma') ? 'checked' : ''); ?>> SMA <br/>
+                                                <input type="radio" class="form-check-input" id="pengawas" name="jenjang" value="PENGAWAS" <?php echo e(($guru->jenjang == 'PENGAWAS') ? 'checked' : ''); ?>> Pengawas <br/>
+                                                <input type="radio" class="form-check-input" id="slb" name="jenjang" value="SLB" <?php echo e(($guru->jenjang == 'SLB') ? 'checked' : ''); ?>> SLB <br/>
+                                                <input type="radio" class="form-check-input" id="smk" name="jenjang" value="SMK" <?php echo e(($guru->jenjang == 'SMK') ? 'checked' : ''); ?>> SMK <br/>
+                                                <input type="radio" class="form-check-input" id="sma" name="jenjang" value="SMA" <?php echo e(($guru->jenjang == 'SMA') ? 'checked' : ''); ?>> SMA <br/>
                                             </label>
                                         </label>
                                         <?php $__errorArgs = ['jenjang'];
@@ -191,7 +191,7 @@ unset($__errorArgs, $__bag); ?>
                                         <select class="form-control choices" id="kota" name="kota" >
                                             <option value="">--pilih wilayah kabupaten/kota--</option>
                                             <?php $__currentLoopData = $kota; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option value="<?php echo e($k->id); ?>" <?php echo e($guru->kota == $k->id ? 'selected' : ''); ?>><?php echo e($k->nama_kota); ?></option>
+                                                <option value="<?php echo e($k->nama_kota); ?>" <?php echo e($guru->kota == $k->nama_kota ? 'selected' : ''); ?>><?php echo e($k->nama_kota); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                         <?php $__errorArgs = ['kota'];
@@ -247,7 +247,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="form-group row mb-3">
                                     <label for="no_rek" class="col-sm-3 col-form-label">No. Rekening: </label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="no_rek" name="no_rek" value="<?php echo e($guru->no_rek); ?>">
+                                        <input type="text" class="form-control" id="no_rek" name="no_rek" value="<?php echo e($guru->no_rek); ?>">
                                         <?php $__errorArgs = ['no_rek'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -288,18 +288,22 @@ unset($__errorArgs, $__bag); ?>
                                     <div class="col-sm-9">
                                         <select class="form-control choices" id="pangkat" name="pangkat" >
                                             <option value="">--pilih pangkat/golongan--</option>
-                                            <option value="ii/a" <?php echo e($guru->pangkat == 'ii/a' ? 'selected' : ''); ?>>II/A</option>
-                                            <option value="ii/b" <?php echo e($guru->pangkat == 'ii/b' ? 'selected' : ''); ?>>II/B</option>
-                                            <option value="ii/c" <?php echo e($guru->pangkat == 'ii/c' ? 'selected' : ''); ?>>II/C</option>
-                                            <option value="ii/d" <?php echo e($guru->pangkat == 'ii/d' ? 'selected' : ''); ?>>II/D</option>
-                                            <option value="iii/a" <?php echo e($guru->pangkat == 'iii/a' ? 'selected' : ''); ?>>III/A</option>
-                                            <option value="iii/b" <?php echo e($guru->pangkat == 'iii/b' ? 'selected' : ''); ?>>III/B</option>
-                                            <option value="iii/c" <?php echo e($guru->pangkat == 'iii/c' ? 'selected' : ''); ?>>III/C</option>
-                                            <option value="iii/d" <?php echo e($guru->pangkat == 'iii/d' ? 'selected' : ''); ?>>III/D</option>
-                                            <option value="iv/a" <?php echo e($guru->pangkat == 'iv/a' ? 'selected' : ''); ?>>IV/A</option>
-                                            <option value="iv/b" <?php echo e($guru->pangkat == 'iv/b' ? 'selected' : ''); ?>>IV/B</option>
-                                            <option value="iv/c" <?php echo e($guru->pangkat == 'iv/c' ? 'selected' : ''); ?>>IV/C</option>
-                                            <option value="iv/d" <?php echo e($guru->pangkat == 'iv/d' ? 'selected' : ''); ?>>IV/D</option>
+                                            <option value="I/a" <?php echo e($guru->pangkat == 'I/a' ? 'selected' : ''); ?>>I/A</option>
+                                            <option value="I/b" <?php echo e($guru->pangkat == 'I/b' ? 'selected' : ''); ?>>I/B</option>
+                                            <option value="I/c" <?php echo e($guru->pangkat == 'I/c' ? 'selected' : ''); ?>>I/C</option>
+                                            <option value="I/d" <?php echo e($guru->pangkat == 'I/d' ? 'selected' : ''); ?>>I/D</option>
+                                            <option value="II/a" <?php echo e($guru->pangkat == 'II/a' ? 'selected' : ''); ?>>II/A</option>
+                                            <option value="II/b" <?php echo e($guru->pangkat == 'II/b' ? 'selected' : ''); ?>>II/B</option>
+                                            <option value="II/c" <?php echo e($guru->pangkat == 'II/c' ? 'selected' : ''); ?>>II/C</option>
+                                            <option value="II/d" <?php echo e($guru->pangkat == 'II/d' ? 'selected' : ''); ?>>II/D</option>
+                                            <option value="III/a" <?php echo e($guru->pangkat == 'III/a' ? 'selected' : ''); ?>>III/A</option>
+                                            <option value="III/b" <?php echo e($guru->pangkat == 'III/b' ? 'selected' : ''); ?>>III/B</option>
+                                            <option value="III/c" <?php echo e($guru->pangkat == 'III/c' ? 'selected' : ''); ?>>III/C</option>
+                                            <option value="III/d" <?php echo e($guru->pangkat == 'III/d' ? 'selected' : ''); ?>>III/D</option>
+                                            <option value="IV/a" <?php echo e($guru->pangkat == 'IV/a' ? 'selected' : ''); ?>>IV/A</option>
+                                            <option value="IV/b" <?php echo e($guru->pangkat == 'IV/b' ? 'selected' : ''); ?>>IV/B</option>
+                                            <option value="IV/c" <?php echo e($guru->pangkat == 'IV/c' ? 'selected' : ''); ?>>IV/C</option>
+                                            <option value="IV/d" <?php echo e($guru->pangkat == 'IV/d' ? 'selected' : ''); ?>>IV/D</option>
                                         </select>
                                         <?php $__errorArgs = ['pangkat'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

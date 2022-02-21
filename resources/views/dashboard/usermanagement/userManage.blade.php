@@ -65,8 +65,7 @@
                         { data: 'cabdin', name: 'cabdin' },
                         { data: 'kota', name: 'kota' },
                         { data: 'action', name: 'action' }
-                    ],
-                    scrollX: true
+                    ]
                 }
             );
         } );

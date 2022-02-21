@@ -23,7 +23,8 @@ class GuruController extends Controller
     {
         $gurus = Guru::get();
         return view('dashboard.guru.guru', [
-            'title' => "Data Guru"
+            'title' => "Data Guru",
+            'gurus' => $gurus
         ]);
     }
 
@@ -47,23 +48,23 @@ class GuruController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) //nuptk dll must number
     {
         $rules = [
 			'nrg' => 'required',
-			'no_peserta' => 'required',
-			'nuptk' => 'required',
+			'no_peserta' => 'required',//number
+			'nuptk' => 'required|unique:gurus,nuptk',
 			'no_sk' => 'required',
-			'nama' => 'required',
-			'jenjang' => 'required|in:pengawas,slb,sma,smk',
+			'nama' => "required",
+			'jenjang' => 'required|in:PENGAWAS,SLB,SMA,SMK',
 			'tempat_tugas' => 'required',
-			'kota' => 'required|in:1',
-			'nip' => 'required',
+			'kota' => 'required',
+			'nip' => 'required|unique:gurus,nip',
 			'nama_bank' => 'required',
 			'kantor_cabang' => 'required',
 			'no_rek' => 'required',
 			'nama_rek' => 'required',
-			'pangkat' => 'required|in:ii/a,ii/b,ii/c,ii/d,iii/a,iii/b,iii/c,iii/d,iv/a,iv/b,iv/c,iv/d',
+			'pangkat' => 'required|in:I/a,I/b,I/c,I/d,II/a,II/b,II/c,II/d,III/a,III/b,III/c,III/d,IV/a,IV/b,IV/c,IV/d',
 			'masa_kerja' => 'required',
 			'gaji_pokok' => 'required',
 			'triw' => 'required|in:1,2,3,4',
@@ -148,13 +149,11 @@ class GuruController extends Controller
     public function show($id)
     {
         $guru = Guru::find($id);
-        $kotaid = $guru->kota;
-        $kota = Kota::find($kotaid)->nama_kota;
         $name = $guru->nama;
+        // dd($guru);
         return view('dashboard.guru.detail',[
             'title' => "Detail Guru ".$name,
-            'guru' => $guru,
-            'kota' => $kota
+            'guru' => $guru
         ]);
     }
 
@@ -168,6 +167,7 @@ class GuruController extends Controller
     {
         $kota = Kota::get();
         $guru = Guru::find($id);
+        // dd($guru);
         $title = "Edit Guru ".$guru->nama;
         return view('dashboard.guru.edit_guru', compact('guru','kota','title'));
     }
@@ -179,23 +179,23 @@ class GuruController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $guru, $id)
+    public function update(Request $guru, $id) //nuptk dll must number
     {
         $rules = [
 			'nrg' => 'required',
 			'no_peserta' => 'required',
 			'nuptk' => 'required',
 			'no_sk' => 'required',
-			'nama' => 'required',
-			'jenjang' => 'required|in:pengawas,slb,sma,smk',
+			'nama' => "required",
+			'jenjang' => 'required|in:PENGAWAS,SLB,SMA,SMK',
 			'tempat_tugas' => 'required',
-			'kota' => 'required|in:1',
+			'kota' => 'required',
 			'nip' => 'required',
 			'nama_bank' => 'required',
 			'kantor_cabang' => 'required',
 			'no_rek' => 'required',
 			'nama_rek' => 'required',
-			'pangkat' => 'required|in:ii/a,ii/b,ii/c,ii/d,iii/a,iii/b,iii/c,iii/d,iv/a,iv/b,iv/c,iv/d',
+			'pangkat' => 'required|in:I/a,I/b,I/c,I/d,II/a,II/b,II/c,II/d,III/a,III/b,III/c,III/d,IV/a,IV/b,IV/c,IV/d',
 			'masa_kerja' => 'required',
 			'gaji_pokok' => 'required',
 			'jumlah' => 'required',
@@ -211,8 +211,7 @@ class GuruController extends Controller
 		}
 		else{
             try{
-                $current_timestamp = Carbon::now()->toDateTimeString();
-				Guru::where('id', $id)->update([
+                Guru::where('id', $id)->update([
                     'nrg' => $guru->nrg,
                     'no_peserta' => $guru->no_peserta,
                     'nuptk' => $guru->nuptk,
@@ -245,8 +244,7 @@ class GuruController extends Controller
                     'pajak' => $guru->pajak,
                     'nom_pajak' => $guru->nom_pajak,
                     'bpjs' => $guru->bpjs,
-                    'jumlah_diterima' => $guru->jumlah_diterima,
-                    'updated_at' => $current_timestamp
+                    'jumlah_diterima' => $guru->jumlah_diterima
                 ]);
                 return redirect()->route('admin.guru')->with('success', 'Data berhasil diubah');
 			}
@@ -264,7 +262,7 @@ class GuruController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('delete from gurus where id = ?',[$id]);
+        Gurus::find($id)->delete();
         return redirect()->route('admin.guru')->with('success','Data berhasil dihapus');
     }
 

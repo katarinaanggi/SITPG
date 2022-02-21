@@ -42,7 +42,7 @@
                         <div class="form-group row mb-3">
                             <label for="no_peserta" class="col-sm-3 col-form-label">No. Peserta: </label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="no_peserta" name="no_peserta" value="{{ $guru->no_peserta }}">
+                                <input type="text" class="form-control" id="no_peserta" name="no_peserta" value="{{ $guru->no_peserta }}">
                                 @error('no_peserta')
                                     <div class="text-danger">*{{ $message }}</div>
                                 @enderror
@@ -62,7 +62,7 @@
                         <div class="form-group row mb-3">
                             <label for="nip" class="col-sm-3 col-form-label">NIP: </label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="nip" name="nip" value="{{ $guru->nip }}">
+                                <input type="text" class="form-control" id="nip" name="nip" value="{{ $guru->nip }}">
                                 @error('nip')
                                     <div class="text-danger">*{{ $message }}</div>
                                 @enderror
@@ -75,7 +75,7 @@
                                 <div class="form-group row mb-3">
                                     <label for="nrg" class="col-sm-3 col-form-label">NRG: </label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="nrg" name="nrg" value="{{ $guru->nrg }}">
+                                        <input type="text" class="form-control" id="nrg" name="nrg" value="{{ $guru->nrg }}">
                                         @error('nrg')
                                             <div class="text-danger">*{{ $message }}</div>
                                         @enderror
@@ -85,7 +85,7 @@
                                 <div class="form-group row mb-3">
                                     <label for="nuptk" class="col-sm-3 col-form-label">NUPTK: </label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="nuptk" name="nuptk" value="{{ $guru->nuptk }}">
+                                        <input type="text" class="form-control" id="nuptk" name="nuptk" value="{{ $guru->nuptk }}">
                                         @error('nuptk')
                                             <div class="text-danger">*{{ $message }}</div>
                                         @enderror
@@ -107,10 +107,10 @@
                                     <div class="col-sm-9">
                                         <label class="form-check">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" id="s1" name="jenjang" value="pengawas" {{ ($guru->jenjang == 'pengawas') ? 'checked' : ''}}> Pengawas <br/>
-                                                <input type="radio" class="form-check-input" id="s2" name="jenjang" value="slb" {{ ($guru->jenjang == 'slb') ? 'checked' : ''}}> SLB <br/>
-                                                <input type="radio" class="form-check-input" id="s3" name="jenjang" value="smk" {{ ($guru->jenjang == 'smk') ? 'checked' : ''}}> SMK <br/>
-                                                <input type="radio" class="form-check-input" id="s3" name="jenjang" value="sma" {{ ($guru->jenjang == 'sma') ? 'checked' : ''}}> SMA <br/>
+                                                <input type="radio" class="form-check-input" id="pengawas" name="jenjang" value="PENGAWAS" {{ ($guru->jenjang == 'PENGAWAS') ? 'checked' : ''}}> Pengawas <br/>
+                                                <input type="radio" class="form-check-input" id="slb" name="jenjang" value="SLB" {{ ($guru->jenjang == 'SLB') ? 'checked' : ''}}> SLB <br/>
+                                                <input type="radio" class="form-check-input" id="smk" name="jenjang" value="SMK" {{ ($guru->jenjang == 'SMK') ? 'checked' : ''}}> SMK <br/>
+                                                <input type="radio" class="form-check-input" id="sma" name="jenjang" value="SMA" {{ ($guru->jenjang == 'SMA') ? 'checked' : ''}}> SMA <br/>
                                             </label>
                                         </label>
                                         @error('jenjang')
@@ -135,7 +135,7 @@
                                         <select class="form-control choices" id="kota" name="kota" >
                                             <option value="">--pilih wilayah kabupaten/kota--</option>
                                             @foreach($kota as $k)
-                                                <option value="{{ $k->id }}" {{ $guru->kota == $k->id ? 'selected' : ''}}>{{ $k->nama_kota}}</option>
+                                                <option value="{{ $k->nama_kota }}" {{ $guru->kota == $k->nama_kota ? 'selected' : ''}}>{{ $k->nama_kota}}</option>
                                             @endforeach
                                         </select>
                                         @error('kota')
@@ -170,7 +170,7 @@
                                 <div class="form-group row mb-3">
                                     <label for="no_rek" class="col-sm-3 col-form-label">No. Rekening: </label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="no_rek" name="no_rek" value="{{ $guru->no_rek }}">
+                                        <input type="text" class="form-control" id="no_rek" name="no_rek" value="{{ $guru->no_rek }}">
                                         @error('no_rek')
                                             <div class="text-danger">*{{ $message }}</div>
                                         @enderror
@@ -197,18 +197,22 @@
                                     <div class="col-sm-9">
                                         <select class="form-control choices" id="pangkat" name="pangkat" >
                                             <option value="">--pilih pangkat/golongan--</option>
-                                            <option value="ii/a" {{ $guru->pangkat == 'ii/a' ? 'selected' : '' }}>II/A</option>
-                                            <option value="ii/b" {{ $guru->pangkat == 'ii/b' ? 'selected' : '' }}>II/B</option>
-                                            <option value="ii/c" {{ $guru->pangkat == 'ii/c' ? 'selected' : '' }}>II/C</option>
-                                            <option value="ii/d" {{ $guru->pangkat == 'ii/d' ? 'selected' : '' }}>II/D</option>
-                                            <option value="iii/a" {{ $guru->pangkat == 'iii/a' ? 'selected' : '' }}>III/A</option>
-                                            <option value="iii/b" {{ $guru->pangkat == 'iii/b' ? 'selected' : '' }}>III/B</option>
-                                            <option value="iii/c" {{ $guru->pangkat == 'iii/c' ? 'selected' : '' }}>III/C</option>
-                                            <option value="iii/d" {{ $guru->pangkat == 'iii/d' ? 'selected' : '' }}>III/D</option>
-                                            <option value="iv/a" {{ $guru->pangkat == 'iv/a' ? 'selected' : '' }}>IV/A</option>
-                                            <option value="iv/b" {{ $guru->pangkat == 'iv/b' ? 'selected' : '' }}>IV/B</option>
-                                            <option value="iv/c" {{ $guru->pangkat == 'iv/c' ? 'selected' : '' }}>IV/C</option>
-                                            <option value="iv/d" {{ $guru->pangkat == 'iv/d' ? 'selected' : '' }}>IV/D</option>
+                                            <option value="I/a" {{ $guru->pangkat == 'I/a' ? 'selected' : '' }}>I/A</option>
+                                            <option value="I/b" {{ $guru->pangkat == 'I/b' ? 'selected' : '' }}>I/B</option>
+                                            <option value="I/c" {{ $guru->pangkat == 'I/c' ? 'selected' : '' }}>I/C</option>
+                                            <option value="I/d" {{ $guru->pangkat == 'I/d' ? 'selected' : '' }}>I/D</option>
+                                            <option value="II/a" {{ $guru->pangkat == 'II/a' ? 'selected' : '' }}>II/A</option>
+                                            <option value="II/b" {{ $guru->pangkat == 'II/b' ? 'selected' : '' }}>II/B</option>
+                                            <option value="II/c" {{ $guru->pangkat == 'II/c' ? 'selected' : '' }}>II/C</option>
+                                            <option value="II/d" {{ $guru->pangkat == 'II/d' ? 'selected' : '' }}>II/D</option>
+                                            <option value="III/a" {{ $guru->pangkat == 'III/a' ? 'selected' : '' }}>III/A</option>
+                                            <option value="III/b" {{ $guru->pangkat == 'III/b' ? 'selected' : '' }}>III/B</option>
+                                            <option value="III/c" {{ $guru->pangkat == 'III/c' ? 'selected' : '' }}>III/C</option>
+                                            <option value="III/d" {{ $guru->pangkat == 'III/d' ? 'selected' : '' }}>III/D</option>
+                                            <option value="IV/a" {{ $guru->pangkat == 'IV/a' ? 'selected' : '' }}>IV/A</option>
+                                            <option value="IV/b" {{ $guru->pangkat == 'IV/b' ? 'selected' : '' }}>IV/B</option>
+                                            <option value="IV/c" {{ $guru->pangkat == 'IV/c' ? 'selected' : '' }}>IV/C</option>
+                                            <option value="IV/d" {{ $guru->pangkat == 'IV/d' ? 'selected' : '' }}>IV/D</option>
                                         </select>
                                         @error('pangkat')
                                             <div class="text-danger">*{{ $message }}</div>

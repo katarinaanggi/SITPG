@@ -57,11 +57,11 @@
 
         .read-more-show{
         cursor:pointer;
-        color: #C411F1;
+        color: var(--ungumuda);
         }
         .read-more-hide{
         cursor:pointer;
-        color: #C411F1;
+        color: var(--ungumuda);
         }
     
         .hide_content{

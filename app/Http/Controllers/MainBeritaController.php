@@ -179,7 +179,7 @@ class MainBeritaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        DB::delete('delete from berita where id = ?',[$id]);
+        Berita::find($id)->delete();
         return redirect()->route('admin.berita')->with('success','Data berhasil dihapus');
     }
 

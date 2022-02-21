@@ -5,192 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SITPG | {{ $title }}</title>
 
+    {{-- fonts --}}
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"> 
+
+    {{-- bootstrap --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/ungu.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-html5-2.2.2/r-2.2.9/datatables.min.css"/>
+
+    {{-- datatable --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/fc-4.0.1/fh-3.2.1/r-2.2.9/datatables.min.css"/>
+    
+    {{-- extra component --}}
+    <link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" />
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg" type="image/x-icon') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"><link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-html5-2.2.2/r-2.2.9/sc-2.0.5/datatables.min.css"/> --}}
+    <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" />
-
-    <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
-        
-        .wrapper {
-            display: table;
-            height: 100%;
-            width: 100%;
-        }
-
-        .sub-entry{
-            width: 50%;
-            float: left;
-        }
-        
-        .truncate {
-            max-width:50px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        :root {
-            --transition-time: 0.3s;
-        }
-        
-        .card {
-            display: block; 
-            margin-bottom: 20px;
-            line-height: 1.42857143;
-            background-color: white;
-            border-radius: 2px;
-            box-shadow: 0 2px 5px 0 rgba(213, 186, 235, 0.37),0 2px 10px 0 rgba(213, 186, 235, 0.37); 
-            transition: box-shadow .25s; 
-            border-radius: 20px;
-        }
-        .card:hover {
-            box-shadow: 0 8px 17px 0 rgba(213, 186, 235, 0.37),0 6px 20px 0 rgba(213, 186, 235, 0.37);
-        }
-         
-        .card-content {
-            padding:15px;
-            text-align:left;
-        }
-        .card-title {
-            margin-top:0px;
-            font-weight: 700;
-            font-size: 1.65em;
-        }
-
-        .card-title a {
-            color: #000;
-            text-decoration: none !important;
-        }
-
-        .choices__inner{
-            border: 1px solid #dce7f1;
-            background-color: white
-        }
-
-        /* Card bawahnya */
-        .bcard-hover {
-            transition: all 0.25s ease-in;
-            border-bottom: 5px solid transparent;
-        }
-        .bcard-hover:hover {
-            transform: translateY(-5px);
-            border: none;
-            border-bottom: 5px solid #790995;
-        }
-
-        /* New! Card */
-        #news {
-            --bg-filter-opacity: 0.5;
-            padding: 1em;
-            align-items: flex-end;
-            transition: all, var(--transition-time);
-            position: relative;
-            overflow: hidden;
-            background-color: var(--ungu);
-            color: var(--bg);
-        }
-
-        #news:hover {
-            transform: rotate(0);
-            color: var(--ungu);
-        }
-
-        #news:before {
-            background: #F3CFFC;
-            width: 250%;
-            height: 250%;
-        }
-
-        .date {
-            position: absolute;
-            top: 0;
-            right: 0;
-            font-size: 1em;
-            padding: 1em;
-            line-height: 1em;
-            opacity: .8;
-            color: var(--bg);
-        }
-
-        #news:hover .date {
-            color: var(--ungu)
-        }
-
-        #news:hover .card-content .card-body h4 a, #news:hover .card-footer a i {
-            color: var(--ungu) !important
-        }
-
-        #news .card-content .card-body h4 a, #news .card-footer a i {
-            color: var(--bg) !important
-        }
-
-        #cf {
-            justify-content: space-between; 
-            background-color:var(--ungu);
-            transition: all, var(--transition-time);
-        }
-
-        #news:hover #cf {
-            background-color: #F3CFFC;
-        }
-
-        .tags {
-            display: flex;
-            animation: blinker 1s linear infinite;
-        }
-
-        .tag {
-            position: absolute;
-            top: 0;
-            left: 0;
-            font-size: 1em;
-            background: #F9E7FE;
-            border-radius: 0.3rem;
-            padding: 0 1em;
-            margin-right: 0.5em;
-            line-height: 1.8em;
-            color: var(--ungudark);
-            transition: all, var(--transition-time);
-        }
-
-        #news:hover .tags .tag {
-            background: var(--ungu);
-            color: var(--bg)
-        }
-
-        .card:before, .card:after {
-            content: '';
-            transform: scale(0);
-            transform-origin: top left;
-            border-radius: 50%;
-            position: absolute;
-            left: -50%;
-            top: -50%;
-            z-index: -5;
-            transition: all, var(--transition-time);
-            transition-timing-function: ease-in-out;
-        }
-
-        .card:hover:before, .card:hover:after {
-            transform: scale(1);
-        }
-
-        @keyframes blinker {  
-            50% { opacity: 0; }
-        }
-
-    </style>
+    {{-- css --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/ungu.css') }}">
 </head>
 <body>
     @include('sweetalert::alert')
@@ -262,23 +98,28 @@
             </div>
         </div>
     </div>
+    {{-- extra component --}}
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/mazer.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
-
-    
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-html5-2.2.2/r-2.2.9/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.11.4/dataRender/ellipsis.js"></script>
-    {{-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-html5-2.2.2/r-2.2.9/sc-2.0.5/datatables.min.js"></script> --}}
     <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form-element-select.js') }}"></script>
-
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    
+    {{-- bootstrap --}}
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    
+    {{-- datatable --}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/fc-4.0.1/fh-3.2.1/r-2.2.9/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.11.4/dataRender/ellipsis.js"></script>
+    
     @yield('datatable')
     
     <script>
@@ -308,23 +149,6 @@
     @yield('script')
 
     <script type="text/javascript">
-        // // Hide the extra content initially:
-        // $('.read-more-content').addClass('hide_content')
-        // $('.read-more-show, .read-more-hide').removeClass('hide_content')
-
-        // // Set up the toggle effect:
-        // $('.read-more-show').on('click', function(e) {
-        //     $(this).next('.read-more-content').removeClass('hide_content');
-        //     $(this).addClass('hide_content');
-        //     e.preventDefault();
-        // });
-        // $('.read-more-hide').on('click', function(e) {
-        //     var p = $(this).parent('.read-more-content');
-        //     p.addClass('hide_content');
-        //     p.prev('.read-more-show').removeClass('hide_content'); // Hide only the preceding "Read More"
-        //     e.preventDefault();
-        // });
-
         // Set delete confirmation alert
         $('.delete-confirm').on('click', function (event) {
             event.preventDefault();
