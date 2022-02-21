@@ -207,6 +207,22 @@ figcaption {
     transform: scale(1);
 }
 
+#searchq {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #57066B;
+    border-radius: 3px;
+    font-size: 16px;
+    background-color: white;
+    padding: 8px 15px 8px 15px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#searchq:focus {
+    width: 91%;
+}
+
 @keyframes blinker {  
     50% { opacity: 0; }
 }

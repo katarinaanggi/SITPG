@@ -25,15 +25,14 @@
               <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                   <div class="text-center">
-                    
+                    <img class="profile-user-img img-fluid img-circle admin_picture" src="<?php echo e(asset('assets/images/faces/1.jpg')); ?>" alt="User profile picture">
                   </div>
+                  <br>
   
-                  <h3 class="profile-username text-center admin_name"><?php echo e(Auth::guard('admin')->user()->name); ?></h3>
-  
+                  <h3 class="profile-username text-center admin_name" style="margin: 0"><?php echo e(Auth::guard('admin')->user()->name); ?></h3>
                   <p class="text-muted text-center">Administrator</p>
 
                   <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
-                  <a href="javascript:void(0)" class="btn btn-block" id="change_picture_btn"><b>Change picture</b></a>
                   
                 </div>
                 <!-- /.card-body -->

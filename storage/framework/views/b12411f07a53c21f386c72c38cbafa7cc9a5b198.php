@@ -16,17 +16,13 @@
             </div>
         </div>
     </div>
-
-    <div class="row justify-content-center mb-3">
-        <div class="col-md-6">
-            <form action="<?php echo e(route('admin.home')); ?>">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search.." name="search" value="<?php echo e(request('search')); ?>">
-                    <button class="btn btn-save" type="submit">Search</button>
-                </div>
-            </form>
+    
+    <form action="<?php echo e(route('admin.home')); ?>" autocomplete="off">
+        <div class="input-group mb-3">
+            <input type="text" class="searchq" id="searchq" placeholder="Search.." name="search" value="<?php echo e(request('search')); ?>">
+            <button class="btn btn-save" type="submit">Search</button>
         </div>
-    </div>
+    </form>
     
     <?php if($berita->count()): ?>
         <div class="card" id="news">
