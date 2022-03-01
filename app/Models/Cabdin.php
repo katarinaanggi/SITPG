@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cabdin extends Model
 {
     use HasFactory;
-
+    protected $table = 'cabdin';
     protected $fillable = [
         'nama',
     ];

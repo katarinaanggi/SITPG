@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">    
+@endsection
+
 @section('page')
 <div class="page-heading">
     <div class="page-title">
@@ -37,7 +41,7 @@
                     <tbody>
                         @foreach ($berita as $key => $value)
                         <tr>
-                            <td><a href="{{ route('admin.detail_berita', $value->id) }}" >{{ $value->judul }}</a></td>
+                            <td><a href="{{ route('operator.detail_berita', $value->id) }}" >{{ $value->judul }}</a></td>
                             <td>
                                 @if(strlen($value->isi) > 75)
                                     {!! substr($value->isi,0,75) !!}. . .

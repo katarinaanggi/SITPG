@@ -48,11 +48,11 @@ class GuruController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) //nuptk dll must number
+    public function store(Request $request) 
     {
         $rules = [
 			'nrg' => 'required',
-			'no_peserta' => 'required',//number
+			'no_peserta' => 'required',
 			'nuptk' => 'required|unique:gurus,nuptk',
 			'no_sk' => 'required',
 			'nama' => "required",
@@ -77,7 +77,7 @@ class GuruController extends Controller
 		$validator = Validator::make($request->all(),$rules);
 
 		if ($validator->fails()) {
-			return redirect()->route('admin.add_guru')->withInput()->withErrors($validator);
+			return redirect()->route('operator.add_guru')->withInput()->withErrors($validator);
 		}
 		else{
             $data = $request->input();
@@ -132,10 +132,10 @@ class GuruController extends Controller
                 $guru->jumlah_diterima = $data['jumlah_diterima'];
                 
 				$guru->save();
-				return redirect()->route('admin.guru')->with('success', 'Data berhasil ditambahkan');
+				return redirect()->route('operator.guru')->with('success', 'Data berhasil ditambahkan');
 			}
 			catch(Exception $e){
-				return redirect()->route('admin.add_guru')->with('error', 'Data belum berhasil ditambahkan');
+				return redirect()->route('operator.add_guru')->with('error', 'Data belum berhasil ditambahkan');
 			}
 		}
     }
@@ -179,7 +179,7 @@ class GuruController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $guru, $id) //nuptk dll must number
+    public function update(Request $guru, $id) 
     {
         $rules = [
 			'nrg' => 'required',
@@ -207,7 +207,7 @@ class GuruController extends Controller
 		$validator = Validator::make($guru->all(),$rules);
 
 		if ($validator->fails()) {
-			return redirect()->route('admin.edit_guru',$guru->id)->withInput()->withErrors($validator);
+			return redirect()->route('operator.edit_guru',$guru->id)->withInput()->withErrors($validator);
 		}
 		else{
             try{
@@ -246,10 +246,10 @@ class GuruController extends Controller
                     'bpjs' => $guru->bpjs,
                     'jumlah_diterima' => $guru->jumlah_diterima
                 ]);
-                return redirect()->route('admin.guru')->with('success', 'Data berhasil diubah');
+                return redirect()->route('operator.guru')->with('success', 'Data berhasil diubah');
 			}
 			catch(Exception $e){
-				return redirect()->route('admin.edit_guru',$guru->id)->with('error', 'Data belum berhasil ditambahkan');
+				return redirect()->route('operator.edit_guru',$guru->id)->with('error', 'Data belum berhasil ditambahkan');
 			}
 		}
     }
@@ -263,7 +263,7 @@ class GuruController extends Controller
     public function destroy($id)
     {
         Gurus::find($id)->delete();
-        return redirect()->route('admin.guru')->with('success','Data berhasil dihapus');
+        return redirect()->route('operator.guru')->with('success','Data berhasil dihapus');
     }
 
     /**
@@ -275,6 +275,6 @@ class GuruController extends Controller
     public function destroyAll()
     {
         DB::delete('delete from gurus');
-        return redirect()->route('admin.guru')->with('success','Data berhasil dihapus');
+        return redirect()->route('operator.guru')->with('success','Data berhasil dihapus');
     }
 }

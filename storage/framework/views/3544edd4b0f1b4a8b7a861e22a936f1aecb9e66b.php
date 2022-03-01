@@ -1,5 +1,9 @@
 
 
+<?php $__env->startSection('style'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">    
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('page'); ?>
     <div class="page-title">
         <div class="row">
@@ -8,7 +12,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo e(route('admin.home')); ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="<?php echo e(route('admin.guru')); ?>">Data Guru</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo e(route('operator.guru')); ?>">Data Guru</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit Guru</li>
                     </ol>
                 </nav>
@@ -18,8 +22,8 @@
     <div class="col-12 col-md-12">
         <div class="card">
             <div class="card-content">
-                <a href="<?php echo e(route('admin.guru')); ?>"><i class="bi bi-x-lg"></i></a>
-                <form action="<?php echo e(route('admin.update_guru', $guru->id)); ?>" method="post" id="update-guru">
+                <a href="<?php echo e(route('operator.guru')); ?>"><i class="bi bi-x-lg"></i></a>
+                <form action="<?php echo e(route('operator.update_guru', $guru->id)); ?>" method="post" id="update-guru">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('PATCH'); ?>
                     <?php if($message = Session::get('error')): ?>
@@ -42,7 +46,7 @@
                         <div class="form-group row mb-3">
                             <label for="no_peserta" class="col-sm-3 col-form-label">No. Peserta: </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="no_peserta" name="no_peserta" value="<?php echo e($guru->no_peserta); ?>">
+                                <input type="text" class="form-control" id="no_peserta" name="no_peserta" value="<?php echo e($guru->no_peserta); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                 <?php $__errorArgs = ['no_peserta'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -76,7 +80,7 @@ unset($__errorArgs, $__bag); ?>
                         <div class="form-group row mb-3">
                             <label for="nip" class="col-sm-3 col-form-label">NIP: </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nip" name="nip" value="<?php echo e($guru->nip); ?>">
+                                <input type="text" class="form-control" id="nip" name="nip" value="<?php echo e($guru->nip); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                 <?php $__errorArgs = ['nip'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -96,7 +100,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="form-group row mb-3">
                                     <label for="nrg" class="col-sm-3 col-form-label">NRG: </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="nrg" name="nrg" value="<?php echo e($guru->nrg); ?>">
+                                        <input type="text" class="form-control" id="nrg" name="nrg" value="<?php echo e($guru->nrg); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         <?php $__errorArgs = ['nrg'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -113,7 +117,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="form-group row mb-3">
                                     <label for="nuptk" class="col-sm-3 col-form-label">NUPTK: </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="nuptk" name="nuptk" value="<?php echo e($guru->nuptk); ?>">
+                                        <input type="text" class="form-control" id="nuptk" name="nuptk" value="<?php echo e($guru->nuptk); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         <?php $__errorArgs = ['nuptk'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -247,7 +251,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="form-group row mb-3">
                                     <label for="no_rek" class="col-sm-3 col-form-label">No. Rekening: </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="no_rek" name="no_rek" value="<?php echo e($guru->no_rek); ?>">
+                                        <input type="text" class="form-control" id="no_rek" name="no_rek" value="<?php echo e($guru->no_rek); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         <?php $__errorArgs = ['no_rek'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

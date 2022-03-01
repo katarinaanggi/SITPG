@@ -1,5 +1,9 @@
 
 
+<?php $__env->startSection('style'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">    
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('page'); ?>
 <div class="page-heading">
     <div class="page-title">
@@ -37,7 +41,7 @@
                     <tbody>
                         <?php $__currentLoopData = $berita; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td><a href="<?php echo e(route('admin.detail_berita', $value->id)); ?>" ><?php echo e($value->judul); ?></a></td>
+                            <td><a href="<?php echo e(route('operator.detail_berita', $value->id)); ?>" ><?php echo e($value->judul); ?></a></td>
                             <td>
                                 <?php if(strlen($value->isi) > 75): ?>
                                     <?php echo substr($value->isi,0,75); ?>. . .

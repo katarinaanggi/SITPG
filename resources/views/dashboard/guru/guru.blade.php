@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">    
+@endsection
+
 @section('page')
 <div class="page-heading">
     <div class="page-title">
@@ -24,8 +28,9 @@
                 <h4 class="card-title">Daftar Guru</h4>
             </div>
             <div class="card-body">
-                <a class="btn" href="{{ route('admin.add_guru') }}">+Add New Guru</a>
-                <a class="btn btn-save" href="{{ route('admin.deleteAll_guru') }}" id="delall">Delete All Data</a><br /><br />
+                <a class="btn" href="{{ route('operator.add_guru') }}">+Add New Guru</a>
+                <a class="btn btn-save" href="{{ route('operator.deleteAll_guru') }}" id="delall">Delete All Data</a><br /><br />
+                @auth('admin')
                 <form action="{{ route('admin.file_import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-4" >
@@ -35,7 +40,8 @@
                             <button class="btn btn-save" type="submit" id="button-addon2">Import</button>
                         </div>
                     </div>
-                </form>
+                </form>                    
+                @endauth
                 <table class="table table-inverse table-responsive table-hover" id="guruTable">
                     <thead class="thead-inverse">
                         <tr>
@@ -79,7 +85,7 @@
                     <tbody>
                     </tbody>
                 </table>
-                <a class="btn btn-save mt-3" href="{{ route('admin.file_export') }}">Export All Data</a>
+                <a class="btn btn-save mt-3" href="{{ route('operator.file_export') }}">Export All Data</a>
             </div>
         </div>
     </section>
@@ -104,7 +110,7 @@
                 orderCellsTop: true,
                 fixedHeader: true,
                 fixedColumns: true,
-                ajax: '{!! route('admin.data_guru') !!}',
+                ajax: '{!! route('operator.data_guru') !!}',
                 columns: [
                     { data: 'action', name: 'action' },
                     { data: 'id', name: 'id' },

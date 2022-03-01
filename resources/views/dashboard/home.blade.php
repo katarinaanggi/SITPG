@@ -1,11 +1,15 @@
 @extends('layouts.main')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">    
+@endsection
+
 @section('page')
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Selamat Datang di Sistem Informasi Tunjangan Profesi Guru</h3>
-                <p class="text-subtitle text-muted">Sistem Informasi Tunjangan Profesi Guru ini disediakan oleh operator Dinas Pendidikan dan Kebudayaan Provinsi Jawa Tengah.</p>
+                <p class="text-subtitle text-muted">Sistem Informasi Tunjangan Profesi Guru ini disediakan oleh Operator Dinas Pendidikan dan Kebudayaan Provinsi Jawa Tengah.</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -17,42 +21,36 @@
         </div>
     </div>
     
-    <form action="{{ route('admin.home') }}" autocomplete="off">
-        <div class="input-group mb-3">
-            <input type="text" class="searchq" id="searchq" placeholder="Search.." name="search" value="{{ request('search') }}">
-            <button class="btn btn-save" type="submit">Search</button>
-        </div>
-    </form>
     
-    @if ($berita->count())
-        <div class="card" id="news">
-            <div class="card-content">
-                <div class="card-body text-center">
-                    <div class="tags">
+    @if ($cari->count())
+    <div class="card" id="news">
+        <div class="card-content">
+            <div class="card-body text-center">
+                <div class="tags">
                         <div class="tag">New!</div>
                     </div>
                     <h4 class="card-title">
-                        <a href="{{ route('admin.detail_berita', $berita[0]->id) }}">{{ $berita[0]->judul }}</a>
+                        <a href="{{ route('detail_berita', $cari[0]->id) }}">{{ $cari[0]->judul }}</a>
                     </h4>
                     <p class="card-text isinya">
-                        @if(strlen($berita[0]->isi) > 500)
-                            {!! substr($berita[0]->isi,0,500) !!}. . .
+                        @if(strlen($cari[0]->isi) > 500)
+                        {!! substr($cari[0]->isi,0,500) !!}. . .
                         @else
-                            {!! $berita[0]->isi !!}
+                            {!! $cari[0]->isi !!}
                         @endif
                     </p>
-                    <div class="date">{{ \Carbon\Carbon::parse($berita[0]->created_at)->diffForHumans() }}</div>
+                    <div class="date">{{ \Carbon\Carbon::parse($cari[0]->created_at)->diffForHumans() }}</div>
                 </div>
             </div>
             <div id="cf" class="card-footer d-flex">
                 
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#viewDetails" data-bs-backdrop="false">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#viewDetails" data-bs-backdrop="false">
                         Read More
                     </button>
-
-                @if ($berita[0]->nama_file)
-                    <a href="{{ route('downloadFile', $berita[0]->nama_file) }}" data-bs-toggle="tooltip" title={{$berita[0]->nama_file}}>
+                    
+                    @if ($cari[0]->nama_file)
+                    <a href="{{ route('downloadFile', $cari[0]->nama_file) }}" data-bs-toggle="tooltip" title={{$cari[0]->nama_file}}>
                         <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
                     </a>
                 @endif 
@@ -63,16 +61,16 @@
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">{{ $berita[0]->judul }}</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">{{ $cari[0]->judul }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+            </div>
                 <div class="modal-body">
-                    <p class="card-text"><small class="text-muted">Created at {{ $berita[0]->created_at->format('d-m-Y') }} by Admin</small></p> 
-                    <p style="text-align: justify; text-justify: inter-word;">{!! $berita[0]->isi !!}</p>
+                    <p class="card-text"><small class="text-muted">Created at {{ $cari[0]->created_at->format('d-m-Y') }} by Admin</small></p> 
+                    <p style="text-align: justify; text-justify: inter-word;">{!! $cari[0]->isi !!}</p>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    @if ($berita[0]->nama_file)
-                        <a href="{{ route('downloadFile', $berita[0]->nama_file) }}" class="mr-auto"> 
+                    @if ($cari[0]->nama_file)
+                        <a href="{{ route('downloadFile', $cari[0]->nama_file) }}" class="mr-auto"> 
                             Download file 
                         </a>
                     @endif
@@ -82,19 +80,21 @@
             </div>
         </div>
     @else 
-        <p class="text-center">Not Found</p> 
+    <p class="text-center">Not Found</p> 
     @endif
-
+    
+    <i class="bi-search form__icon"></i>
+    <input type="text" class="searchq form__input" id="searchq" placeholder="Search.." name="search">
     <section class="wrapper">
         <div class="container">
             <div class="row">
-                @foreach ($berita->skip(1) as $value)
+                @foreach ($berita as $value)
                 <div class="col-md-4">
                     <div class="card bcard-hover">
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="{{ route('admin.detail_berita', $value->id) }}">{{ $value->judul }}</a>
+                                    <a href="{{ route('detail_berita', $value->id) }}">{{ $value->judul }}</a>
                                 </h4>
                                 <p class="card-text " >
                                     @if(strlen($value->isi) > 50)
@@ -107,12 +107,31 @@
                         </div>
                         <div class="card-footer d-flex justify-content-between">
                             <span><small class="text-muted">{{ \Carbon\Carbon::parse($value->created_at)->diffForHumans() }}</small></span>
-                            <a href="{{ route('admin.detail_berita', $value->id) }}" style="display: inline-block; font-weight: 700; letter-spacing: 1.5px;">READ MORE</a>
+                            <a href="{{ route('detail_berita', $value->id) }}" style="display: inline-block; font-weight: 700; letter-spacing: 1.5px;">READ MORE</a>
                         </div>
                     </div>
                 </div>
                 @endforeach 
             </div>
+            <div class="d-flex justify-content-center">
+                {!! $berita->links() !!}
+            </div>
         </div>
     </section>    
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $('#searchq').on('keyup',function(){
+            $value=$(this).val();
+            $.ajax({
+                type : 'get',
+                url : '{{ route('search') }}',
+                data:{'search':$value},
+                success:function(data){
+                    $('.container').html(data);
+                }
+            });
+        })
+    </script>
 @endsection

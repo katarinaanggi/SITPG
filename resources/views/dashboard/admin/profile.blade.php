@@ -1,4 +1,8 @@
-@extends('layouts.profil')
+@extends('layouts.main')
+
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">    
+@endsection
 
 @section('page')
 <div class="page-title">
@@ -32,7 +36,7 @@
                   <h3 class="profile-username text-center admin_name" style="margin: 0">{{ Auth::guard('admin')->user()->name }}</h3>
                   <p class="text-muted text-center">Administrator</p>
 
-                  <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
+                  {{-- <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none"> --}}
                   
                 </div>
                 <!-- /.card-body -->

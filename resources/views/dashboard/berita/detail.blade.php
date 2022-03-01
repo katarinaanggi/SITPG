@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">    
+@endsection
+
 @section('page')
 <div class="page-heading">
     <div class="page-title">
@@ -10,18 +14,22 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.berita') }}">Berita</a></li>
+                        @if (Auth::guard('admin')->check())
+                            <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.berita') }}">Berita</a></li>
+                        @elseif (Auth::guard('web')->check())
+                            <li class="breadcrumb-item"><a href="{{ route('user.home') }}">Dashboard</a></li>  
+                        @endif
                         <li class="breadcrumb-item active" aria-current="page">Detail Berita {{ $berita->id }}</li>
                     </ol>
                 </nav>
             </div>
         </div>
-    </div>
+    </div>        
     
     <div class="container">
         <div class="article-meta text-center">
-            <h1 class="headline ">{{ $berita->judul }}</h1>
+            <h1 class="headline">{{ $berita->judul }}</h1>
             <div class="author">
                 <p class="byline">by <b>Administrator</b> {{ $berita->created_at->format('M d, Y') }}</p>
             </div>

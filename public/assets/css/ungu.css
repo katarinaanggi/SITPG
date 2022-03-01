@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --ungu: #790995;
     --white: #ffffff;
     --ungudark: #4E0660;
@@ -6,10 +6,16 @@
     --ungumuda2: #57066B;
     --ungumuda: #C411F1;
     --ungumuda3: #F9E7FE;
+    --ungumuda4: #E8A0F9;
+    --shine: #D659F5;
     --bg: #fcf6fd;
     --light: #ff80ff;
     --hover: #F3CFFC;
     --readonly: #ede9ef;
+    --pink: #ff80ff;
+    --shadow: rgba(201, 95, 233, 0.493);
+    --shadow2: rgba(201, 95, 233, 0.493);
+    --fcf: rgba(255, 100, 255, 0.5);
   }
 
 body {
@@ -35,7 +41,6 @@ a:hover {
 .btn, .btn:focus, .btn:active, .btn:visited, .btn:hover {
     background-color: var(--ungumuda3);
     color :var(--ungu) !important;
-    /* : #ffb46e; */
 }
 
 .sidebar-menu .sidebar-item.active .sidebar-link {
@@ -76,7 +81,7 @@ h1, h3, h6, .card-title a {
 
 .form-control:focus {
     border-color: var(--light);
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px var(--fcf);
 }
 
 .form-check-input {
@@ -101,4 +106,138 @@ h1, h3, h6, .card-title a {
 .form-control:disabled, .form-control[readonly] {
     background-color: var(--readonly);
     opacity: 1;
+} */
+
+:root {
+    --aqua: #60D1B3;
+    --aquahover: #195545;
+    --navy: #292f35;
+    --aquatitle: #343434;
+    --army: #144437;
+    --light: #B0E8D9;
+    --fcf: rgba(100, 255, 208, 0.5);
+    --readonly: #e9efee;
+    --shadow: rgba(95, 233, 199, 0.493);
+    --shadow2: rgba(95, 233, 187, 0.493);
+    --shine: #59f5ce;
+    --hover: #cffcf2;
+    --bg: #f6fdfc;
+    --white: white;
+
+    --pink: #ff80ff;
+  }
+
+body {
+    background-color: var(--white);
 }
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--aquatitle);
+}
+
+a {
+    color: var(--aqua);
+}
+
+.bi-heart-fill {
+    color: red !important;
+}
+
+a:hover {
+    color: var(--aquahover);
+}
+
+#sitpg:hover {
+    color: var(--white);
+}
+
+.btn, .btn:focus, .btn:active, .btn:visited, .btn:hover {
+    background-color: var(--aqua);
+    color :var(--white) !important;
+}
+
+/* warna sidebbar */
+.sidebar-wrapper.active {
+    background-color: var(--navy);
+}
+
+/* warna link sidebar */
+.sidebar-menu .sidebar-item.active .sidebar-link {
+    background-color: var(--aqua) !important;
+}
+
+/* sidebar active color  */
+.sidebar-menu .sidebar-item.active i, .sidebar-menu .sidebar-item.active .sidebar-link span {
+    color: var(--army) !important;
+}
+
+/* warna icon sidebar */
+.sidebar-wrapper .menu .sidebar-link i, .sidebar-wrapper .menu .sidebar-link svg{
+    color: var(--white);
+}
+
+/* warna font menu sidebar */
+.sidebar-wrapper .menu .sidebar-title, .sidebar-wrapper .menu .sidebar-link span {
+    color: var(--white);
+}
+
+.sidebar-wrapper.active .sidebar-menu .menu .sidebar-item:hover i {
+    color: var(--army) !important;
+} 
+
+.sidebar-wrapper.active .sidebar-menu .menu .sidebar-item:hover .sidebar-link span {
+    color: var(--army);
+}
+
+.card-title a {
+    color: var(--aqua) !important;
+}
+
+.dropdown-item {
+    color: var(--aqua);
+}
+
+.bi {
+    position:relative; 
+    top: calc(50% - 10px);
+    color: var(--aqua);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: var(--aqua);
+    color: white;
+}
+
+.btn-save, .btn-save:focus, .btn-save:active, .btn-save:visited, .btn-save:hover{
+    background-color: var(--army); 
+    color: white !important;
+}
+
+.form-control:focus {
+    border-color: var(--light);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px var(--fcf);
+}
+
+.form-check-input {
+    border: 1.5px solid #dce7f1;
+    width: 17px;
+    height: 17px;
+}
+
+.form-check-input:checked {
+    background-color: var(--aqua);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--white);
+    background-color: var(--aqua);
+}
+
+.nav-tabs .nav-link.active:after {
+    background-color: var(--aqua);
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: var(--readonly);
+    opacity: 1;
+} 

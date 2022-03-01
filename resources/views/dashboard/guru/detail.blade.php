@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">    
+@endsection
+
 @section('page')
 <div class="page-title">
     <div class="row">
@@ -8,7 +12,7 @@
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.guru') }}">Data Guru</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('operator.guru') }}">Data Guru</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Detail Guru</li>
                 </ol>
             </nav>
@@ -18,7 +22,7 @@
     <div class="col-12 col-md-12">
         <div class="card">
             <div class="card-content">
-                <a href="{{route('admin.guru')}}"><i class="bi bi-x-lg"></i></a>
+                <a href="{{route('operator.guru')}}"><i class="bi bi-x-lg"></i></a>
                 <div class="card-header"><h3 class="text-center">Detail of {{ $guru->nama }}</h3></div>
                 <div class="card-body">
                     <div class="form-group row mb-3">
@@ -298,10 +302,10 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <a href="{{ route('admin.guru') }}" class="btn" style="width: 100%">Kembali</a>
+                        <a href="{{ route('operator.guru') }}" class="btn" style="width: 100%">Kembali</a>
                     </div>
                     <div class="col">
-                        <a href="{{ route('admin.edit_guru', $guru->id) }}" class="btn btn-save" style="width: 100%">Edit</a>
+                        <a href="{{ route('operator.edit_guru', $guru->id) }}" class="btn btn-save" style="width: 100%">Edit</a>
                     </div>
                 </div>
             </div>

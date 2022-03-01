@@ -1,5 +1,9 @@
 
 
+<?php $__env->startSection('style'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/profile.css')); ?>">    
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('page'); ?>
 <div class="page-title">
     <div class="row">
@@ -32,7 +36,7 @@
                   <h3 class="profile-username text-center admin_name" style="margin: 0"><?php echo e(Auth::guard('admin')->user()->name); ?></h3>
                   <p class="text-muted text-center">Administrator</p>
 
-                  <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
+                  
                   
                 </div>
                 <!-- /.card-body -->
@@ -253,4 +257,4 @@ unset($__errorArgs, $__bag); ?></span>
     
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.profil', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/dashboard/admin/profile.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/dashboard/admin/profile.blade.php ENDPATH**/ ?>

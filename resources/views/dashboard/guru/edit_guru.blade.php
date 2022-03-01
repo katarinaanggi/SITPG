@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">    
+@endsection
+
 @section('page')
     <div class="page-title">
         <div class="row">
@@ -8,7 +12,7 @@
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.guru') }}">Data Guru</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('operator.guru') }}">Data Guru</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Edit Guru</li>
                     </ol>
                 </nav>
@@ -18,8 +22,8 @@
     <div class="col-12 col-md-12">
         <div class="card">
             <div class="card-content">
-                <a href="{{route('admin.guru')}}"><i class="bi bi-x-lg"></i></a>
-                <form action="{{ route('admin.update_guru', $guru->id) }}" method="post" id="update-guru">
+                <a href="{{route('operator.guru')}}"><i class="bi bi-x-lg"></i></a>
+                <form action="{{ route('operator.update_guru', $guru->id) }}" method="post" id="update-guru">
                     @csrf
                     @method('PATCH')
                     @if ($message = Session::get('error'))
@@ -42,7 +46,7 @@
                         <div class="form-group row mb-3">
                             <label for="no_peserta" class="col-sm-3 col-form-label">No. Peserta: </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="no_peserta" name="no_peserta" value="{{ $guru->no_peserta }}">
+                                <input type="text" class="form-control" id="no_peserta" name="no_peserta" value="{{ $guru->no_peserta }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                 @error('no_peserta')
                                     <div class="text-danger">*{{ $message }}</div>
                                 @enderror
@@ -62,7 +66,7 @@
                         <div class="form-group row mb-3">
                             <label for="nip" class="col-sm-3 col-form-label">NIP: </label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nip" name="nip" value="{{ $guru->nip }}">
+                                <input type="text" class="form-control" id="nip" name="nip" value="{{ $guru->nip }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                 @error('nip')
                                     <div class="text-danger">*{{ $message }}</div>
                                 @enderror
@@ -75,7 +79,7 @@
                                 <div class="form-group row mb-3">
                                     <label for="nrg" class="col-sm-3 col-form-label">NRG: </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="nrg" name="nrg" value="{{ $guru->nrg }}">
+                                        <input type="text" class="form-control" id="nrg" name="nrg" value="{{ $guru->nrg }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         @error('nrg')
                                             <div class="text-danger">*{{ $message }}</div>
                                         @enderror
@@ -85,7 +89,7 @@
                                 <div class="form-group row mb-3">
                                     <label for="nuptk" class="col-sm-3 col-form-label">NUPTK: </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="nuptk" name="nuptk" value="{{ $guru->nuptk }}">
+                                        <input type="text" class="form-control" id="nuptk" name="nuptk" value="{{ $guru->nuptk }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         @error('nuptk')
                                             <div class="text-danger">*{{ $message }}</div>
                                         @enderror
@@ -170,7 +174,7 @@
                                 <div class="form-group row mb-3">
                                     <label for="no_rek" class="col-sm-3 col-form-label">No. Rekening: </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="no_rek" name="no_rek" value="{{ $guru->no_rek }}">
+                                        <input type="text" class="form-control" id="no_rek" name="no_rek" value="{{ $guru->no_rek }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         @error('no_rek')
                                             <div class="text-danger">*{{ $message }}</div>
                                         @enderror

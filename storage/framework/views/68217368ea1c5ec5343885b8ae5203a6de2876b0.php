@@ -25,8 +25,10 @@
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     
     
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/ungu.css')); ?>">
+    
+    <?php echo $__env->yieldContent('style'); ?>
+
 </head>
 <body>
     <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -50,8 +52,21 @@
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
-                                            <h6 class="mb-0 text-gray-600"><?php echo e(Auth::guard('admin')->user()->name); ?></h6>
-                                            <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                                            <h6 class="mb-0 text-gray-600">
+                                                <?php if(Auth::guard('admin')->check()): ?>
+                                                    <?php echo e(Auth::guard('admin')->user()->name); ?>                                                
+                                                <?php elseif(Auth::guard('web')->check()): ?>
+                                                    <?php echo e(Auth::guard('web')->user()->name); ?>   
+                                                <?php endif; ?>
+                                            </h6>
+                                            <p class="mb-0 text-sm text-gray-600">
+                                                <?php if(Auth::guard('admin')->check()): ?>
+                                                    Administrator                                             
+                                                <?php elseif(Auth::guard('web')->check()): ?>
+                                                    Operator Cabdin <?php echo e(Auth::guard('web')->user()->cabdin); ?>    
+                                                <?php endif; ?>
+                                                
+                                            </p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
@@ -62,17 +77,35 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" style="min-width: 11rem;">
                                     <li>
-                                        <h6 class="dropdown-header">Hello, <?php echo e(Auth::guard('admin')->user()->name); ?>!</h6>
+                                        <h6 class="dropdown-header">
+                                            <?php if(Auth::guard('admin')->check()): ?>
+                                                Hello, <?php echo e(Auth::guard('admin')->user()->name); ?>                                                
+                                            <?php elseif(Auth::guard('web')->check()): ?>
+                                                Hello, <?php echo e(Auth::guard('web')->user()->name); ?>   
+                                            <?php endif; ?>
+                                        </h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="<?php echo e(route('admin.profile')); ?>"><i class="icon-mid bi bi-person me-2"></i> My
-                                            Profile</a></li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="<?php echo e(route('admin.logout')); ?>" onclick="event.preventDefault();document.
-                                        getElementById('logout-form').submit();"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
-                                        <form action="<?php echo e(route('admin.logout')); ?>" method="post" class="d-none" id="logout-form"><?php echo csrf_field(); ?></form>
-                                    </li>
+                                    <?php if(Auth::guard('admin')->check()): ?>
+                                        <li><a class="dropdown-item" href="<?php echo e(route('admin.profile')); ?>"><i class="icon-mid bi bi-person me-2"></i> My
+                                                Profile</a></li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="<?php echo e(route('admin.logout')); ?>" onclick="event.preventDefault();document.
+                                            getElementById('logout-form').submit();"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
+                                            <form action="<?php echo e(route('admin.logout')); ?>" method="post" class="d-none" id="logout-form"><?php echo csrf_field(); ?></form>
+                                        </li>                                        
+                                    <?php elseif(Auth::guard('web')->check()): ?>
+                                        <li><a class="dropdown-item" href=""><i class="icon-mid bi bi-person me-2"></i> My
+                                                Profile</a></li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="<?php echo e(route('user.logout')); ?>" onclick="event.preventDefault();document.
+                                            getElementById('logout-form').submit();"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
+                                            <form action="<?php echo e(route('admin.logout')); ?>" method="post" class="d-none" id="logout-form"><?php echo csrf_field(); ?></form>
+                                        </li> 
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                         </div>
@@ -80,10 +113,10 @@
                 </nav>
             </header>
             <div id="main-content">
-                
-<div class="page-heading"> 
-    <?php echo $__env->yieldContent('page'); ?>
-</div>
+                <div class="page-heading"> 
+                    <?php echo $__env->yieldContent('page'); ?>
+                </div>
+
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">

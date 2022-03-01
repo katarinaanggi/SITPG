@@ -1,5 +1,9 @@
 
 
+<?php $__env->startSection('style'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">    
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('page'); ?>
 <div class="page-heading">
     <div class="page-title">
@@ -24,8 +28,9 @@
                 <h4 class="card-title">Daftar Guru</h4>
             </div>
             <div class="card-body">
-                <a class="btn" href="<?php echo e(route('admin.add_guru')); ?>">+Add New Guru</a>
-                <a class="btn btn-save" href="<?php echo e(route('admin.deleteAll_guru')); ?>" id="delall">Delete All Data</a><br /><br />
+                <a class="btn" href="<?php echo e(route('operator.add_guru')); ?>">+Add New Guru</a>
+                <a class="btn btn-save" href="<?php echo e(route('operator.deleteAll_guru')); ?>" id="delall">Delete All Data</a><br /><br />
+                <?php if(auth()->guard('admin')->check()): ?>
                 <form action="<?php echo e(route('admin.file_import')); ?>" method="POST" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <div class="form-group mb-4" >
@@ -35,7 +40,8 @@
                             <button class="btn btn-save" type="submit" id="button-addon2">Import</button>
                         </div>
                     </div>
-                </form>
+                </form>                    
+                <?php endif; ?>
                 <table class="table table-inverse table-responsive table-hover" id="guruTable">
                     <thead class="thead-inverse">
                         <tr>
@@ -79,7 +85,7 @@
                     <tbody>
                     </tbody>
                 </table>
-                <a class="btn btn-save mt-3" href="<?php echo e(route('admin.file_export')); ?>">Export All Data</a>
+                <a class="btn btn-save mt-3" href="<?php echo e(route('operator.file_export')); ?>">Export All Data</a>
             </div>
         </div>
     </section>
@@ -104,7 +110,7 @@
                 orderCellsTop: true,
                 fixedHeader: true,
                 fixedColumns: true,
-                ajax: '<?php echo route('admin.data_guru'); ?>',
+                ajax: '<?php echo route('operator.data_guru'); ?>',
                 columns: [
                     { data: 'action', name: 'action' },
                     { data: 'id', name: 'id' },

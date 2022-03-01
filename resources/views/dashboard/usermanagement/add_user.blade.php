@@ -81,14 +81,14 @@
                                     <div class="form-group">
                                         <label for="password">Password: </label>
                                         <input type="password"  name="password" id="password" required style="padding: 0.375rem 0.75rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; border-radius: 0.25rem; border: 1px solid #dce7f1; width:99.9%">
-                                        <span id="togglePassword" class="bi bi-eye" style="margin-left: -30px; cursor: pointer;"></span>
+                                        <span id="togglePassword" class="bi bi-eye-fill" style="margin-left: -30px; cursor: pointer;"></span>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="cpassword">Confirm Password: </label>
                                         <input type="password"  name="cpassword" id="cpassword" required style="padding: 0.375rem 0.75rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; border-radius: 0.25rem; border: 1px solid #dce7f1; width:99.9%">
-                                        <span id="togglePassword2" class="bi bi-eye" style="margin-left: -30px; cursor: pointer;"></span>
+                                        <span id="togglePassword2" class="bi bi-eye-fill" style="margin-left: -30px; cursor: pointer;"></span>
                                     </div>
                                 </div>
                             </div>
@@ -117,14 +117,14 @@
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
             password.setAttribute('type', type);
             // toggle the eye slash icon
-            $(this).toggleClass("bi-eye bi-eye-slash");
+            $(this).toggleClass("bi-eye-fill bi-eye-slash-fill");
         });
         togglePassword2.addEventListener('click', function (e) {
             // toggle the type attribute
             const type = cpassword.getAttribute('type') === 'password' ? 'text' : 'password';
             cpassword.setAttribute('type', type);
             // toggle the eye slash icon
-            $(this).toggleClass("bi-eye bi-eye-slash");
+            $(this).toggleClass("bi-eye-fill bi-eye-slash-fill");
         });
 
     </script>

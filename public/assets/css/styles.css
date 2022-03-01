@@ -1,6 +1,7 @@
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,100,900');
 @import url('https://fonts.googleapis.com/css?family=Archivo+Black');
+
 
 .wrapper {
     display: table;
@@ -38,13 +39,13 @@ aside {
 
 blockquote {
     text-indent: 0.5rem;
-    box-shadow: -10px 0px 0px var(--ungumuda);
+    box-shadow: -10px 0px 0px var(--aqua);
     margin-top: 5rem; 
 }
 
 figcaption {
     font-weight: bold;
-    background: linear-gradient(to right, var(--ungumuda2), #190994);
+    background: linear-gradient(to right, var(--army), var(--aqua));
     /* -webkit-background-clip: text; */
     -webkit-text-fill-color: transparent;
 }
@@ -71,14 +72,14 @@ figcaption {
     line-height: 1.42857143;
     background-color: white;
     border-radius: 2px;
-    box-shadow: 0 2px 5px 0 rgba(213, 186, 235, 0.37),0 2px 10px 0 rgba(213, 186, 235, 0.37); 
+    box-shadow: 0 2px 5px 0 rgba(186, 235, 220, 0.37),0 2px 10px 0 rgba(186, 235, 227, 0.37); 
     transition: box-shadow .25s; 
     border-radius: 20px;
 }
 .card:hover {
-    box-shadow: 0 8px 17px 0 rgba(213, 186, 235, 0.37),0 6px 20px 0 rgba(213, 186, 235, 0.37);
+    box-shadow: 0 8px 17px 0 rgba(186, 235, 220, 0.37),0 6px 20px 0 rgba(186, 235, 227, 0.37);
 }
-    
+
 .card-content {
     padding:15px;
     text-align:left;
@@ -95,8 +96,8 @@ figcaption {
 }
 
 .choices__inner{
-    border: 1px solid #dce7f1;
-    background-color: white
+    border: 1px solid #dcf1ec;
+    background-color: white !important;
 }
 
 /* Card bawahnya */
@@ -107,7 +108,7 @@ figcaption {
 .bcard-hover:hover {
     transform: translateY(-5px);
     border: none;
-    border-bottom: 5px solid var(--ungu);
+    border-bottom: 5px solid var(--aqua);
 }
 
 /* New! Card */
@@ -118,13 +119,13 @@ figcaption {
     transition: all, var(--transition-time);
     position: relative;
     overflow: hidden;
-    background-color: var(--ungu);
+    background-color: var(--aqua);
     color: var(--bg);
 }
 
 #news:hover {
     transform: rotate(0);
-    color: var(--ungu);
+    color: var(--aqua);
 }
 
 #news:before {
@@ -145,11 +146,11 @@ figcaption {
 }
 
 #news:hover .date {
-    color: var(--ungu)
+    color: var(--aqua)
 }
 
 #news:hover .card-content .card-body h4 a, #news:hover .card-footer a i {
-    color: var(--ungu) !important
+    color: var(--aqua) !important
 }
 
 #news .card-content .card-body h4 a, #news .card-footer a i {
@@ -158,7 +159,7 @@ figcaption {
 
 #cf {
     justify-content: space-between; 
-    background-color:var(--ungu);
+    background-color:var(--aqua);
     transition: all, var(--transition-time);
 }
 
@@ -176,17 +177,17 @@ figcaption {
     top: 0;
     left: 0;
     font-size: 1em;
-    background: var(--ungumuda3);
+    background: var(--aqua);
     border-radius: 0.3rem;
     padding: 0 1em;
     margin-right: 0.5em;
     line-height: 1.8em;
-    color: var(--ungudark);
+    color: var(--army);
     transition: all, var(--transition-time);
 }
 
 #news:hover .tags .tag {
-    background: var(--ungu);
+    background: var(--aqua);
     color: var(--bg)
 }
 
@@ -208,19 +209,39 @@ figcaption {
 }
 
 #searchq {
-    width: 130px;
+    width: 170px;
+    margin-left: 80%;
     box-sizing: border-box;
-    border: 2px solid #57066B;
+    border: 2px solid var(--army);
     border-radius: 3px;
     font-size: 16px;
     background-color: white;
     padding: 8px 15px 8px 15px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+    -webkit-transition: margin-left 0.4s ease-in-out;
+    transition: margin-left 0.4s ease-in-out;
 }
 
 #searchq:focus {
-    width: 91%;
+    margin-left: 0%;
+    width: 900px;
+}
+
+.form__icon {
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+}
+.form__input {
+    position: relative;
+    z-index: 3;
+}
+.form__input:placeholder-shown {
+    z-index: 1;
+}
+
+.bi-search {
+    margin-top: 11px;
+    margin-left: 860px;
 }
 
 @keyframes blinker {  

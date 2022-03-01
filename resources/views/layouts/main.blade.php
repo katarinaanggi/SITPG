@@ -25,8 +25,10 @@
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     
     {{-- css --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/ungu.css') }}">
+    
+    @yield('style')
+
 </head>
 <body>
     @include('sweetalert::alert')
@@ -50,8 +52,21 @@
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
-                                            <h6 class="mb-0 text-gray-600">{{ Auth::guard('admin')->user()->name }}</h6>
-                                            <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                                            <h6 class="mb-0 text-gray-600">
+                                                @if (Auth::guard('admin')->check())
+                                                    {{ Auth::guard('admin')->user()->name }}                                                
+                                                @elseif (Auth::guard('web')->check())
+                                                    {{ Auth::guard('web')->user()->name }}   
+                                                @endif
+                                            </h6>
+                                            <p class="mb-0 text-sm text-gray-600">
+                                                @if (Auth::guard('admin')->check())
+                                                    Administrator                                             
+                                                @elseif (Auth::guard('web')->check())
+                                                    Operator Cabdin {{ Auth::guard('web')->user()->cabdin }}    
+                                                @endif
+                                                
+                                            </p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
@@ -62,17 +77,35 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton" style="min-width: 11rem;">
                                     <li>
-                                        <h6 class="dropdown-header">Hello, {{ Auth::guard('admin')->user()->name }}!</h6>
+                                        <h6 class="dropdown-header">
+                                            @if (Auth::guard('admin')->check())
+                                                Hello, {{ Auth::guard('admin')->user()->name }}                                                
+                                            @elseif (Auth::guard('web')->check())
+                                                Hello, {{ Auth::guard('web')->user()->name }}   
+                                            @endif
+                                        </h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="icon-mid bi bi-person me-2"></i> My
-                                            Profile</a></li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.
-                                        getElementById('logout-form').submit();"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
-                                        <form action="{{ route('admin.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
-                                    </li>
+                                    @if (Auth::guard('admin')->check())
+                                        <li><a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="icon-mid bi bi-person me-2"></i> My
+                                                Profile</a></li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.
+                                            getElementById('logout-form').submit();"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
+                                            <form action="{{ route('admin.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
+                                        </li>                                        
+                                    @elseif (Auth::guard('web')->check())
+                                        <li><a class="dropdown-item" href=""><i class="icon-mid bi bi-person me-2"></i> My
+                                                Profile</a></li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault();document.
+                                            getElementById('logout-form').submit();"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
+                                            <form action="{{ route('admin.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
+                                        </li> 
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -80,10 +113,10 @@
                 </nav>
             </header>
             <div id="main-content">
-                
-<div class="page-heading"> 
-    @yield('page')
-</div>
+                <div class="page-heading"> 
+                    @yield('page')
+                </div>
+
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">

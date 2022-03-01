@@ -1,5 +1,9 @@
 
 
+<?php $__env->startSection('style'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">    
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('page'); ?>
 <div class="page-title">
     <div class="row">
@@ -7,15 +11,20 @@
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?php echo e(route('admin.home')); ?>">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="<?php echo e(route('admin.guru')); ?>">Data Guru</a></li>
+                    <?php if(Auth::guard('admin')->check()): ?>
+                        <li class="breadcrumb-item"><a href="<?php echo e(route('admin.home')); ?>">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo e(route('operator.guru')); ?>">Data Guru</a></li>
+                    <?php elseif(Auth::guard('web')->check()): ?>
+                        <li class="breadcrumb-item"><a href="<?php echo e(route('user.home')); ?>">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo e(route('operator.guru')); ?>">Data Guru</a></li>
+                    <?php endif; ?>
                     <li class="breadcrumb-item active" aria-current="page">Add Guru</li>
                 </ol>
             </nav>
         </div>
     </div>
 </div>
-<form action="<?php echo e(route('admin.store_guru')); ?>" method="post">
+<form action="<?php echo e(route('operator.store_guru')); ?>" method="post">
     <?php echo csrf_field(); ?>
     <?php if($message = Session::get('error')): ?>
     <div class="alert alert-danger">
@@ -26,13 +35,13 @@
     <div class="col-12 col-md-12">
         <div class="card">
             <div class="card-content">
-                <a href="<?php echo e(route('admin.guru')); ?>"><i class="bi bi-x-lg"></i></a>
+                <a href="<?php echo e(route('operator.guru')); ?>"><i class="bi bi-x-lg"></i></a>
                 <div class="card-header"><h3 class="text-center">Create New Guru</h3></div>
                 <div class="card-body">
                     <div class="form-group row mb-3">
                         <label for="no_peserta" class="col-sm-3 col-form-label">No. Peserta: </label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="no_peserta" name="no_peserta" value="<?php echo e(old('no_peserta')); ?>">
+                            <input type="number" class="form-control" id="no_peserta" name="no_peserta" value="<?php echo e(old('no_peserta')); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                             <?php $__errorArgs = ['no_peserta'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -66,7 +75,7 @@ unset($__errorArgs, $__bag); ?>
                     <div class="form-group row mb-3">
                         <label for="nip" class="col-sm-3 col-form-label">NIP: </label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="nip" name="nip" value="<?php echo e(old('nip')); ?>">
+                            <input type="number" class="form-control" id="nip" name="nip" value="<?php echo e(old('nip')); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                             <?php $__errorArgs = ['nip'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -86,7 +95,7 @@ unset($__errorArgs, $__bag); ?>
                             <div class="form-group row mb-3">
                                 <label for="nrg" class="col-sm-3 col-form-label">NRG: </label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="nrg" name="nrg" value="<?php echo e(old('nrg')); ?>">
+                                    <input type="number" class="form-control" id="nrg" name="nrg" value="<?php echo e(old('nrg')); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                     <?php $__errorArgs = ['nrg'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -104,7 +113,7 @@ unset($__errorArgs, $__bag); ?>
                             <div class="form-group row mb-3">
                                 <label for="nuptk" class="col-sm-3 col-form-label">NUPTK: </label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="nuptk" name="nuptk" value="<?php echo e(old('nuptk')); ?>">
+                                    <input type="number" class="form-control" id="nuptk" name="nuptk" value="<?php echo e(old('nuptk')); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                     <?php $__errorArgs = ['nuptk'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -239,7 +248,7 @@ unset($__errorArgs, $__bag); ?>
                             <div class="form-group row mb-3">
                                 <label for="no_rek" class="col-sm-3 col-form-label">No. Rekening: </label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="no_rek" name="no_rek" value="<?php echo e(old('no_rek')); ?>">
+                                    <input type="number" class="form-control" id="no_rek" name="no_rek" value="<?php echo e(old('no_rek')); ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                     <?php $__errorArgs = ['no_rek'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

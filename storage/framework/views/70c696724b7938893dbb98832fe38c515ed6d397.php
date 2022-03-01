@@ -1,5 +1,9 @@
 
 
+<?php $__env->startSection('style'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">    
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('page'); ?>
 <div class="page-heading">
     <div class="page-title">
@@ -10,18 +14,22 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?php echo e(route('admin.home')); ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="<?php echo e(route('admin.berita')); ?>">Berita</a></li>
+                        <?php if(Auth::guard('admin')->check()): ?>
+                            <li class="breadcrumb-item"><a href="<?php echo e(route('admin.home')); ?>">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="<?php echo e(route('admin.berita')); ?>">Berita</a></li>
+                        <?php elseif(Auth::guard('web')->check()): ?>
+                            <li class="breadcrumb-item"><a href="<?php echo e(route('user.home')); ?>">Dashboard</a></li>  
+                        <?php endif; ?>
                         <li class="breadcrumb-item active" aria-current="page">Detail Berita <?php echo e($berita->id); ?></li>
                     </ol>
                 </nav>
             </div>
         </div>
-    </div>
+    </div>        
     
     <div class="container">
         <div class="article-meta text-center">
-            <h1 class="headline "><?php echo e($berita->judul); ?></h1>
+            <h1 class="headline"><?php echo e($berita->judul); ?></h1>
             <div class="author">
                 <p class="byline">by <b>Administrator</b> <?php echo e($berita->created_at->format('M d, Y')); ?></p>
             </div>
