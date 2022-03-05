@@ -45,7 +45,7 @@
     <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="container mt-5">
         <a href="<?php echo e(route('admin.berita')); ?>"><i class="bi bi-x-lg"></i></a>
-        <form action="<?php echo e(route('admin.update_berita', $berita->id)); ?>" method="post" enctype="multipart/form-data" >
+        <form action="<?php echo e(route('admin.update_berita', $berita->id)); ?>" method="post" enctype="multipart/form-data" autocomplete="off">
             <h3 class="text-center mb-5">Edit Berita</h3>
             <?php echo csrf_field(); ?>
             <?php echo method_field('PATCH'); ?>
@@ -55,15 +55,6 @@
                 </div>
             <?php endif; ?>
 
-            <?php if(count($errors) > 0): ?>
-                <div class="alert alert-danger">
-                    <ul>
-                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <li><?php echo e($error); ?></li>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
             <div class="col-12 col-md-12">
                 <div class="card">
                     <div class="card-content">
@@ -71,11 +62,27 @@
                                 <div class="form-group">
                                     <label for="judul">Judul: </label>
                                     <input type="text" class="form-control" id="judul" name="judul" value="<?php echo e($berita->judul); ?>">
+                                    <span class="text-danger"><?php $__errorArgs = ['judul'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="isi">Isi: </label>
                                     <textarea type="text" class="form-control" id="isi" name="isi" ><?php echo e($berita->isi); ?></textarea>
+                                    <span class="text-danger"><?php $__errorArgs = ['isi'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                 </div>
                                 
                                 <div class="custom-file">                                    
@@ -84,9 +91,12 @@
                                         <i class="bi bi-cloud-upload-fill"></i>&nbsp;Pilih file baru: </label>
                                     <input id="file" name='file' type="file" style="display:none;" onchange="namafile()">
                                     <label id="file-name"></label>
+                                    <?php if($message = Session::get('file')): ?>
+                                        <span class="text-danger">*<?php echo e($message); ?></span>
+                                    <?php endif; ?>
                                 </div>
 
-                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Are you sure to update this data?')">
+                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Apakah anda yakin untuk mengubah data ini?')">
                                     Save
                                 </button>
 
@@ -115,7 +125,7 @@
  <script type="text/javascript">
     function submitForm(form) {
         swal({
-            title: "Are you sure?",
+            title: "Apakah anda yakin?",
             text: 'This record and it`s details will be permanantly updated!',
             icon: "warning",
             buttons: ["Cancel", "Yes!"],

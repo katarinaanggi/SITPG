@@ -100,7 +100,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/delete-user/{id}', [UserManagementController::class, 'destroy'])->name('delete_user');
         Route::get('/data-user', function() {
             return DataTables::of(User::query())
-                ->addColumn('action', 'action')
+                ->addColumn('action', 'dashboard.userManagement.action')
                 ->make(true);
         })->name('data_user');
         Route::post('/get-kota', [UserManagementController::class, 'getKota'])->name('get_kota');

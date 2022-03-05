@@ -45,25 +45,16 @@
     @include('sweetalert::alert')
     <div class="container mt-5">
         <a href="{{route('admin.berita')}}"><i class="bi bi-x-lg"></i></a>
-        <form action="{{ route('admin.update_berita', $berita->id) }}" method="post" enctype="multipart/form-data" >
+        <form action="{{ route('admin.update_berita', $berita->id) }}" method="post" enctype="multipart/form-data" autocomplete="off">
             <h3 class="text-center mb-5">Edit Berita</h3>
             @csrf
             @method('PATCH')
-            @if ($message = Session::get('error'))
+            {{-- @if ($message = Session::get('error'))
                 <div class="alert alert-danger">
                     <strong>{{ $message }}</strong>
                 </div>
-            @endif
+            @endif --}}
 
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <div class="col-12 col-md-12">
                 <div class="card">
                     <div class="card-content">
@@ -71,11 +62,13 @@
                                 <div class="form-group">
                                     <label for="judul">Judul: </label>
                                     <input type="text" class="form-control" id="judul" name="judul" value="{{ $berita->judul}}">
+                                    <span class="text-danger">@error('judul')*{{$message}} @enderror</span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="isi">Isi: </label>
                                     <textarea type="text" class="form-control" id="isi" name="isi" >{{ $berita->isi}}</textarea>
+                                    <span class="text-danger">@error('isi')*{{$message}} @enderror</span>
                                 </div>
                                 
                                 <div class="custom-file">                                    
@@ -84,9 +77,12 @@
                                         <i class="bi bi-cloud-upload-fill"></i>&nbsp;Pilih file baru: </label>
                                     <input id="file" name='file' type="file" style="display:none;" onchange="namafile()">
                                     <label id="file-name"></label>
+                                    @if ($message = Session::get('file'))
+                                        <span class="text-danger">*{{ $message }}</span>
+                                    @endif
                                 </div>
 
-                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Are you sure to update this data?')">
+                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Apakah anda yakin untuk mengubah data ini?')">
                                     Save
                                 </button>
 
@@ -115,7 +111,7 @@
  <script type="text/javascript">
     function submitForm(form) {
         swal({
-            title: "Are you sure?",
+            title: "Apakah anda yakin?",
             text: 'This record and it`s details will be permanantly updated!',
             icon: "warning",
             buttons: ["Cancel", "Yes!"],

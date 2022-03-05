@@ -80,7 +80,7 @@ class UserController extends Controller
         ]);
 
 		if ($validator->fails()) {
-			return redirect()->route('user.profile')->withInput()->withErrors($validator);
+			return redirect()->route('user.profile')->withInput()->withErrors($validator)->with('error', 'Data belum berhasil diubah');
 		}
 		else{
             $current_timestamp = Carbon::now()->toDateTimeString();

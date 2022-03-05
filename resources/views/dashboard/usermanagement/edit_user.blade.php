@@ -21,6 +21,12 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" />
 
     <title>Edit User {{$user->name }}</title>
+
+    <style>
+        .choices {
+            margin-bottom: 0px;
+        }
+    </style>
 </head>
 <body>
     @include('sweetalert::alert')
@@ -29,21 +35,12 @@
         <form action="{{ route('admin.update_user', $user->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
-            @if ($message = Session::get('error'))
+            {{-- @if ($message = Session::get('error'))
                 <div class="alert alert-danger">
                     <strong>{{ $message }}</strong>
                 </div>
-            @endif
+            @endif --}}
 
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <div class="col-12 col-md-12">
                 <div class="card">
                     <div class="card-content">
@@ -52,40 +49,46 @@
                                 <div class="form-group">
                                     <label for="name">Name: </label>
                                     <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}">
+                                    <span class="text-danger">@error('name')*{{$message}} @enderror</span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email">Email: </label>
                                     <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}">
+                                    <span class="text-danger">@error('email')*{{$message}} @enderror</span>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="phone">Phone: </label>
                                     <input type="number" class="form-control" id="phone" name="phone" value="{{$user->phone}}">
+                                    <span class="text-danger">@error('phone')*{{$message}} @enderror</span>
                                 </div>
 
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="cabdin" >Cabang Dinas: </label>
-                                            <select class="form-control choices" id="cabdin" name="cabdin" required>
+                                            <select class="form-control choices" id="cabdin" name="cabdin">
+                                                <option value="">--pilih wilayah cabang dinas--</option>
                                                 @foreach($cabdin as $cd)
                                                     <option value="{{ $cd->id }}" {{ ( $cd->id == $user->cabdin) ? 'selected' : '' }}>{{ $cd->nama}}</option>
                                                 @endforeach
                                             </select>
+                                            <span class="text-danger">@error('cabdin')*{{$message}} @enderror</span>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="kota" >Kabupaten/Kota: </label>
-                                            <select class="form-control" id="kota" name="kota" required>
-                                                <option value="{{$user->kota}}">{{$user->kota}}</option>
+                                            <select class="form-control" id="kota" name="kota">
+                                                <option value="{{$user->kota}}" >{{$user->kota}}</option>
                                             </select>
+                                            <span class="text-danger">@error('kota')*{{$message}} @enderror</span>
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Are you sure to update this data?')">
+                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Apakah anda yakin untuk mengubah data ini?')">
                                     Save
                                 </button>
                         </div>
@@ -112,27 +115,39 @@
     <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form-element-select.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            $('#cabdin').on('change', function () {
-                var cabdinId = this.value;
-                $('#kota').html('');
-                $.ajax({
-                    url: '{{ route('admin.get_kota') }}?id_cabdin='+cabdinId,
-                    type: "POST",
-                    data: {
-                        cabdinId: cabdinId,
-                        _token: '{{csrf_token()}}' 
-                    },
-                    dataType : 'json',
-                    success: function(result){
-                        $('#kota').html('<option value="0">--pilih wilayah kabupaten/kota--</option>'); 
-                        $.each(result, function(key,value){
-                            $("#kota").append('<option value="'+value.nama+'">'+value.nama+'</option>');
-                        });
-                    }
-                });
-            });
+        const kota = document.querySelector('#kota');
+        const cabdin = document.querySelector('#cabdin');
+        
+        if(cabdin.value){
+            getKota();
+        }
+
+        $('#cabdin').on('change', function () {
+            getKota();
         });
+
+        function getKota () {
+            var cabdinId = cabdin.value;
+            var namakota = kota.value;
+            $('#kota').html('');
+            $.ajax({
+                url: '{{ route('admin.get_kota') }}?id_cabdin='+cabdinId,
+                type: "POST",
+                data: {
+                    cabdinId: cabdinId,
+                    _token: '{{csrf_token()}}' 
+                },
+                dataType : 'json',
+                success: function(result){
+                    $('#kota').html('<option value="'+namakota+'">'+namakota+'</option>'); 
+                    $.each(result, function(key,value){
+                        if(namakota != value.nama_kota){
+                            $("#kota").append('<option value="'+value.nama_kota+'">'+value.nama_kota+'</option>');
+                        }
+                    });
+                }
+            });
+        }
     </script>
 
 </body>

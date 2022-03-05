@@ -1,7 +1,12 @@
 
 
 <?php $__env->startSection('style'); ?>
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/profile.css')); ?>">    
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/profile.css')); ?>">   
+    <style>
+      .choices {
+        margin-bottom: 0px;
+      }
+    </style> 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('page'); ?>
@@ -396,5 +401,6 @@ unset($__errorArgs, $__bag); ?></span>
       <!-- /.content -->
     
 <?php $__env->stopSection(); ?>
+
 
 <?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/dashboard/user/profile.blade.php ENDPATH**/ ?>

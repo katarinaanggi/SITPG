@@ -20,8 +20,6 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        // $users = Datatables::of(User::query())->make(true);
-        // $users = User::get();
         return view('dashboard.usermanagement.userManage', [
             'title' => "User Management"
         ]);
@@ -35,7 +33,6 @@ class UserManagementController extends Controller
     public function create()
     {
         $cabdin = DB::select('select * from cabdin');
-        // $kota = DB::select('select * from kota');
         return view('dashboard.usermanagement.add_user',[
             'title' => "Add User",
             'cabdin' => $cabdin
@@ -67,18 +64,34 @@ class UserManagementController extends Controller
     public function store(Request $request)
     {
         $rules = [
-			'name' => 'required|string|max:50|min:5',
-			'email' => 'required|email|unique:users,email',
-			'phone' => 'required|numeric|min:5',
-			'cabdin' => 'required|in:1,2,3,4,5,6,7,8,9,10,11,12,13',
-			'kota' => 'required',
-			'password' => 'required|min:5',
+			'name'      => 'required|string|max:50|min:5',
+			'email'     => 'required|email|unique:users,email',
+			'phone'     => 'required|numeric|min:5',
+			'cabdin'    => 'required|in:1,2,3,4,5,6,7,8,9,10,11,12,13',
+			'kota'      => 'required',
+			'password'  => 'required|min:5',
             'cpassword' => 'required|min:5|same:password',
 		];
-		$validator = Validator::make($request->all(),$rules);
+
+        $messages = [
+            'required'  => 'Field :attribute harus diisi.',
+            'unique'    => 'Field :attribute sudah terpakai.',
+            'max'       => 'Field :attribute terlalu panjang, maksimal :max karakter.',
+            'min'       => 'Field :attribute terlalu pendek, minimal :min karakter.',
+            'string'    => 'Field :attribute harus berupa karakter.',
+            'email'     => 'Field :attribute harus berupa email.',
+            'numeric'   => 'Field :attribute harus berupa numeric.',
+            'in'        => 'Field cabang dinas yang dipilih tidak tersedia.',
+            'same'      => 'Konfirmasi password tidak sama dengan password.',
+            'cpassword.required'  => 'Field konfirmasi password harus diisi.',
+            'cabdin.required'     => 'Field cabang dinas harus diisi.',
+            'cpassword.min'       => 'Field konfirmasi password terlalu pendek, minimal :min karakter.'
+        ];
+        
+		$validator = Validator::make($request->all(),$rules,$messages);
 
 		if ($validator->fails()) {
-			return redirect()->route('admin.add_user')->withInput()->withErrors($validator);
+			return redirect()->route('admin.add_user')->withInput()->withErrors($validator)->with('error', 'Data belum berhasil ditambahkan');
 		}
 		else{
             $data = $request->input();
@@ -126,6 +139,7 @@ class UserManagementController extends Controller
     {
         $cabdin = DB::select('select * from cabdin'); 
         $user = DB::table('users')->where('id', $id)->first();
+        // dd($user);
         return view('dashboard.usermanagement.edit_user', compact('user','cabdin'));
     }
 
@@ -139,16 +153,32 @@ class UserManagementController extends Controller
     public function update(Request $value, $id)
     {
         $rules = [
-			'name' => 'required|string|max:50|min:5',
-			'email' => 'required|email|unique:users,email',
-			'phone' => 'required|numeric|min:5',
-			'cabdin' => 'required|in:1,2,3,4,5,6,7,8,9,10,11,12,13',
-			'kota' => 'required',
+			'name'      => 'required|string|max:50|min:5',
+			'email'     => 'required|email|unique:users,email,'.$id,
+			'phone'     => 'required|numeric|min:5',
+			'cabdin'    => 'required|in:1,2,3,4,5,6,7,8,9,10,11,12,13',
+			'kota'      => 'required',
 		];
-		$validator = Validator::make($value->all(),$rules);
+
+        $messages = [
+            'required'  => 'Field :attribute harus diisi.',
+            'unique'    => 'Field :attribute sudah terpakai.',
+            'max'       => 'Field :attribute terlalu panjang, maksimal :max karakter.',
+            'min'       => 'Field :attribute terlalu pendek, minimal :min karakter.',
+            'string'    => 'Field :attribute harus berupa karakter.',
+            'email'     => 'Field :attribute harus berupa email.',
+            'numeric'   => 'Field :attribute harus berupa numeric.',
+            'in'        => 'Field cabang dinas yang dipilih tidak tersedia.',
+            'same'      => 'Konfirmasi password tidak sama dengan password.',
+            'cpassword.required'  => 'Field konfirmasi password harus diisi.',
+            'cabdin.required'     => 'Field cabang dinas harus diisi.',
+            'cpassword.min'       => 'Field konfirmasi password terlalu pendek, minimal :min karakter.'
+        ];
+
+		$validator = Validator::make($value->all(),$rules, $messages);
 
 		if ($validator->fails()) {
-			return redirect()->route('admin.edit_user',$value->id)->withInput()->withErrors($validator);
+			return redirect()->route('admin.edit_user',$value->id)->withInput()->withErrors($validator)->with('error', 'Data belum berhasil diubah');
 		}
 		else{
             try{

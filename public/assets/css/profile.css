@@ -43,11 +43,11 @@ font-size: 1.65em;
 
 .read-more-show{
 cursor:pointer;
-color: var(--ungumuda);
+color: var(--aqua);
 }
 .read-more-hide{
 cursor:pointer;
-color: var(--ungumuda);
+color: var(--aqua);
 }
 
 .hide_content{

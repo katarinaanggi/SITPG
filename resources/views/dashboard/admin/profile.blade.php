@@ -66,35 +66,38 @@
                       </li>
                       @endif
                     </ul>
-                  @if ($message = Session::get('error'))
+                  {{-- @if ($message = Session::get('error'))
                       <div class="alert alert-danger">
                           <strong>{{ $message }}</strong>
                       </div>
-                  @endif
+                  @endif --}}
                 </div><!-- /.card-header -->
                 <div class="card-body">
                   @if ($key = Session::get('tab'))
                     <div class="tab-content" id="pills-tabContent">
                       <div class="tab-pane fade {{ ($key == 'Personal Information') ? 'show active' : '' }}" id="pills-pi" role="tabpanel" aria-labelledby="pills-pi-tab">
-                          <form class="form-horizontal" method="POST" action="{{ route('admin.changeProfile', Auth::guard('admin')->user()->id) }}" id="AdminInfoForm">
+                          <form class="form-horizontal" method="POST" action="{{ route('admin.changeProfile', Auth::guard('admin')->user()->id) }}" >
                               @csrf
                               @method('PATCH')
                               <div class="form-group row">
                                   <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ Auth::guard('admin')->user()->name }}" name="name" minlength="5" maxlength="255">
+                                      <span class="text-danger">@error('name'){{$message}} @enderror</span>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
                                       <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ Auth::guard('admin')->user()->email }}" name="email">
+                                      <span class="text-danger">@error('email'){{$message}} @enderror</span>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="{{ Auth::guard('admin')->user()->phone }}" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                      <span class="text-danger">@error('phone'){{$message}} @enderror</span>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -116,14 +119,14 @@
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="inputName2" class="col-sm-2 col-form-label">New Password</label>
+                              <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
                               <div class="col-sm-10">
                                 <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword">
                                 <span class="text-danger">@error('newpassword'){{$message}} @enderror</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="inputName2" class="col-sm-2 col-form-label">Confirm New Password</label>
+                              <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
                               <div class="col-sm-10">
                                 <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword">
                                 <span class="text-danger">@error('cnewpassword'){{$message}} @enderror</span>
@@ -140,25 +143,28 @@
                   @else
                     <div class="tab-content" id="pills-tabContent">
                       <div class="tab-pane fade show active" id="pills-pi" role="tabpanel" aria-labelledby="pills-pi-tab">
-                          <form class="form-horizontal" method="POST" action="{{ route('admin.changeProfile', Auth::guard('admin')->user()->id) }}" id="AdminInfoForm">
+                          <form class="form-horizontal" method="POST" action="{{ route('admin.changeProfile', Auth::guard('admin')->user()->id) }}" >
                               @csrf
                               @method('PATCH')
                               <div class="form-group row">
                                   <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ Auth::guard('admin')->user()->name }}" name="name" minlength="5" maxlength="255">
+                                      <span class="text-danger">@error('name'){{$message}} @enderror</span>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
                                       <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ Auth::guard('admin')->user()->email }}" name="email">
+                                      <span class="text-danger">@error('email'){{$message}} @enderror</span>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="{{ Auth::guard('admin')->user()->phone }}" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                      <span class="text-danger">@error('phone'){{$message}} @enderror</span>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -180,14 +186,14 @@
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="inputName2" class="col-sm-2 col-form-label">New Password</label>
+                              <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
                               <div class="col-sm-10">
                                 <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword">
                                 <span class="text-danger">@error('newpassword'){{$message}} @enderror</span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="inputName2" class="col-sm-2 col-form-label">Confirm New Password</label>
+                              <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
                               <div class="col-sm-10">
                                 <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword">
                                 <span class="text-danger">@error('cnewpassword'){{$message}} @enderror</span>

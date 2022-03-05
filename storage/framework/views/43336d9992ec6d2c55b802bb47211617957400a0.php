@@ -19,4 +19,4 @@
                 }
             });
         });
-</script><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/action.blade.php ENDPATH**/ ?>
+</script><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/dashboard/userManagement/action.blade.php ENDPATH**/ ?>

@@ -36,9 +36,12 @@
                     <div class="form-group mb-4" >
                         <label>Import File</label>
                         <div class="input-group mb-3">
-                            <input type="file" id="importfile" name="file" class="form-control" aria-describedby="button-addon2">
+                            <input type="file" id="importfile" name="importfile" class="form-control" aria-describedby="button-addon2">
                             <button class="btn btn-save" type="submit" id="button-addon2">Import</button>
                         </div>
+                        <?php if($message = Session::get('file')): ?>
+                            <span class="text-danger">*<?php echo e($message); ?></span>
+                        <?php endif; ?>
                     </div>
                 </form>                    
                 <?php endif; ?>
@@ -155,7 +158,7 @@
                         text: 'Export Current Page',
                         title: 'SITPG Data TPG TW I 2022',
                         exportOptions: {
-                            columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 ]
+                            columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34 ]
                         }
                     }
                 ],
@@ -219,8 +222,8 @@
         event.preventDefault();
         const url = $(this).attr('href');
         swal({
-            title: 'Are you sure?',
-            text: 'All record and it`s details will be permanantly deleted!',
+            title: 'Apakah anda yakin?',
+            text: 'Semua data akan dihapus secara permanen!',
             icon: 'warning',
             buttons: ["Cancel", "Yes!"],
         }).then(function(value) {

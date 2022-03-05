@@ -1,7 +1,12 @@
 @extends('layouts.main')
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">    
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">   
+    <style>
+        .choices {
+            margin-bottom: 0px;
+        }
+    </style> 
 @endsection
 
 @section('page')
@@ -26,13 +31,13 @@
                 <form action="{{ route('operator.update_guru', $guru->id) }}" method="post" id="update-guru">
                     @csrf
                     @method('PATCH')
-                    @if ($message = Session::get('error'))
+                    {{-- @if ($message = Session::get('error'))
                         <div class="alert alert-danger">
                             <strong>{{ $message }}</strong>
                         </div>
-                    @endif
+                    @endif --}}
         
-                    @if (count($errors) > 0)
+                    {{-- @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -40,7 +45,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif
+                    @endif --}}
                     <div class="card-header"><h3 class="text-center">Edit Detail of {{ $guru->nama }}</h3></div>
                     <div class="card-body">
                         <div class="form-group row mb-3">
@@ -137,9 +142,8 @@
                                     <label for="kota" class="col-sm-3 col-form-label">Kabupaten/Kota: </label>
                                     <div class="col-sm-9">
                                         <select class="form-control choices" id="kota" name="kota" >
-                                            <option value="">--pilih wilayah kabupaten/kota--</option>
                                             @foreach($kota as $k)
-                                                <option value="{{ $k->nama_kota }}" {{ $guru->kota == $k->nama_kota ? 'selected' : ''}}>{{ $k->nama_kota}}</option>
+                                                <option value="{{ $k->nama_kota }}" {{ $k->nama_kota == $guru->kota ? 'selected' : ''}}>{{ $k->nama_kota}}</option>
                                             @endforeach
                                         </select>
                                         @error('kota')
@@ -200,7 +204,6 @@
                                     <label for="pangkat" class="col-sm-3 col-form-label">Pangkat/ Golongan: </label>
                                     <div class="col-sm-9">
                                         <select class="form-control choices" id="pangkat" name="pangkat" >
-                                            <option value="">--pilih pangkat/golongan--</option>
                                             <option value="I/a" {{ $guru->pangkat == 'I/a' ? 'selected' : '' }}>I/A</option>
                                             <option value="I/b" {{ $guru->pangkat == 'I/b' ? 'selected' : '' }}>I/B</option>
                                             <option value="I/c" {{ $guru->pangkat == 'I/c' ? 'selected' : '' }}>I/C</option>
@@ -426,7 +429,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Are you sure to update this data?')">
+                        <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Apakah anda yakin untuk mengubah data ini?')">
                             Save
                         </button>
                     </div>

@@ -30,7 +30,7 @@
                         <div class="tag">New!</div>
                     </div>
                     <h4 class="card-title">
-                        <a href="{{ route('detail_berita', $cari[0]->id) }}">{{ $cari[0]->judul }}</a>
+                        <a href="{{ route('operator.detail_berita', $cari[0]->id) }}">{{ $cari[0]->judul }}</a>
                     </h4>
                     <p class="card-text isinya">
                         @if(strlen($cari[0]->isi) > 500)
@@ -94,7 +94,7 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="{{ route('detail_berita', $value->id) }}">{{ $value->judul }}</a>
+                                    <a href="{{ route('operator.detail_berita', $value->id) }}">{{ $value->judul }}</a>
                                 </h4>
                                 <p class="card-text " >
                                     @if(strlen($value->isi) > 50)
@@ -107,7 +107,7 @@
                         </div>
                         <div class="card-footer d-flex justify-content-between">
                             <span><small class="text-muted">{{ \Carbon\Carbon::parse($value->created_at)->diffForHumans() }}</small></span>
-                            <a href="{{ route('detail_berita', $value->id) }}" style="display: inline-block; font-weight: 700; letter-spacing: 1.5px;">READ MORE</a>
+                            <a href="{{ route('operator.detail_berita', $value->id) }}" style="display: inline-block; font-weight: 700; letter-spacing: 1.5px;">READ MORE</a>
                         </div>
                     </div>
                 </div>

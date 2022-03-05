@@ -8,50 +8,53 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+
+HeadingRowFormatter::default('none');
 
 class GurusImport implements ToModel, WithUpserts, WithHeadingRow, WithBatchInserts, WithChunkReading
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+    // /**
+    //  * @param array $row
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Model|null
+    //  */
     public function model(array $row)
     {
         return new Guru([
-            'nrg'     => $row['nrg'] ?? null,
-            'no_peserta'     => $row['no_peserta'] ?? null,
-            'nuptk'     => $row['nuptk'],
-            'no_sk'     => $row['no_sk'] ?? null,
-            'nama'     => $row['nama'],
-            'jenjang'     => $row['jenjang'] ?? null,
-            'tempat_tugas'     => $row['tempat_tugas'] ?? null,
-            'kota'     => $row['kota'] ?? null,
-            'nip'     => $row['nip'],
-            'nama_bank'     => $row['nama_bank'] ?? null,
-            'kantor_cabang'     => $row['kantor_cabang'] ?? null,
-            'no_rek'     => $row['no_rekening'] ?? null,
-            'nama_rek'     => $row['nama_rekening'] ?? null,
-            'pangkat'     => $row['pangkat'] ?? null,
-            'masa_kerja'     => $row['masa_kerja'] ?? null,
-            'gaji_pokok'     => $row['gaji_pokok'] ?? null,
-            'jan'     => $row['jan'] ?? null,
-            'feb'     => $row['feb'] ?? null,
-            'mar'     => $row['mar'] ?? null,
-            'apr'     => $row['apr'] ?? null,
-            'mei'     => $row['mei'] ?? null,
-            'jun'     => $row['jun'] ?? null,
-            'jul'     => $row['jul'] ?? null,
-            'agu'     => $row['agu'] ?? null,
-            'sep'     => $row['sep'] ?? null,
-            'okt'     => $row['okt'] ?? null,
-            'nov'     => $row['nop'] ?? null,
-            'des'     => $row['des'] ?? null,
-            'jumlah'     => $row['jumlah'] ?? null,
-            'pajak'     => $row['pajak'] ?? null,
-            'nom_pajak'     => $row['nominal_pajak'] ?? null,
-            'bpjs'     => $row['bpjs'] ?? null,
-            'jumlah_diterima'     => $row['total'] ?? null,
+            'nrg'               => $row['NRG'] ?? null,
+            'no_peserta'        => $row['NO.PESERTA'] ?? null,
+            'nuptk'             => $row['NUPTK'],
+            'no_sk'             => $row['NO.SK'] ?? null,
+            'nama'              => $row['NAMA'],
+            'jenjang'           => $row['JENJANG'] ?? null,
+            'tempat_tugas'      => $row['TEMPAT TUGAS'] ?? null,
+            'kota'              => $row['KAB/KOTA'] ?? $row['KAB/ KOTA'] ?? null,
+            'nip'               => $row['NIP'],
+            'nama_bank'         => $row['NAMA BANK'] ?? null,
+            'kantor_cabang'     => $row['KANTOR CABANG'] ?? null,
+            'no_rek'            => $row['NO.REKENING'] ?? $row['NO. REKENING'] ?? null,
+            'nama_rek'          => $row['NAMA REKENING'] ?? null,
+            'pangkat'           => $row['PANGKAT/GOL'] ?? $row['PANGKAT /GOL'] ?? null,
+            'masa_kerja'        => $row['MASA  KERJA'] ?? $row['MASA KERJA'] ?? null,
+            'gaji_pokok'        => $row['GAJI POKOK'] ?? null,
+            'jan'               => $row['JAN'] ?? null,
+            'feb'               => $row['FEB'] ?? null,
+            'mar'               => $row['MAR'] ?? null,
+            'apr'               => $row['APR'] ?? null,
+            'mei'               => $row['MEI'] ?? null,
+            'jun'               => $row['JUN'] ?? null,
+            'jul'               => $row['JUL'] ?? null,
+            'agu'               => $row['AGU'] ?? null,
+            'sep'               => $row['SEP'] ?? null,
+            'okt'               => $row['OKT'] ?? null,
+            'nov'               => $row['NOP'] ?? null,
+            'des'               => $row['DES'] ?? null,
+            'jumlah'            => $row['JUMLAH'] ?? null,
+            'pajak'             => $row['PAJAK (%)'] ?? $row['PAJAK(%)'] ?? null,
+            'nom_pajak'         => $row['NOMINAL PAJAK'] ?? null,
+            'bpjs'              => $row['BPJS Maks 1 %'] ?? null,
+            'jumlah_diterima'   => $row['TOTAL'] ?? $row['YANG DITERIMA'] ?? null,
         ]);
     }
 
@@ -65,11 +68,11 @@ class GurusImport implements ToModel, WithUpserts, WithHeadingRow, WithBatchInse
 
     public function batchSize(): int
     {
-        return 1000;
+        return 5000;
     }
 
     public function chunkSize(): int
     {
-        return 1000;
+        return 5000;
     }
 }

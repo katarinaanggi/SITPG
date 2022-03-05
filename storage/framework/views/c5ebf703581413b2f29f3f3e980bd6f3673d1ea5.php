@@ -2,6 +2,11 @@
 
 <?php $__env->startSection('style'); ?>
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">    
+    <style>
+        .choices {
+            margin-bottom: 0px;
+        }
+    </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('page'); ?>
@@ -26,11 +31,7 @@
 </div>
 <form action="<?php echo e(route('operator.store_guru')); ?>" method="post">
     <?php echo csrf_field(); ?>
-    <?php if($message = Session::get('error')): ?>
-    <div class="alert alert-danger">
-        <strong><?php echo e($message); ?></strong>
-    </div>
-    <?php endif; ?>
+    
     
     <div class="col-12 col-md-12">
         <div class="card">

@@ -74,10 +74,19 @@ class GuruController extends Controller
 			'bpjs' => 'required',
 			'jumlah_diterima' => 'required',
 		];
-		$validator = Validator::make($request->all(),$rules);
+
+        $messages = [
+            'required'       => 'Field :attribute harus diisi.',
+            'unique'         => 'Field :attribute sudah terpakai.',
+            'in.jenjang'     => 'Field jenjang yang dipilih tidak tersedia.',
+            'in.pangkat'     => 'Field pangkat yang dipilih tidak tersedia.',
+            'in.triw'        => 'Field triwulan yang dipilih tidak tersedia.'
+        ];
+
+		$validator = Validator::make($request->all(),$rules,$messages);
 
 		if ($validator->fails()) {
-			return redirect()->route('operator.add_guru')->withInput()->withErrors($validator);
+			return redirect()->route('operator.add_guru')->withInput()->withErrors($validator)->with('error', 'Data belum berhasil ditambahkan');
 		}
 		else{
             $data = $request->input();
@@ -167,9 +176,12 @@ class GuruController extends Controller
     {
         $kota = Kota::get();
         $guru = Guru::find($id);
-        // dd($guru);
         $title = "Edit Guru ".$guru->nama;
-        return view('dashboard.guru.edit_guru', compact('guru','kota','title'));
+        return view('dashboard.guru.edit_guru', [
+            'title' => $title,
+            'guru' => $guru,
+            'kota' => $kota
+        ]);
     }
 
     /**
@@ -184,13 +196,13 @@ class GuruController extends Controller
         $rules = [
 			'nrg' => 'required',
 			'no_peserta' => 'required',
-			'nuptk' => 'required',
+			'nuptk' => 'required|unique:gurus,nuptk,'.$id,
 			'no_sk' => 'required',
 			'nama' => "required",
 			'jenjang' => 'required|in:PENGAWAS,SLB,SMA,SMK',
 			'tempat_tugas' => 'required',
 			'kota' => 'required',
-			'nip' => 'required',
+			'nip' => 'required|unique:gurus,nip,'.$id,
 			'nama_bank' => 'required',
 			'kantor_cabang' => 'required',
 			'no_rek' => 'required',
@@ -204,10 +216,16 @@ class GuruController extends Controller
 			'bpjs' => 'required',
 			'jumlah_diterima' => 'required',
 		];
-		$validator = Validator::make($guru->all(),$rules);
+        $messages = [
+            'required'       => 'Field :attribute harus diisi.',
+            'unique'         => 'Field :attribute sudah terpakai.',
+            'in.jenjang'     => 'Field jenjang yang dipilih tidak tersedia.',
+            'in.pangkat'     => 'Field pangkat yang dipilih tidak tersedia.'
+        ];
+		$validator = Validator::make($guru->all(),$rules,$messages);
 
 		if ($validator->fails()) {
-			return redirect()->route('operator.edit_guru',$guru->id)->withInput()->withErrors($validator);
+			return redirect()->route('operator.edit_guru',$guru->id)->withInput()->withErrors($validator)->with('error', 'Data belum berhasil diubah');
 		}
 		else{
             try{
@@ -249,7 +267,7 @@ class GuruController extends Controller
                 return redirect()->route('operator.guru')->with('success', 'Data berhasil diubah');
 			}
 			catch(Exception $e){
-				return redirect()->route('operator.edit_guru',$guru->id)->with('error', 'Data belum berhasil ditambahkan');
+				return redirect()->route('operator.edit_guru',$guru->id)->with('error', 'Data belum berhasil diubah');
 			}
 		}
     }
@@ -262,7 +280,7 @@ class GuruController extends Controller
      */
     public function destroy($id)
     {
-        Gurus::find($id)->delete();
+        Guru::find($id)->delete();
         return redirect()->route('operator.guru')->with('success','Data berhasil dihapus');
     }
 

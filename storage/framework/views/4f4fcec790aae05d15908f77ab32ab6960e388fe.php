@@ -21,6 +21,12 @@
     <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/choices.js/choices.min.css')); ?>" />
 
     <title>Edit User <?php echo e($user->name); ?></title>
+
+    <style>
+        .choices {
+            margin-bottom: 0px;
+        }
+    </style>
 </head>
 <body>
     <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -35,15 +41,6 @@
                 </div>
             <?php endif; ?>
 
-            <?php if(count($errors) > 0): ?>
-                <div class="alert alert-danger">
-                    <ul>
-                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <li><?php echo e($error); ?></li>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
             <div class="col-12 col-md-12">
                 <div class="card">
                     <div class="card-content">
@@ -52,40 +49,81 @@
                                 <div class="form-group">
                                     <label for="name">Name: </label>
                                     <input type="text" class="form-control" id="name" name="name" value="<?php echo e($user->name); ?>">
+                                    <span class="text-danger"><?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email">Email: </label>
                                     <input type="email" class="form-control" id="email" name="email" value="<?php echo e($user->email); ?>">
+                                    <span class="text-danger"><?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="phone">Phone: </label>
                                     <input type="number" class="form-control" id="phone" name="phone" value="<?php echo e($user->phone); ?>">
+                                    <span class="text-danger"><?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                 </div>
 
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="cabdin" >Cabang Dinas: </label>
-                                            <select class="form-control choices" id="cabdin" name="cabdin" required>
+                                            <select class="form-control choices" id="cabdin" name="cabdin">
+                                                <option value="">--pilih wilayah cabang dinas--</option>
                                                 <?php $__currentLoopData = $cabdin; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cd): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($cd->id); ?>" <?php echo e(( $cd->id == $user->cabdin) ? 'selected' : ''); ?>><?php echo e($cd->nama); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
+                                            <span class="text-danger"><?php $__errorArgs = ['cabdin'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="kota" >Kabupaten/Kota: </label>
-                                            <select class="form-control" id="kota" name="kota" required>
-                                                <option value="<?php echo e($user->kota); ?>"><?php echo e($user->kota); ?></option>
+                                            <select class="form-control" id="kota" name="kota">
+                                                <option value="<?php echo e($user->kota); ?>" ><?php echo e($user->kota); ?></option>
                                             </select>
+                                            <span class="text-danger"><?php $__errorArgs = ['kota'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Are you sure to update this data?')">
+                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Apakah anda yakin untuk mengubah data ini?')">
                                     Save
                                 </button>
                         </div>
@@ -112,27 +150,39 @@
     <script src="<?php echo e(asset('assets/vendors/choices.js/choices.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/pages/form-element-select.js')); ?>"></script>
     <script>
-        $(document).ready(function() {
-            $('#cabdin').on('change', function () {
-                var cabdinId = this.value;
-                $('#kota').html('');
-                $.ajax({
-                    url: '<?php echo e(route('admin.get_kota')); ?>?id_cabdin='+cabdinId,
-                    type: "POST",
-                    data: {
-                        cabdinId: cabdinId,
-                        _token: '<?php echo e(csrf_token()); ?>' 
-                    },
-                    dataType : 'json',
-                    success: function(result){
-                        $('#kota').html('<option value="0">--pilih wilayah kabupaten/kota--</option>'); 
-                        $.each(result, function(key,value){
-                            $("#kota").append('<option value="'+value.nama+'">'+value.nama+'</option>');
-                        });
-                    }
-                });
-            });
+        const kota = document.querySelector('#kota');
+        const cabdin = document.querySelector('#cabdin');
+        
+        if(cabdin.value){
+            getKota();
+        }
+
+        $('#cabdin').on('change', function () {
+            getKota();
         });
+
+        function getKota () {
+            var cabdinId = cabdin.value;
+            var namakota = kota.value;
+            $('#kota').html('');
+            $.ajax({
+                url: '<?php echo e(route('admin.get_kota')); ?>?id_cabdin='+cabdinId,
+                type: "POST",
+                data: {
+                    cabdinId: cabdinId,
+                    _token: '<?php echo e(csrf_token()); ?>' 
+                },
+                dataType : 'json',
+                success: function(result){
+                    $('#kota').html('<option value="'+namakota+'">'+namakota+'</option>'); 
+                    $.each(result, function(key,value){
+                        if(namakota != value.nama_kota){
+                            $("#kota").append('<option value="'+value.nama_kota+'">'+value.nama_kota+'</option>');
+                        }
+                    });
+                }
+            });
+        }
     </script>
 
 </body>

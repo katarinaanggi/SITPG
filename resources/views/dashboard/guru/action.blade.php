@@ -15,8 +15,8 @@
             event.preventDefault();
             const url = $(this).attr('href');
             swal({
-                title: 'Are you sure?',
-                text: 'This record and it`s details will be permanantly deleted!',
+                title: 'Apakah anda yakin?',
+                text: 'Data ini akan dihapus secara permanen!',
                 icon: 'warning',
                 buttons: ["Cancel", "Yes!"],
             }).then(function(value) {

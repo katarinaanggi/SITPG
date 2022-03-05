@@ -62,10 +62,18 @@ class MainBeritaController extends Controller
 			'judul' => 'required|string|max:50|min:5',
 			'isi' => 'required|string|min:10',
 		];
-		$validator = Validator::make($request->all(),$rules);
+		$validator = Validator::make($request->all(),$rules,[
+            'judul.required' => 'Judul berita harus diisi.',
+            'judul.max' => 'Judul berita terlalu panjang, maksimal :max karakter.',
+            'judul.min' => 'Judul berita terlalu pendek, minimal :min karakter.',
+            'judul.string' => 'Judul berita bukan bertipe string.',
+            'isi.required' => 'Isi berita harus diisi.',
+            'isi.min' => 'Isi berita terlalu pendek, minimal :min karakter.',
+            'isi.string' => 'Isi berita bukan bertipe string.'
+        ]);
 
 		if ($validator->fails()) {
-			return redirect()->route('admin.add_berita')->withInput()->withErrors($validator);
+			return redirect()->route('admin.add_berita')->withInput()->withErrors($validator)->with('error', 'Data belum berhasil ditambahkan');
 		}
 		else{
             $data = $request->input();
@@ -76,12 +84,12 @@ class MainBeritaController extends Controller
                 if($request->hasFile('file')){
                     $file = $request->file('file');
                     if ($validExt = Validator::make( [
-                            'file'      => $file,
-                            'extension' => strtolower($file->getClientOriginalExtension()),
+                            'ext'      => $file,
+                            'file' => strtolower($file->getClientOriginalExtension()),
                         ],[
-                            'extension'      => 'in:doc,csv,xlsx,xls,docx,ppt,odt,ods,odp,zip,rar,pdf',
+                            'file'      => 'in:doc,csv,xlsx,xls,docx,ppt,zip,rar,pdf',
                         ])->fails()) {
-                            return redirect()->route('admin.add_berita')->withInput()->withErrors('Tipe file tidak didukung');
+                            return redirect()->route('admin.add_berita')->withInput()->with('file', 'Tipe file tidak didukung');
                     }
                     $fileName = time().'_'.$file->getClientOriginalName();
                     $filePath = $file->storeAs('uploads', $fileName, 'public');
@@ -121,10 +129,18 @@ class MainBeritaController extends Controller
 			'judul' => 'required|string|max:50|min:5',
 			'isi' => 'required|string|min:10',
 		];
-		$validator = Validator::make($value->all(),$rules);
+		$validator = Validator::make($value->all(),$rules,[
+            'judul.required' => 'Judul berita harus diisi.',
+            'judul.max' => 'Judul berita terlalu panjang, maksimal :max karakter.',
+            'judul.min' => 'Judul berita terlalu pendek, minimal :min karakter.',
+            'judul.string' => 'Judul berita bukan bertipe string.',
+            'isi.required' => 'Isi berita harus diisi.',
+            'isi.min' => 'Isi berita terlalu pendek, minimal :min karakter.',
+            'isi.string' => 'Isi berita bukan bertipe string.'
+        ]);
 
 		if ($validator->fails()) {
-			return redirect()->route('admin.edit_berita',$value->id)->withInput()->withErrors($validator);
+			return redirect()->route('admin.edit_berita',$value->id)->withInput()->withErrors($validator)->with('error', 'Data belum berhasil diubah');
 		}
 		else{
             $fileName = DB::table('berita')->where('id', $value->id)->value('nama_file');
@@ -139,7 +155,7 @@ class MainBeritaController extends Controller
                         ],[
                             'extension'      => 'in:doc,csv,xlsx,xls,docx,ppt,odt,ods,odp,zip,rar,pdf',
                         ])->fails()) {
-                            return redirect()->route('admin.edit_berita',$value->id)->withInput()->withErrors('Tipe file tidak didukung');
+                            return redirect()->route('admin.edit_berita',$value->id)->withInput()->with('file', 'Tipe file tidak didukung');
                     }
                     $fileName = time().'_'.$file->getClientOriginalName();
                     $filePath = $file->storeAs('uploads', $fileName, 'public');

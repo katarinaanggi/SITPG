@@ -1,7 +1,12 @@
 
 
 <?php $__env->startSection('style'); ?>
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">    
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">   
+    <style>
+        .choices {
+            margin-bottom: 0px;
+        }
+    </style> 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('page'); ?>
@@ -26,21 +31,9 @@
                 <form action="<?php echo e(route('operator.update_guru', $guru->id)); ?>" method="post" id="update-guru">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('PATCH'); ?>
-                    <?php if($message = Session::get('error')): ?>
-                        <div class="alert alert-danger">
-                            <strong><?php echo e($message); ?></strong>
-                        </div>
-                    <?php endif; ?>
+                    
         
-                    <?php if(count($errors) > 0): ?>
-                        <div class="alert alert-danger">
-                            <ul>
-                                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li><?php echo e($error); ?></li>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </ul>
-                        </div>
-                    <?php endif; ?>
+                    
                     <div class="card-header"><h3 class="text-center">Edit Detail of <?php echo e($guru->nama); ?></h3></div>
                     <div class="card-body">
                         <div class="form-group row mb-3">
@@ -193,9 +186,8 @@ unset($__errorArgs, $__bag); ?>
                                     <label for="kota" class="col-sm-3 col-form-label">Kabupaten/Kota: </label>
                                     <div class="col-sm-9">
                                         <select class="form-control choices" id="kota" name="kota" >
-                                            <option value="">--pilih wilayah kabupaten/kota--</option>
                                             <?php $__currentLoopData = $kota; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option value="<?php echo e($k->nama_kota); ?>" <?php echo e($guru->kota == $k->nama_kota ? 'selected' : ''); ?>><?php echo e($k->nama_kota); ?></option>
+                                                <option value="<?php echo e($k->nama_kota); ?>" <?php echo e($k->nama_kota == $guru->kota ? 'selected' : ''); ?>><?php echo e($k->nama_kota); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                         <?php $__errorArgs = ['kota'];
@@ -291,7 +283,6 @@ unset($__errorArgs, $__bag); ?>
                                     <label for="pangkat" class="col-sm-3 col-form-label">Pangkat/ Golongan: </label>
                                     <div class="col-sm-9">
                                         <select class="form-control choices" id="pangkat" name="pangkat" >
-                                            <option value="">--pilih pangkat/golongan--</option>
                                             <option value="I/a" <?php echo e($guru->pangkat == 'I/a' ? 'selected' : ''); ?>>I/A</option>
                                             <option value="I/b" <?php echo e($guru->pangkat == 'I/b' ? 'selected' : ''); ?>>I/B</option>
                                             <option value="I/c" <?php echo e($guru->pangkat == 'I/c' ? 'selected' : ''); ?>>I/C</option>
@@ -559,7 +550,7 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Are you sure to update this data?')">
+                        <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Apakah anda yakin untuk mengubah data ini?')">
                             Save
                         </button>
                     </div>

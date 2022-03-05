@@ -404,9 +404,10 @@ button:focus {
    3. Hero Area
    ========================================================================== */
 #hero-area {
-  background: url(../../images/bg/bg3.jpg) fixed no-repeat;
+  background: rgba(0, 0, 0, 0.4) url(../../images/bg/disdikbud4.jpg) fixed no-repeat;
   background-size: cover;
   color: #fff;
+  background-blend-mode: darken;
   overflow: hidden;
   position: relative;
 }

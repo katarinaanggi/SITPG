@@ -2,6 +2,11 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">    
+    <style>
+        .choices {
+            margin-bottom: 0px;
+        }
+    </style>
 @endsection
 
 @section('page')
@@ -26,11 +31,11 @@
 </div>
 <form action="{{ route('operator.store_guru') }}" method="post">
     @csrf
-    @if ($message = Session::get('error'))
+    {{-- @if ($message = Session::get('error'))
     <div class="alert alert-danger">
         <strong>{{ $message }}</strong>
     </div>
-    @endif
+    @endif --}}
     
     <div class="col-12 col-md-12">
         <div class="card">

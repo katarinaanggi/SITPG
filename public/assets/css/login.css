@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
-:root {
+/* :root {
     --ungu: #790995;
     --white: #ffffff;
     --ungudark: #4E0660;
@@ -17,16 +17,16 @@
     --shadow: rgba(201, 95, 233, 0.493);
     --shadow2: rgba(201, 95, 233, 0.493);
     --fcf: rgba(255, 100, 255, 0.5);
-}
+} */
 /* BASIC */
 body {
-    background-color: var(--ungu);
+    background-color: var(--navy);
     font-family: "Poppins", sans-serif;
     height: 100vh;
 }
 
 a {
-    color: var(--ungumuda4);
+    color: var(--aqua);
     display:inline-block;
     text-decoration: none;
     font-weight: 400;
@@ -117,7 +117,7 @@ button.button  {
 }
 
 button.button:hover  {
-    background-color: var(--ungumuda);
+    background-color: var(--army);
 }
 
 input[type=email], input[type=password] {
@@ -143,8 +143,8 @@ input[type=email], input[type=password] {
 
 input[type=email]:focus, input[type=password]:focus {
     background-color: #fff;
-    border-bottom: 2px solid var(--ungumuda4);
-    border-color: var(--ungumuda4);
+    border-bottom: 2px solid var(--aqua);
+    border-color: var(--aqua);
 }
 
 .form-control:focus {

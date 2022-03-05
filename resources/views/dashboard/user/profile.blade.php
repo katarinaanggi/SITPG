@@ -1,7 +1,12 @@
 @extends('layouts.main')
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">    
+    <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">   
+    <style>
+      .choices {
+        margin-bottom: 0px;
+      }
+    </style> 
 @endsection
 
 @section('page')
@@ -64,11 +69,11 @@
                       </li>
                       @endif
                     </ul>
-                  @if ($message = Session::get('error'))
+                  {{-- @if ($message = Session::get('error'))
                       <div class="alert alert-danger">
                           <strong>{{ $message }}</strong>
                       </div>
-                  @endif
+                  @endif --}}
                 </div><!-- /.card-header -->
                 <div class="card-body">
                   @if ($key = Session::get('tab'))
@@ -284,3 +289,29 @@
       <!-- /.content -->
     
 @endsection
+
+{{-- @section('script')
+  <script>
+    $(document).ready(function() {
+        $('#cabdin').on('change', function () {
+            var cabdinId = this.value;
+            $('#kota').html('');
+            $.ajax({
+                url: '{{ route('admin.get_kota') }}?id_cabdin='+cabdinId,
+                type: "POST",
+                data: {
+                    cabdinId: cabdinId,
+                    _token: '{{csrf_token()}}' 
+                },
+                dataType : 'json',
+                success: function(result){
+                    $('#kota').html('<option value="">--pilih wilayah kabupaten/kota--</option>'); 
+                    $.each(result, function(key,value){
+                        $("#kota").append('<option value="'+value.nama_kota+'">'+value.nama_kota+'</option>');
+                    });
+                }
+            });
+        });
+    });
+  </script>
+@endsection --}}

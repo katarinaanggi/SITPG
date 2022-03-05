@@ -76,25 +76,49 @@
                   <?php if($key = Session::get('tab')): ?>
                     <div class="tab-content" id="pills-tabContent">
                       <div class="tab-pane fade <?php echo e(($key == 'Personal Information') ? 'show active' : ''); ?>" id="pills-pi" role="tabpanel" aria-labelledby="pills-pi-tab">
-                          <form class="form-horizontal" method="POST" action="<?php echo e(route('admin.changeProfile', Auth::guard('admin')->user()->id)); ?>" id="AdminInfoForm">
+                          <form class="form-horizontal" method="POST" action="<?php echo e(route('admin.changeProfile', Auth::guard('admin')->user()->id)); ?>" >
                               <?php echo csrf_field(); ?>
                               <?php echo method_field('PATCH'); ?>
                               <div class="form-group row">
                                   <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="inputName" placeholder="Name" value="<?php echo e(Auth::guard('admin')->user()->name); ?>" name="name" minlength="5" maxlength="255">
+                                      <span class="text-danger"><?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
                                       <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo e(Auth::guard('admin')->user()->email); ?>" name="email">
+                                      <span class="text-danger"><?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="<?php echo e(Auth::guard('admin')->user()->phone); ?>" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                      <span class="text-danger"><?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -123,7 +147,7 @@ unset($__errorArgs, $__bag); ?></span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="inputName2" class="col-sm-2 col-form-label">New Password</label>
+                              <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
                               <div class="col-sm-10">
                                 <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword">
                                 <span class="text-danger"><?php $__errorArgs = ['newpassword'];
@@ -137,7 +161,7 @@ unset($__errorArgs, $__bag); ?></span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="inputName2" class="col-sm-2 col-form-label">Confirm New Password</label>
+                              <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
                               <div class="col-sm-10">
                                 <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword">
                                 <span class="text-danger"><?php $__errorArgs = ['cnewpassword'];
@@ -161,25 +185,49 @@ unset($__errorArgs, $__bag); ?></span>
                   <?php else: ?>
                     <div class="tab-content" id="pills-tabContent">
                       <div class="tab-pane fade show active" id="pills-pi" role="tabpanel" aria-labelledby="pills-pi-tab">
-                          <form class="form-horizontal" method="POST" action="<?php echo e(route('admin.changeProfile', Auth::guard('admin')->user()->id)); ?>" id="AdminInfoForm">
+                          <form class="form-horizontal" method="POST" action="<?php echo e(route('admin.changeProfile', Auth::guard('admin')->user()->id)); ?>" >
                               <?php echo csrf_field(); ?>
                               <?php echo method_field('PATCH'); ?>
                               <div class="form-group row">
                                   <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="inputName" placeholder="Name" value="<?php echo e(Auth::guard('admin')->user()->name); ?>" name="name" minlength="5" maxlength="255">
+                                      <span class="text-danger"><?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
                                       <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo e(Auth::guard('admin')->user()->email); ?>" name="email">
+                                      <span class="text-danger"><?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
                                   <div class="col-sm-10">
                                       <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="<?php echo e(Auth::guard('admin')->user()->phone); ?>" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                      <span class="text-danger"><?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></span>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -208,7 +256,7 @@ unset($__errorArgs, $__bag); ?></span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="inputName2" class="col-sm-2 col-form-label">New Password</label>
+                              <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
                               <div class="col-sm-10">
                                 <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword">
                                 <span class="text-danger"><?php $__errorArgs = ['newpassword'];
@@ -222,7 +270,7 @@ unset($__errorArgs, $__bag); ?></span>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label for="inputName2" class="col-sm-2 col-form-label">Confirm New Password</label>
+                              <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
                               <div class="col-sm-10">
                                 <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword">
                                 <span class="text-danger"><?php $__errorArgs = ['cnewpassword'];

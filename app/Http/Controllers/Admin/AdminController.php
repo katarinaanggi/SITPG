@@ -63,13 +63,13 @@ class AdminController extends Controller
             'phone' => 'required'
         ];
         $validator = Validator::make($request->all(),$rules,[
-            'name.required' => 'Nama harus diisi',
-            'email.required' => 'Email harus diisi',
-            'phone.required' => 'Phone harus diisi'
+            'name.required' => 'Nama harus diisi.',
+            'email.required' => 'Email harus diisi.',
+            'phone.required' => 'Phone harus diisi.'
         ]);
 
 		if ($validator->fails()) {
-			return redirect()->route('user.profile')->withInput()->withErrors($validator);
+			return redirect()->route('admin.profile')->withInput()->withErrors($validator)->with('error', 'Data belum berhasil diubah');
 		}
 		else{
             $current_timestamp = Carbon::now()->toDateTimeString();
@@ -92,13 +92,13 @@ class AdminController extends Controller
         ];
         
         $validator = Validator::make($request->all(),$rules,[
-            'oldpassword.min' => 'Password lama terlalu pendek, minimal :min karakter',
-            'newpassword.min' => 'Password baru terlalu pendek, minimal :min karakter',
-            'cnewpassword.min' => 'Konfirmasi password terlalu pendek, minimal :min karakter',
-            'oldpassword.required' => 'Password lama harus diisi',
-            'newpassword.required' => 'Password baru harus diisi',
-            'cnewpassword.required' => 'Konfirmasi password harus diisi',
-            'cnewpassword.same' => 'Konfirmasi password harus sama dengan password baru'
+            'oldpassword.min' => 'Password lama terlalu pendek, minimal :min karakter.',
+            'newpassword.min' => 'Password baru terlalu pendek, minimal :min karakter.',
+            'cnewpassword.min' => 'Konfirmasi password terlalu pendek, minimal :min karakter.',
+            'oldpassword.required' => 'Password lama harus diisi.',
+            'newpassword.required' => 'Password baru harus diisi.',
+            'cnewpassword.required' => 'Konfirmasi password harus diisi.',
+            'cnewpassword.same' => 'Konfirmasi password harus sama dengan password baru.'
         ]);
         
 		if ($validator->fails()) {
@@ -126,6 +126,16 @@ class AdminController extends Controller
     }
 
     function fileImport(Request $request){
+        $file = $request->file('importfile');
+        if ($validExt = Validator::make( [
+                'ext'      => $file,
+                'importfile' => strtolower($file->getClientOriginalExtension()),
+            ],[
+                'importfile'      => 'in:csv,xlsx,xls',
+            ])->fails()) {
+                return redirect()->route('operator.guru')->withInput()->with('file', 'Tipe file tidak didukung');
+        }
+
         Excel::import(new GurusImport, $request->file('file')->store('temp'));
         return back()->with('success', 'Berhasil diimport');
     }

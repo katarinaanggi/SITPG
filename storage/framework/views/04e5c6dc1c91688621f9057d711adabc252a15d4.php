@@ -30,7 +30,7 @@
                         <div class="tag">New!</div>
                     </div>
                     <h4 class="card-title">
-                        <a href="<?php echo e(route('detail_berita', $cari[0]->id)); ?>"><?php echo e($cari[0]->judul); ?></a>
+                        <a href="<?php echo e(route('operator.detail_berita', $cari[0]->id)); ?>"><?php echo e($cari[0]->judul); ?></a>
                     </h4>
                     <p class="card-text isinya">
                         <?php if(strlen($cari[0]->isi) > 500): ?>
@@ -95,7 +95,7 @@
                         <div class="card-content">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="<?php echo e(route('detail_berita', $value->id)); ?>"><?php echo e($value->judul); ?></a>
+                                    <a href="<?php echo e(route('operator.detail_berita', $value->id)); ?>"><?php echo e($value->judul); ?></a>
                                 </h4>
                                 <p class="card-text " >
                                     <?php if(strlen($value->isi) > 50): ?>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="card-footer d-flex justify-content-between">
                             <span><small class="text-muted"><?php echo e(\Carbon\Carbon::parse($value->created_at)->diffForHumans()); ?></small></span>
-                            <a href="<?php echo e(route('detail_berita', $value->id)); ?>" style="display: inline-block; font-weight: 700; letter-spacing: 1.5px;">READ MORE</a>
+                            <a href="<?php echo e(route('operator.detail_berita', $value->id)); ?>" style="display: inline-block; font-weight: 700; letter-spacing: 1.5px;">READ MORE</a>
                         </div>
                     </div>
                 </div>
