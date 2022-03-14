@@ -24,15 +24,10 @@
         </div>
     </div>
 </div>
-    <form action="<?php echo e(route('admin.store_user')); ?>" method="post" >
+    <form action="<?php echo e(route('admin.store_user')); ?>" method="post" class="needs-validation" novalidate id="formvalid">
         <?php echo csrf_field(); ?>
-        <?php if($message = Session::get('error')): ?>
-            <div class="alert alert-danger">
-                <strong><?php echo e($message); ?></strong>
-            </div>
-        <?php endif; ?>
-
         
+
         <div class="col-12 col-md-12">
             <div class="card">
                 <div class="card-content">
@@ -40,78 +35,108 @@
                     <div class="card-header"><h3 class="text-center">Create New User</h3></div>
                     <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Name: </label>
-                                <input type="text" class="form-control" id="name" name="name"  value="<?php echo e(old('name')); ?>">
-                                <span class="text-danger"><?php $__errorArgs = ['name'];
+                                <label for="name"class="form-label">Name: </label>
+                                <input type="text" class="form-control" id="name" name="name"  value="<?php echo e(old('name')); ?>" minlength="5" maxlength="30" required>
+                                <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                    <span class="text-danger">*<?php echo e($message); ?></span>  
+                                <?php else: ?>
+                                    <span class="invalid-feedback">
+                                        Nama harus diisi minimal 5 karakter dan maksimal 30 karakter.
+                                    </span> 
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Email: </label>
-                                <input type="email" class="form-control" id="email" name="email" value="<?php echo e(old('email')); ?>">
-                                <span class="text-danger"><?php $__errorArgs = ['email'];
+                                <label for="email" class="form-label">Email: </label>
+                                <input type="email" class="form-control" id="email" name="email" value="<?php echo e(old('email')); ?>" required>
+                                <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                    <span class="text-danger">*<?php echo e($message); ?></span>  
+                                <?php else: ?>
+                                    <span class="invalid-feedback">
+                                        Email harus diisi.
+                                    </span> 
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                             </div>
                             
                             <div class="form-group">
-                                <label for="phone">Phone: </label>
-                                <input type="number" class="form-control" id="phone" name="phone" value="<?php echo e(old('phone')); ?>">
-                                <span class="text-danger"><?php $__errorArgs = ['phone'];
+                                <label for="phone" class="form-label">Phone: </label>
+                                <input type="number" class="form-control" id="phone" name="phone" value="<?php echo e(old('phone')); ?>" required>
+                                <?php $__errorArgs = ['phone'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                    <span class="text-danger">*<?php echo e($message); ?></span>  
+                                <?php else: ?>
+                                    <span class="invalid-feedback">
+                                        Phone harus diisi.
+                                    </span> 
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                             </div>
 
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="cabdin" >Cabang Dinas: </label>
-                                        <select class="form-control choices" id="cabdin" name="cabdin">
+                                        <label for="cabdin" class="form-label">Cabang Dinas: </label>
+                                        <select class="form-control choices" id="cabdin" name="cabdin" required>
                                             <option value="">--pilih wilayah cabang dinas--</option>
                                             <?php $__currentLoopData = $cabdin; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cd): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($cd->id); ?>" <?php echo e(old('cabdin') == $cd->id ? 'selected' : ''); ?>><?php echo e($cd->nama); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
-                                        <span class="text-danger"><?php $__errorArgs = ['cabdin'];
+                                        <?php $__errorArgs = ['cabdin'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                            <span class="text-danger">*<?php echo e($message); ?></span>  
+                                        <?php else: ?>
+                                            <span class="invalid-feedback">
+                                                Cabang dinas harus diisi.
+                                            </span> 
+                                        <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="kota" >Kabupaten/Kota: </label>
-                                        <select class="form-control" id="kota" name="kota">
+                                        <label for="kota" class="form-label">Kabupaten/Kota: </label>
+                                        <select class="form-control" id="kota" name="kota" required>
                                             <option value="">--pilih wilayah kabupaten/kota--</option>
                                         </select>
-                                        <span class="text-danger"><?php $__errorArgs = ['kota'];
+                                        <?php $__errorArgs = ['kota'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                            <span class="text-danger">*<?php echo e($message); ?></span>  
+                                        <?php else: ?>
+                                            <span class="invalid-feedback">
+                                                Kabupaten/Kota harus diisi.
+                                            </span> 
+                                        <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                                         <input type="text" id="hdnPreviousValue" style="display: none" value="<?php echo e(old('kota')); ?>">
                                     </div>
                                 </div>
@@ -120,32 +145,44 @@ unset($__errorArgs, $__bag); ?></span>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="password">Password: </label>
-                                        <input type="password"  name="password" id="password" value="<?php echo e(old('password')); ?>" style="padding: 0.375rem 0.75rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; border-radius: 0.25rem; border: 1px solid #dce7f1; width:99.9%">
+                                        <label for="password" class="form-label">Password: </label>
+                                        <input type="password"  name="password" id="password" value="<?php echo e(old('password')); ?>" required style="padding: 0.375rem 0.75rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; border-radius: 0.25rem; border: 1px solid #dce7f1; width:99.9%">
                                         <span id="togglePassword" class="bi bi-eye-fill" style="margin-left: -30px; cursor: pointer;"></span>
-                                        <span class="text-danger"><?php $__errorArgs = ['password'];
+                                        <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                            <span class="text-danger">*<?php echo e($message); ?></span>  
+                                        <?php else: ?>
+                                            <span class="invalid-feedback">
+                                                Password harus diisi.
+                                            </span> 
+                                        <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="cpassword">Confirm Password: </label>
-                                        <input type="password"  name="cpassword" id="cpassword" value="<?php echo e(old('cpassword')); ?>" style="padding: 0.375rem 0.75rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; border-radius: 0.25rem; border: 1px solid #dce7f1; width:99.9%">
+                                        <label for="cpassword" class="form-label">Confirm Password: </label>
+                                        <input type="password"  name="cpassword" id="cpassword" value="<?php echo e(old('cpassword')); ?>" required style="padding: 0.375rem 0.75rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; border-radius: 0.25rem; border: 1px solid #dce7f1; width:99.9%">
                                         <span id="togglePassword2" class="bi bi-eye-fill" style="margin-left: -30px; cursor: pointer;"></span>
-                                        <span class="text-danger"><?php $__errorArgs = ['cpassword'];
+                                        <?php $__errorArgs = ['cpassword'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                            <span class="text-danger">*<?php echo e($message); ?></span>  
+                                        <?php else: ?>
+                                            <span class="invalid-feedback">
+                                                Konfirmasi password harus diisi.
+                                            </span> 
+                                        <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +206,7 @@ unset($__errorArgs, $__bag); ?></span>
         const kotaprev = document.querySelector('#hdnPreviousValue');
         const cabdin = document.querySelector('#cabdin');
 
-        $('#cabdin').on('change', function () {
+        $('#cabdin').on('change', function () {     //tiap cabdin ganti value, kota jg ganti
             getKota();
         });
         
@@ -199,7 +236,7 @@ unset($__errorArgs, $__bag); ?></span>
             });
         }
 
-        if(kotaprev.value){
+        if(kotaprev.value){     //kalo abis submit ada nulis kota, ntar muncul kaya old()
             getKota();
         }
         
@@ -219,7 +256,7 @@ unset($__errorArgs, $__bag); ?></span>
             $(this).toggleClass("bi-eye-fill bi-eye-slash-fill");
         });
 
-        if(cabdin.value){
+        if(cabdin.value){       //kalo cabdin ada value trs diload, kota ada pilihan sesuai cabdin
             window.onLoad = getKota();
         }
     </script>

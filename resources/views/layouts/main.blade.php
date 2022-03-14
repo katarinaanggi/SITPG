@@ -12,6 +12,7 @@
     {{-- bootstrap --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 
     {{-- datatable --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/fc-4.0.1/fh-3.2.1/r-2.2.9/datatables.min.css"/>
@@ -93,7 +94,7 @@
                                         <li>
                                             <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.
                                             getElementById('logout-form').submit();"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
-                                            <form action="{{ route('admin.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
+                                            <form action="{{ route('admin.logout') }}" method="post" class="d-none" >@csrf</form>
                                         </li>                                        
                                     @elseif (Auth::guard('web')->check())
                                         <li><a class="dropdown-item" href=""><i class="icon-mid bi bi-person me-2"></i> My
@@ -103,7 +104,7 @@
                                         <li>
                                             <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault();document.
                                             getElementById('logout-form').submit();"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a>
-                                            <form action="{{ route('admin.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
+                                            <form action="{{ route('admin.logout') }}" method="post" class="d-none" >@csrf</form>
                                         </li> 
                                     @endif
                                 </ul>
@@ -134,7 +135,7 @@
     {{-- extra component --}}
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/mazer.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
     <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form-element-select.js') }}"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
@@ -153,11 +154,46 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/fc-4.0.1/fh-3.2.1/r-2.2.9/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.11.4/dataRender/ellipsis.js"></script>
     
+    @yield('script')
+    
     @yield('datatable')
     
-    @yield('script')
-
     <script type="text/javascript">
+        function bsSelectValidation() {
+            if ($("#formvalid").hasClass('was-validated')) {
+                $(".choices").each(function (i, el) {
+                if ($(el).is(":invalid")) {
+                    $(el).closest(".form-group").find(".valid-feedback").removeClass("d-block");
+                    $(el).closest(".form-group").find(".invalid-feedback").addClass("d-block");
+                }
+                else {
+                    $(el).closest(".form-group").find(".invalid-feedback").removeClass("d-block");
+                    $(el).closest(".form-group").find(".valid-feedback").addClass("d-block");
+                }
+                });
+            }
+        }
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+
+                form.classList.add('was-validated');
+                bsSelectValidation();
+            }, false)
+            })
+        })()
         // Set delete confirmation alert
         $('.delete-confirm').on('click', function (event) {
             event.preventDefault();

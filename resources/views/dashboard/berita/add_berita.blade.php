@@ -48,7 +48,7 @@
 <body>
     <div class="container mt-5">
         <a href="{{route('admin.berita')}}"><i class="bi bi-x-lg"></i></a>
-        <form action="{{ route('admin.store_berita') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.store_berita') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
             <h3 class="text-center mb-5">Add New Berita</h3>
             @csrf
             {{-- @if ($message = Session::get('error'))
@@ -62,15 +62,15 @@
                     <div class="card-content">
                         <div class="card-body">
                                 <div class="form-group">
-                                    <label for="judul">Judul <span class="text-danger">*</span> : </label>
-                                    <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}">
-                                    <span class="text-danger">@error('judul')*{{$message}} @enderror</span>
+                                    <label for="judul" class="form-label">Judul <span class="text-danger">*</span> : </label>
+                                    <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" minlength="5" maxlength="50" required>
+                                    <div class="invalid-feedback">@error('judul')*{{$message}} @else Judul harus diisi minimal 5 karakter dan maksimal 50 karakter.@enderror</div>
                                 </div>
-
+                                
                                 <div class="form-group">
-                                    <label for="isi">Isi <span class="text-danger">*</span> : </label>
-                                    <textarea type="text" class="form-control" id="isi" name="isi" >{{ old('isi') }}</textarea>
-                                    <span class="text-danger">@error('isi')*{{$message}} @enderror</span>
+                                    <label for="isi" class="form-label">Isi <span class="text-danger">*</span> : </label>
+                                    <textarea type="text" class="form-control" id="isi" name="isi" minlength="10" required>{{ old('isi') }}</textarea>
+                                    <div class="invalid-feedback">@error('isi')*{{$message}} @else Isi berita harus diisi minimal 10 karakter.@enderror</div>
                                 </div>
                                 
                                 <div class="custom-file">                                    
@@ -109,6 +109,27 @@
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 
 <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()
+
     function namafile(){
         var filename = document.getElementById("file").files[0].name;
         document.getElementById("file-name").textContent = filename;

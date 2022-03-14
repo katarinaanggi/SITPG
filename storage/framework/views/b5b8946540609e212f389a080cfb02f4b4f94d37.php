@@ -45,15 +45,11 @@
     <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="container mt-5">
         <a href="<?php echo e(route('admin.berita')); ?>"><i class="bi bi-x-lg"></i></a>
-        <form action="<?php echo e(route('admin.update_berita', $berita->id)); ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+        <form action="<?php echo e(route('admin.update_berita', $berita->id)); ?>" method="post" enctype="multipart/form-data" autocomplete="off" class="needs-validation" novalidate>
             <h3 class="text-center mb-5">Edit Berita</h3>
             <?php echo csrf_field(); ?>
             <?php echo method_field('PATCH'); ?>
-            <?php if($message = Session::get('error')): ?>
-                <div class="alert alert-danger">
-                    <strong><?php echo e($message); ?></strong>
-                </div>
-            <?php endif; ?>
+            
 
             <div class="col-12 col-md-12">
                 <div class="card">
@@ -61,28 +57,28 @@
                         <div class="card-body">
                                 <div class="form-group">
                                     <label for="judul">Judul: </label>
-                                    <input type="text" class="form-control" id="judul" name="judul" value="<?php echo e($berita->judul); ?>">
-                                    <span class="text-danger"><?php $__errorArgs = ['judul'];
+                                    <input type="text" class="form-control" id="judul" name="judul" value="<?php echo e($berita->judul); ?>" minlength="5" maxlength="50" required>
+                                    <div class="invalid-feedback"><?php $__errorArgs = ['judul'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php else: ?> Judul berita harus diisi minimal 5 karakter dan maksimal 50 karakter. <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?></div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="isi">Isi: </label>
-                                    <textarea type="text" class="form-control" id="isi" name="isi" ><?php echo e($berita->isi); ?></textarea>
-                                    <span class="text-danger"><?php $__errorArgs = ['isi'];
+                                    <textarea type="text" class="form-control" id="isi" name="isi" required><?php echo e($berita->isi); ?></textarea>
+                                    <div class="invalid-feedback"><?php $__errorArgs = ['isi'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php else: ?> Isi berita harus diisi. <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?></div>
                                 </div>
                                 
                                 <div class="custom-file">                                    
@@ -92,7 +88,7 @@ unset($__errorArgs, $__bag); ?></span>
                                     <input id="file" name='file' type="file" style="display:none;" onchange="namafile()">
                                     <label id="file-name"></label>
                                     <?php if($message = Session::get('file')): ?>
-                                        <span class="text-danger">*<?php echo e($message); ?></span>
+                                        <div class="invalid-feedback">*<?php echo e($message); ?></div>
                                     <?php endif; ?>
                                 </div>
 
@@ -123,6 +119,26 @@ unset($__errorArgs, $__bag); ?></span>
 <!-- filepond -->
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
  <script type="text/javascript">
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()
     function submitForm(form) {
         swal({
             title: "Apakah anda yakin?",

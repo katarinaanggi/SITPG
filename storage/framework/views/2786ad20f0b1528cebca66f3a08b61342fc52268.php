@@ -217,4 +217,4 @@
     </script>
         
 </body>
-</html><?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/layouts/main.blade.php ENDPATH**/ ?>
+</html><?php /**PATH E:\IF\Semester 5\PBP\Laravel\SITPG\resources\views/layouts/main.blade.php ENDPATH**/ ?>

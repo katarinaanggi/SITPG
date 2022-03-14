@@ -381,4 +381,4 @@
     </script>
     </body>
 </html>
-<?php /**PATH E:\IF\Semester 5\Pengembangan Berbasis Platform\Laravel\SITPG\resources\views/welcome.blade.php ENDPATH**/ ?>
+<?php /**PATH E:\IF\Semester 5\PBP\Laravel\SITPG\resources\views/welcome.blade.php ENDPATH**/ ?>

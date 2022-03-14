@@ -32,7 +32,7 @@
     @include('sweetalert::alert')
     <div class="container mt-5">
         <a href="{{route('admin.userManagement')}}"><i class="bi bi-x-lg"></i></a>
-        <form action="{{ route('admin.update_user', $user->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.update_user', $user->id) }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate id="formvalid">
             @csrf
             @method('PATCH')
             {{-- @if ($message = Session::get('error'))
@@ -46,51 +46,81 @@
                     <div class="card-content">
                         <div class="card-header"><h3 class="text-center">User Edit for {{$user->name}}</h3></div>
                         <div class="card-body">
-                                <div class="form-group">
-                                    <label for="name">Name: </label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}">
-                                    <span class="text-danger">@error('name')*{{$message}} @enderror</span>
-                                </div>
+                            <div class="form-group">
+                                <label for="name"class="form-label">Name: </label>
+                                <input type="text" class="form-control" id="name" name="name"  value="{{ $user->name }}" minlength="5" maxlength="30" required>
+                                @error('name') 
+                                    <span class="text-danger">*{{$message}}</span>  
+                                @else
+                                    <span class="invalid-feedback">
+                                        Nama harus diisi minimal 5 karakter dan maksimal 30 karakter.
+                                    </span> 
+                                @enderror
+                        </div>
 
-                                <div class="form-group">
-                                    <label for="email">Email: </label>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}">
-                                    <span class="text-danger">@error('email')*{{$message}} @enderror</span>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="phone">Phone: </label>
-                                    <input type="number" class="form-control" id="phone" name="phone" value="{{$user->phone}}">
-                                    <span class="text-danger">@error('phone')*{{$message}} @enderror</span>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="cabdin" >Cabang Dinas: </label>
-                                            <select class="form-control choices" id="cabdin" name="cabdin">
-                                                <option value="">--pilih wilayah cabang dinas--</option>
-                                                @foreach($cabdin as $cd)
-                                                    <option value="{{ $cd->id }}" {{ ( $cd->id == $user->cabdin) ? 'selected' : '' }}>{{ $cd->nama}}</option>
-                                                @endforeach
-                                            </select>
-                                            <span class="text-danger">@error('cabdin')*{{$message}} @enderror</span>
-                                        </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email: </label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                                @error('email') 
+                                    <span class="text-danger">*{{$message}}</span>  
+                                @else
+                                    <span class="invalid-feedback">
+                                        Email harus diisi.
+                                    </span> 
+                                @enderror
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone: </label>
+                                <input type="number" class="form-control" id="phone" name="phone" value="{{ $user->phone }}" required>
+                                @error('phone') 
+                                    <span class="text-danger">*{{$message}}</span>  
+                                @else
+                                    <span class="invalid-feedback">
+                                        Phone harus diisi.
+                                    </span> 
+                                @enderror
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="cabdin" >Cabang Dinas: </label>
+                                        <select class="form-control choices" id="cabdin" name="cabdin" required>
+                                            <option value="">--pilih wilayah cabang dinas--</option>
+                                            @foreach($cabdin as $cd)
+                                            <option value="{{ $cd->id }}" {{ ( $cd->id == $user->cabdin) ? 'selected' : '' }}>{{ $cd->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('cabdin') 
+                                            <span class="text-danger">*{{$message}}</span>  
+                                        @else
+                                            <span class="invalid-feedback">
+                                                Cabang dinas harus diisi.
+                                            </span> 
+                                        @enderror
                                     </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="kota" >Kabupaten/Kota: </label>
-                                            <select class="form-control" id="kota" name="kota">
-                                                <option value="{{$user->kota}}" >{{$user->kota}}</option>
-                                            </select>
-                                            <span class="text-danger">@error('kota')*{{$message}} @enderror</span>
-                                        </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="kota" >Kabupaten/Kota: </label>
+                                        <select class="form-control" id="kota" name="kota" required>
+                                            <option value="{{$user->kota}}" >{{$user->kota}}</option>
+                                        </select>
+                                        @error('kota') 
+                                            <span class="text-danger">*{{$message}}</span>  
+                                        @else
+                                            <span class="invalid-feedback">
+                                                Kabupaten/Kota harus diisi.
+                                            </span> 
+                                        @enderror
                                     </div>
                                 </div>
-                                
-                                <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Apakah anda yakin untuk mengubah data ini?')">
-                                    Save
-                                </button>
+                            </div>
+                            
+                            <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Apakah anda yakin untuk mengubah data ini?')">
+                                Save
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -100,7 +130,7 @@
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/mazer.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
     
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -117,6 +147,42 @@
     <script>
         const kota = document.querySelector('#kota');
         const cabdin = document.querySelector('#cabdin');
+
+        function bsSelectValidation() {
+            if ($("#formvalid").hasClass('was-validated')) {
+                $(".choices").each(function (i, el) {
+                if ($(el).is(":invalid")) {
+                    $(el).closest(".form-group").find(".valid-feedback").removeClass("d-block");
+                    $(el).closest(".form-group").find(".invalid-feedback").addClass("d-block");
+                }
+                else {
+                    $(el).closest(".form-group").find(".invalid-feedback").removeClass("d-block");
+                    $(el).closest(".form-group").find(".valid-feedback").addClass("d-block");
+                }
+                });
+            }
+        }
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+
+                form.classList.add('was-validated');
+                bsSelectValidation();
+            }, false)
+            })
+        })()
         
         if(cabdin.value){
             getKota();

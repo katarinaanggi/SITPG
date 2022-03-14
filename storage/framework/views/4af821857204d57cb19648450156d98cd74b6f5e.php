@@ -73,52 +73,71 @@
                   <?php endif; ?>
                 </div><!-- /.card-header -->
                 <div class="card-body">
+
                   <?php if($key = Session::get('tab')): ?>
                     <div class="tab-content" id="pills-tabContent">
                       <div class="tab-pane fade <?php echo e(($key == 'Personal Information') ? 'show active' : ''); ?>" id="pills-pi" role="tabpanel" aria-labelledby="pills-pi-tab">
-                          <form class="form-horizontal" method="POST" action="<?php echo e(route('admin.changeProfile', Auth::guard('admin')->user()->id)); ?>" >
+                          <form class="form-horizontal needs-validation" method="POST" id="formvalid" action="<?php echo e(route('admin.changeProfile', Auth::guard('admin')->user()->id)); ?>" novalidate>
                               <?php echo csrf_field(); ?>
                               <?php echo method_field('PATCH'); ?>
                               <div class="form-group row">
                                   <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="inputName" placeholder="Name" value="<?php echo e(Auth::guard('admin')->user()->name); ?>" name="name" minlength="5" maxlength="255">
-                                      <span class="text-danger"><?php $__errorArgs = ['name'];
+                                      <input type="text" class="form-control" id="inputName" placeholder="Name" value="<?php echo e(Auth::guard('admin')->user()->name); ?>" name="name" minlength="5" maxlength="255" required>
+                                      <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                        <span class="text-danger">*<?php echo e($message); ?></span>  
+                                      <?php else: ?>
+                                        <span class="invalid-feedback">
+                                          Nama harus diisi minimal 5 karakter dan maksimal 255 karakter.
+                                        </span> 
+                                      <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
-                                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo e(Auth::guard('admin')->user()->email); ?>" name="email">
-                                      <span class="text-danger"><?php $__errorArgs = ['email'];
+                                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo e(Auth::guard('admin')->user()->email); ?>" name="email" required>
+                                      <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                        <span class="text-danger">*<?php echo e($message); ?></span>  
+                                      <?php else: ?>
+                                        <span class="invalid-feedback">
+                                          Email harus diisi.
+                                        </span> 
+                                      <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="<?php echo e(Auth::guard('admin')->user()->phone); ?>" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                                      <span class="text-danger"><?php $__errorArgs = ['phone'];
+                                      <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="<?php echo e(Auth::guard('admin')->user()->phone); ?>" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
+                                      <?php $__errorArgs = ['phone'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                        <span class="text-danger">*<?php echo e($message); ?></span>  
+                                      <?php else: ?>
+                                        <span class="invalid-feedback">
+                                          Phone harus diisi.
+                                        </span> 
+                                      <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -129,51 +148,69 @@ unset($__errorArgs, $__bag); ?></span>
                           </form>
                       </div><!-- /.tab-pane -->
                       <div class="tab-pane fade <?php echo e(($key == 'Password') ? 'show active' : ''); ?>" id="pills-pass" role="tabpanel" aria-labelledby="pills-pass-tab">
-                          <form class="form-horizontal" action="<?php echo e(route('admin.changePassword', Auth::guard('admin')->user()->id)); ?>" method="POST" id="changePasswordAdminForm">
+                          <form class="form-horizontal needs-validation" action="<?php echo e(route('admin.changePassword', Auth::guard('admin')->user()->id)); ?>" method="POST" id="changePasswordAdminForm" novalidate>
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('PATCH'); ?>
                               <div class="form-group row">
-                              <label for="inputOldPass" class="col-sm-2 col-form-label">Old Password</label>
-                              <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputOldPass" placeholder="Enter current password" name="oldpassword">
-                                <span class="text-danger"><?php $__errorArgs = ['oldpassword'];
+                                <label for="oldpassword" class="col-sm-2 col-form-label">Old Password</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control" id="oldpassword" placeholder="Enter current password" name="oldpassword" required>
+                                  <?php $__errorArgs = ['oldpassword'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                    <span class="text-danger">*<?php echo e($message); ?></span>  
+                                  <?php else: ?>
+                                    <span class="invalid-feedback">
+                                      Password lama harus diisi. 
+                                    </span> 
+                                  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
-                              <div class="col-sm-10">
-                                <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword">
-                                <span class="text-danger"><?php $__errorArgs = ['newpassword'];
+                              <div class="form-group row">
+                                <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword" required>
+                                  <?php $__errorArgs = ['newpassword'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                    <span class="text-danger">*<?php echo e($message); ?></span>  
+                                  <?php else: ?>
+                                    <span class="invalid-feedback">
+                                      Password baru harus diisi. 
+                                    </span> 
+                                  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
-                              <div class="col-sm-10">
-                                <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword">
-                                <span class="text-danger"><?php $__errorArgs = ['cnewpassword'];
+                              <div class="form-group row">
+                                <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword" required>
+                                  <?php $__errorArgs = ['cnewpassword'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                    <span class="text-danger">*<?php echo e($message); ?></span>  
+                                  <?php else: ?>
+                                    <span class="invalid-feedback">
+                                      Konfirmasi password baru harus diisi. 
+                                    </span> 
+                                  <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
+                                </div>
                               </div>
-                            </div>
                             <div class="form-group row">
                               <div class="offset-sm-2 col-sm-10">
                                 <button type="submit" class="btn btn-save btn-danger">Update Password</button>
@@ -182,54 +219,75 @@ unset($__errorArgs, $__bag); ?></span>
                           </form>
                       </div> 
                     </div><!-- /.tab-content -->
+
+
+                  
                   <?php else: ?>
                     <div class="tab-content" id="pills-tabContent">
                       <div class="tab-pane fade show active" id="pills-pi" role="tabpanel" aria-labelledby="pills-pi-tab">
-                          <form class="form-horizontal" method="POST" action="<?php echo e(route('admin.changeProfile', Auth::guard('admin')->user()->id)); ?>" >
+                          <form class="form-horizontal needs-validation" method="POST" id="formvalid" action="<?php echo e(route('admin.changeProfile', Auth::guard('admin')->user()->id)); ?>" novalidate>
                               <?php echo csrf_field(); ?>
                               <?php echo method_field('PATCH'); ?>
                               <div class="form-group row">
-                                  <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                  <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="inputName" placeholder="Name" value="<?php echo e(Auth::guard('admin')->user()->name); ?>" name="name" minlength="5" maxlength="255">
-                                      <span class="text-danger"><?php $__errorArgs = ['name'];
+                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Name" value="<?php echo e(Auth::guard('admin')->user()->name); ?>" name="name" minlength="5" maxlength="255" required>
+                                    <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                      <span class="text-danger">*<?php echo e($message); ?></span>  
+                                    <?php else: ?>
+                                      <span class="invalid-feedback">
+                                        Nama harus diisi minimal 5 karakter dan maksimal 255 karakter.
+                                      </span> 
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                  <div class="col-sm-10">
-                                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo e(Auth::guard('admin')->user()->email); ?>" name="email">
-                                      <span class="text-danger"><?php $__errorArgs = ['email'];
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo e(Auth::guard('admin')->user()->email); ?>" name="email" required>
+                                    <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                      <span class="text-danger">*<?php echo e($message); ?></span>  
+                                    <?php else: ?>
+                                      <span class="invalid-feedback">
+                                        Email harus diisi.
+                                      </span> 
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
-                                  <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="<?php echo e(Auth::guard('admin')->user()->phone); ?>" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                                      <span class="text-danger"><?php $__errorArgs = ['phone'];
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="<?php echo e(Auth::guard('admin')->user()->phone); ?>" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
+                                    <?php $__errorArgs = ['phone'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                      <span class="text-danger">*<?php echo e($message); ?></span>  
+                                    <?php else: ?>
+                                      <span class="invalid-feedback">
+                                        Phone harus diisi.
+                                      </span> 
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
-                                  </div>
-                              </div>
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                            </div>
                               <div class="form-group row">
                               <div class="offset-sm-2 col-sm-10">
                                   <button type="submit" class="btn btn-save">Save Changes</button>
@@ -238,49 +296,67 @@ unset($__errorArgs, $__bag); ?></span>
                           </form>
                       </div><!-- /.tab-pane -->
                       <div class="tab-pane fade" id="pills-pass" role="tabpanel" aria-labelledby="pills-pass-tab">
-                          <form class="form-horizontal" action="<?php echo e(route('admin.changePassword', Auth::guard('admin')->user()->id)); ?>" method="POST" id="changePasswordAdminForm">
+                          <form class="form-horizontal needs-validation" action="<?php echo e(route('admin.changePassword', Auth::guard('admin')->user()->id)); ?>" method="POST" id="changePasswordAdminForm" novalidate>
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('PATCH'); ?>
-                              <div class="form-group row">
-                              <label for="inputOldPass" class="col-sm-2 col-form-label">Old Password</label>
+                            <div class="form-group row">
+                              <label for="oldpassword" class="col-sm-2 col-form-label">Old Password</label>
                               <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputOldPass" placeholder="Enter current password" name="oldpassword">
-                                <span class="text-danger"><?php $__errorArgs = ['oldpassword'];
+                                <input type="password" class="form-control" id="oldpassword" placeholder="Enter current password" name="oldpassword" required>
+                                <?php $__errorArgs = ['oldpassword'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                  <span class="text-danger">*<?php echo e($message); ?></span>  
+                                <?php else: ?>
+                                  <span class="invalid-feedback">
+                                    Password lama harus diisi. 
+                                  </span> 
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                               </div>
                             </div>
                             <div class="form-group row">
                               <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
                               <div class="col-sm-10">
-                                <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword">
-                                <span class="text-danger"><?php $__errorArgs = ['newpassword'];
+                                <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword" required>
+                                <?php $__errorArgs = ['newpassword'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                  <span class="text-danger">*<?php echo e($message); ?></span>  
+                                <?php else: ?>
+                                  <span class="invalid-feedback">
+                                    Password baru harus diisi. 
+                                  </span> 
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                               </div>
                             </div>
                             <div class="form-group row">
                               <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
                               <div class="col-sm-10">
-                                <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword">
-                                <span class="text-danger"><?php $__errorArgs = ['cnewpassword'];
+                                <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword" required>
+                                <?php $__errorArgs = ['cnewpassword'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?><?php echo e($message); ?> <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                  <span class="text-danger">*<?php echo e($message); ?></span>  
+                                <?php else: ?>
+                                  <span class="invalid-feedback">
+                                    Konfirmasi password baru harus diisi. 
+                                  </span> 
+                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></span>
+unset($__errorArgs, $__bag); ?>
                               </div>
                             </div>
                             <div class="form-group row">

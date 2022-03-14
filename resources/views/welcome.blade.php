@@ -108,138 +108,83 @@
             <div class="col-md-12">
               <div class="touch-slider owl-carousel owl-theme">
                 @if ($cari->count())
-                <div class="testimonial-item">
-                  <div class="testimonial-text">
-                    <div class="tags">
-                        <div class="tag">New!</div>
-                    </div>
-                    <p>
-                      @if(strlen($cari[0]->isi) > 500 || $cari[0]->nama_file)
-                      {!! substr($cari[0]->isi,0,500) !!}. . . <a href="{{ route('detail_berita', $cari[0]->id) }}" id="rm">read more</a>
-                      @else
-                      {!! $cari[0]->isi !!}
-                      @endif
-                    </p>
-                    <h3><a href="{{ route('detail_berita', $cari[0]->id) }}">{{ $cari[0]->judul }}</a></h3>
-                    <span>{{ \Carbon\Carbon::parse($cari[0]->created_at)->diffForHumans() }}</span>
-                    {{-- @if ($cari[0]->nama_file)
-                        <br>
-                        <a href="{{ route('downloadFile', $cari[0]->nama_file) }}" data-bs-toggle="tooltip" title={{$cari[0]->nama_file}}>
-                            <i class="bi bi-cloud-arrow-down-fill" id="donwnloadfile" style="font-size:26px; "></i>
-                        </a>
-                    @endif  --}}
-                  </div>
-                </div>
 
-                <div class="testimonial-item">
-                  <div class="testimonial-text">
-                    <p>
-                      @if(strlen($cari[1]->isi) > 500 || $cari[1]->nama_file)
-                      {!! substr($cari[1]->isi,0,500) !!}. . . <a href="{{ route('detail_berita', $cari[1]->id) }}" id="rm">read more</a>
-                      @else
-                      {!! $cari[1]->isi !!}
-                      @endif
-                    </p>
-                    <h3><a href="{{ route('detail_berita', $cari[1]->id) }}">{{ $cari[1]->judul }}</a></h3>
-                    <span>{{ \Carbon\Carbon::parse($cari[1]->created_at)->diffForHumans() }}</span>
-                    {{-- @if ($cari[1]->nama_file)
-                    <br>
-                        <a href="{{ route('downloadFile', $cari[1]->nama_file) }}" data-bs-toggle="tooltip" title={{$cari[1]->nama_file}}>
-                            <i class="bi bi-cloud-arrow-down-fill" id="donwnloadfile" style="font-size:26px; "></i>
-                        </a>
-                    @endif  --}}
-                  </div>
-                </div>
-
-                <div class="testimonial-item">
-                  <div class="testimonial-text">
-                    <p>
-                      @if(strlen($cari[2]->isi) > 500 || $cari[2]->nama_file)
-                      {!! substr($cari[2]->isi,0,500) !!}. . . <a href="{{ route('detail_berita', $cari[2]->id) }}" id="rm">read more</a>
-                      @else
-                      {!! $cari[2]->isi !!}
-                      @endif
-                    </p>
-                    <h3><a href="{{ route('detail_berita', $cari[2]->id) }}">{{ $cari[2]->judul }}</a></h3>
-                    <span>{{ \Carbon\Carbon::parse($cari[2]->created_at)->diffForHumans() }}</span>
-                    {{-- @if ($cari[2]->nama_file)
-                    <br>
-                        <a href="{{ route('downloadFile', $cari[2]->nama_file) }}" data-bs-toggle="tooltip" title={{$cari[2]->nama_file}}>
-                            <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
-                        </a>
-                    @endif  --}}
-                  </div>
-                </div>
-
-                @else 
-                <div class="testimonial-item">
-                  <img src="img/testimonial/customer2.jpg" alt="Client Testimonoal" />
-                  <div class="testimonial-text">
-                    <p>Not found.</p>
-                  </div>
-                </div> 
-                @endif
-                
-            {{-- @if ($cari->count())
-                <div class="card" id="news">
-                    <div class="card-content">
-                        <div class="card-body text-center">
-                            <div class="tags">
-                                <div class="tag">New!</div>
-                            </div>
-                            <h4 class="card-title">
-                                <a href="{{ route('operator.detail_berita', $berita[2]->id) }}">{{ $berita[0]->judul }}</a>
-                            </h4>
-                            <p class="card-text isinya">
-                                @if(strlen($berita[0]->isi) > 500)
-                                    {!! substr($berita[0]->isi,0,500) !!}. . .
-                                @else
-                                    {!! $berita[0]->isi !!}
-                                @endif
-                            </p>
-                            <div class="date">{{ \Carbon\Carbon::parse($berita[0]->created_at)->diffForHumans() }}</div>
+                  @if (count($cari) > 0)
+                    <div class="testimonial-item">
+                      <div class="testimonial-text">
+                        <div class="tags">
+                            <div class="tag">New!</div>
                         </div>
+                        <p>
+                          @if(strlen($cari[0]->isi) > 500 || $cari[0]->nama_file)
+                          {!! substr($cari[0]->isi,0,500) !!}. . . <a href="{{ route('detail_berita', $cari[0]->id) }}" id="rm">read more</a>
+                          @else
+                          {!! $cari[0]->isi !!}
+                          @endif
+                        </p>
+                        <h3><a href="{{ route('detail_berita', $cari[0]->id) }}">{{ $cari[0]->judul }}</a></h3>
+                        <span>{{ \Carbon\Carbon::parse($cari[0]->created_at)->diffForHumans() }}</span>
+                        @if ($cari[0]->nama_file)
+                            <br>
+                            <a href="{{ route('downloadFile', $cari[0]->nama_file) }}" data-bs-toggle="tooltip" title={{$cari[0]->nama_file}}>
+                                <i class="bi bi-cloud-arrow-down-fill" id="donwnloadfile" style="font-size:26px; "></i>
+                            </a>
+                        @endif
+                      </div>
                     </div>
-                    <div id="cf" class="card-footer d-flex">
-                        
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#viewDetails" data-bs-backdrop="false">
-                                Read More
-                            </button>
-        
-                        @if ($berita[0]->nama_file)
-                            <a href="{{ route('downloadFile', $berita[0]->nama_file) }}" data-bs-toggle="tooltip" title={{$berita[0]->nama_file}}>
+                  @endif
+
+                  @if (count($cari) > 1)
+                    <div class="testimonial-item">
+                      <div class="testimonial-text">
+                        <p>
+                          @if(strlen($cari[1]->isi) > 500 || $cari[1]->nama_file)
+                          {!! substr($cari[1]->isi,0,500) !!}. . . <a href="{{ route('detail_berita', $cari[1]->id) }}" id="rm">read more</a>
+                          @else
+                          {!! $cari[1]->isi !!}
+                          @endif
+                        </p>
+                        <h3><a href="{{ route('detail_berita', $cari[1]->id) }}">{{ $cari[1]->judul }}</a></h3>
+                        <span>{{ \Carbon\Carbon::parse($cari[1]->created_at)->diffForHumans() }}</span>
+                        @if ($cari[1]->nama_file)
+                        <br>
+                            <a href="{{ route('downloadFile', $cari[1]->nama_file) }}" data-bs-toggle="tooltip" title={{$cari[1]->nama_file}}>
+                                <i class="bi bi-cloud-arrow-down-fill" id="donwnloadfile" style="font-size:26px; "></i>
+                            </a>
+                        @endif 
+                      </div>
+                    </div>
+                  @endif
+
+                  @if (count($cari) > 2)
+                    <div class="testimonial-item">
+                      <div class="testimonial-text">
+                        <p>
+                          @if(strlen($cari[2]->isi) > 500 || $cari[2]->nama_file)
+                          {!! substr($cari[2]->isi,0,500) !!}. . . <a href="{{ route('detail_berita', $cari[2]->id) }}" id="rm">read more</a>
+                          @else
+                          {!! $cari[2]->isi !!}
+                          @endif
+                        </p>
+                        <h3><a href="{{ route('detail_berita', $cari[2]->id) }}">{{ $cari[2]->judul }}</a></h3>
+                        <span>{{ \Carbon\Carbon::parse($cari[2]->created_at)->diffForHumans() }}</span>
+                        @if ($cari[2]->nama_file)
+                        <br>
+                            <a href="{{ route('downloadFile', $cari[2]->nama_file) }}" data-bs-toggle="tooltip" title={{$cari[2]->nama_file}}>
                                 <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
                             </a>
                         @endif 
+                      </div>
                     </div>
-                </div>
-                <!-- Modal -->
-                <div class="modal fade" id="viewDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">{{ $berita[0]->judul }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="card-text"><small class="text-muted">Created at {{ $berita[0]->created_at->format('d-m-Y') }} by Admin</small></p> 
-                            <p style="text-align: justify; text-justify: inter-word;">{!! $berita[0]->isi !!}</p>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            @if ($berita[0]->nama_file)
-                                <a href="{{ route('downloadFile', $berita[0]->nama_file) }}" class="mr-auto"> 
-                                    Download file 
-                                </a>
-                            @endif
-                            <button type="button" class="btn btn-save" data-bs-dismiss="modal">Close</button>
-                        </div>
+                  @endif
+
+                @else 
+                  <div class="testimonial-item">
+                    <div class="testimonial-text">
+                      <p>Not found.</p>
                     </div>
-                    </div>
-                </div>
-            @else 
-                <p class="text-center">Not Found</p> 
-            @endif --}}
+                  </div>
+                @endif 
 
               </div>
             </div>

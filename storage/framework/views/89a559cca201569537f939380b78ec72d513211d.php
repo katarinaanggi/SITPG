@@ -69,11 +69,7 @@
                       </li>
                       <?php endif; ?>
                     </ul>
-                  <?php if($message = Session::get('error')): ?>
-                      <div class="alert alert-danger">
-                          <strong><?php echo e($message); ?></strong>
-                      </div>
-                  <?php endif; ?>
+                  
                 </div><!-- /.card-header -->
                 <div class="card-body">
                   <?php if($key = Session::get('tab')): ?>

@@ -3,22 +3,30 @@
 namespace App\Imports;
 
 use App\Models\Guru;
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
-use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 
 HeadingRowFormatter::default('none');
 
-class GurusImport implements ToModel, WithUpserts, WithHeadingRow, WithBatchInserts, WithChunkReading
+class GurusImport implements ToModel, WithUpserts, WithHeadingRow, WithBatchInserts, WithChunkReading, WithCalculatedFormulas, SkipsOnError, SkipsOnFailure 
 {
-    // /**
-    //  * @param array $row
-    //  *
-    //  * @return \Illuminate\Database\Eloquent\Model|null
-    //  */
+    use Importable, SkipsErrors, SkipsFailures;
+
+    /**
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
         return new Guru([
@@ -68,11 +76,11 @@ class GurusImport implements ToModel, WithUpserts, WithHeadingRow, WithBatchInse
 
     public function batchSize(): int
     {
-        return 5000;
+        return 1000;
     }
 
     public function chunkSize(): int
     {
-        return 5000;
+        return 1000;
     }
 }

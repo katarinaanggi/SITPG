@@ -84,7 +84,7 @@
     {{-- extra component --}}
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/mazer.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
     <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form-element-select.js') }}"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>

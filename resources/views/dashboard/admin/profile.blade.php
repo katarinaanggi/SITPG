@@ -65,39 +65,58 @@
                         <button class="nav-link " id="pills-pass-tab" data-bs-toggle="pill" data-bs-target="#pills-pass" type="button" role="tab" aria-controls="pills-pass" aria-selected="false">Change Password</button>
                       </li>
                       @endif
-                    </ul>
-                  {{-- @if ($message = Session::get('error'))
+                  </ul>
+                  @if ($message = Session::get('error'))
                       <div class="alert alert-danger">
                           <strong>{{ $message }}</strong>
                       </div>
-                  @endif --}}
+                  @endif
                 </div><!-- /.card-header -->
                 <div class="card-body">
+
                   @if ($key = Session::get('tab'))
                     <div class="tab-content" id="pills-tabContent">
                       <div class="tab-pane fade {{ ($key == 'Personal Information') ? 'show active' : '' }}" id="pills-pi" role="tabpanel" aria-labelledby="pills-pi-tab">
-                          <form class="form-horizontal" method="POST" action="{{ route('admin.changeProfile', Auth::guard('admin')->user()->id) }}" >
+                          <form class="form-horizontal needs-validation" method="POST" id="formvalid" action="{{ route('admin.changeProfile', Auth::guard('admin')->user()->id) }}" novalidate>
                               @csrf
                               @method('PATCH')
                               <div class="form-group row">
                                   <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ Auth::guard('admin')->user()->name }}" name="name" minlength="5" maxlength="255">
-                                      <span class="text-danger">@error('name'){{$message}} @enderror</span>
+                                      <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ Auth::guard('admin')->user()->name }}" name="name" minlength="5" maxlength="255" required>
+                                      @error('name') 
+                                        <span class="text-danger">*{{$message}}</span>  
+                                      @else
+                                        <span class="invalid-feedback">
+                                          Nama harus diisi minimal 5 karakter dan maksimal 255 karakter.
+                                        </span> 
+                                      @enderror
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                   <div class="col-sm-10">
-                                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ Auth::guard('admin')->user()->email }}" name="email">
-                                      <span class="text-danger">@error('email'){{$message}} @enderror</span>
+                                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ Auth::guard('admin')->user()->email }}" name="email" required>
+                                      @error('email') 
+                                        <span class="text-danger">*{{$message}}</span>  
+                                      @else
+                                        <span class="invalid-feedback">
+                                          Email harus diisi.
+                                        </span> 
+                                      @enderror
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="{{ Auth::guard('admin')->user()->phone }}" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                                      <span class="text-danger">@error('phone'){{$message}} @enderror</span>
+                                      <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="{{ Auth::guard('admin')->user()->phone }}" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
+                                      @error('phone') 
+                                        <span class="text-danger">*{{$message}}</span>  
+                                      @else
+                                        <span class="invalid-feedback">
+                                          Phone harus diisi.
+                                        </span> 
+                                      @enderror
                                   </div>
                               </div>
                               <div class="form-group row">
@@ -108,30 +127,48 @@
                           </form>
                       </div><!-- /.tab-pane -->
                       <div class="tab-pane fade {{ ($key == 'Password') ? 'show active' : '' }}" id="pills-pass" role="tabpanel" aria-labelledby="pills-pass-tab">
-                          <form class="form-horizontal" action="{{ route('admin.changePassword', Auth::guard('admin')->user()->id) }}" method="POST" id="changePasswordAdminForm">
+                          <form class="form-horizontal needs-validation" action="{{ route('admin.changePassword', Auth::guard('admin')->user()->id) }}" method="POST" id="changePasswordAdminForm" novalidate>
                             @csrf
                             @method('PATCH')
                               <div class="form-group row">
-                              <label for="inputOldPass" class="col-sm-2 col-form-label">Old Password</label>
-                              <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputOldPass" placeholder="Enter current password" name="oldpassword">
-                                <span class="text-danger">@error('oldpassword'){{$message}} @enderror</span>
+                                <label for="oldpassword" class="col-sm-2 col-form-label">Old Password</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control" id="oldpassword" placeholder="Enter current password" name="oldpassword" required>
+                                  @error('oldpassword') 
+                                    <span class="text-danger">*{{$message}}</span>  
+                                  @else
+                                    <span class="invalid-feedback">
+                                      Password lama harus diisi. 
+                                    </span> 
+                                  @enderror
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
-                              <div class="col-sm-10">
-                                <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword">
-                                <span class="text-danger">@error('newpassword'){{$message}} @enderror</span>
+                              <div class="form-group row">
+                                <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword" required>
+                                  @error('newpassword') 
+                                    <span class="text-danger">*{{$message}}</span>  
+                                  @else
+                                    <span class="invalid-feedback">
+                                      Password baru harus diisi. 
+                                    </span> 
+                                  @enderror
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
-                              <div class="col-sm-10">
-                                <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword">
-                                <span class="text-danger">@error('cnewpassword'){{$message}} @enderror</span>
+                              <div class="form-group row">
+                                <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
+                                <div class="col-sm-10">
+                                  <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword" required>
+                                  @error('cnewpassword') 
+                                    <span class="text-danger">*{{$message}}</span>  
+                                  @else
+                                    <span class="invalid-feedback">
+                                      Konfirmasi password baru harus diisi. 
+                                    </span> 
+                                  @enderror
+                                </div>
                               </div>
-                            </div>
                             <div class="form-group row">
                               <div class="offset-sm-2 col-sm-10">
                                 <button type="submit" class="btn btn-save btn-danger">Update Password</button>
@@ -140,33 +177,54 @@
                           </form>
                       </div> 
                     </div><!-- /.tab-content -->
+
+
+                  
                   @else
                     <div class="tab-content" id="pills-tabContent">
                       <div class="tab-pane fade show active" id="pills-pi" role="tabpanel" aria-labelledby="pills-pi-tab">
-                          <form class="form-horizontal" method="POST" action="{{ route('admin.changeProfile', Auth::guard('admin')->user()->id) }}" >
+                          <form class="form-horizontal needs-validation" method="POST" id="formvalid" action="{{ route('admin.changeProfile', Auth::guard('admin')->user()->id) }}" novalidate>
                               @csrf
                               @method('PATCH')
                               <div class="form-group row">
-                                  <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                  <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ Auth::guard('admin')->user()->name }}" name="name" minlength="5" maxlength="255">
-                                      <span class="text-danger">@error('name'){{$message}} @enderror</span>
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                  <div class="col-sm-10">
-                                      <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ Auth::guard('admin')->user()->email }}" name="email">
-                                      <span class="text-danger">@error('email'){{$message}} @enderror</span>
-                                  </div>
-                              </div>
-                              <div class="form-group row">
-                                  <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
-                                  <div class="col-sm-10">
-                                      <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="{{ Auth::guard('admin')->user()->phone }}" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                                      <span class="text-danger">@error('phone'){{$message}} @enderror</span>
-                                  </div>
-                              </div>
+                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ Auth::guard('admin')->user()->name }}" name="name" minlength="5" maxlength="255" required>
+                                    @error('name') 
+                                      <span class="text-danger">*{{$message}}</span>  
+                                    @else
+                                      <span class="invalid-feedback">
+                                        Nama harus diisi minimal 5 karakter dan maksimal 255 karakter.
+                                      </span> 
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="{{ Auth::guard('admin')->user()->email }}" name="email" required>
+                                    @error('email') 
+                                      <span class="text-danger">*{{$message}}</span>  
+                                    @else
+                                      <span class="invalid-feedback">
+                                        Email harus diisi.
+                                      </span> 
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPhone" placeholder="Phone" value="{{ Auth::guard('admin')->user()->phone }}" name="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
+                                    @error('phone') 
+                                      <span class="text-danger">*{{$message}}</span>  
+                                    @else
+                                      <span class="invalid-feedback">
+                                        Phone harus diisi.
+                                      </span> 
+                                    @enderror
+                                </div>
+                            </div>
                               <div class="form-group row">
                               <div class="offset-sm-2 col-sm-10">
                                   <button type="submit" class="btn btn-save">Save Changes</button>
@@ -175,28 +233,46 @@
                           </form>
                       </div><!-- /.tab-pane -->
                       <div class="tab-pane fade" id="pills-pass" role="tabpanel" aria-labelledby="pills-pass-tab">
-                          <form class="form-horizontal" action="{{ route('admin.changePassword', Auth::guard('admin')->user()->id) }}" method="POST" id="changePasswordAdminForm">
+                          <form class="form-horizontal needs-validation" action="{{ route('admin.changePassword', Auth::guard('admin')->user()->id) }}" method="POST" id="changePasswordAdminForm" novalidate>
                             @csrf
                             @method('PATCH')
-                              <div class="form-group row">
-                              <label for="inputOldPass" class="col-sm-2 col-form-label">Old Password</label>
+                            <div class="form-group row">
+                              <label for="oldpassword" class="col-sm-2 col-form-label">Old Password</label>
                               <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputOldPass" placeholder="Enter current password" name="oldpassword">
-                                <span class="text-danger">@error('oldpassword'){{$message}} @enderror</span>
+                                <input type="password" class="form-control" id="oldpassword" placeholder="Enter current password" name="oldpassword" required>
+                                @error('oldpassword') 
+                                  <span class="text-danger">*{{$message}}</span>  
+                                @else
+                                  <span class="invalid-feedback">
+                                    Password lama harus diisi. 
+                                  </span> 
+                                @enderror
                               </div>
                             </div>
                             <div class="form-group row">
                               <label for="newpassword" class="col-sm-2 col-form-label">New Password</label>
                               <div class="col-sm-10">
-                                <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword">
-                                <span class="text-danger">@error('newpassword'){{$message}} @enderror</span>
+                                <input type="password" class="form-control" id="newpassword" placeholder="Enter new password" name="newpassword" required>
+                                @error('newpassword') 
+                                  <span class="text-danger">*{{$message}}</span>  
+                                @else
+                                  <span class="invalid-feedback">
+                                    Password baru harus diisi. 
+                                  </span> 
+                                @enderror
                               </div>
                             </div>
                             <div class="form-group row">
                               <label for="cnewpassword" class="col-sm-2 col-form-label">Confirm New Password</label>
                               <div class="col-sm-10">
-                                <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword">
-                                <span class="text-danger">@error('cnewpassword'){{$message}} @enderror</span>
+                                <input type="password" class="form-control" id="cnewpassword" placeholder="ReEnter new password" name="cnewpassword" required>
+                                @error('cnewpassword') 
+                                  <span class="text-danger">*{{$message}}</span>  
+                                @else
+                                  <span class="invalid-feedback">
+                                    Konfirmasi password baru harus diisi. 
+                                  </span> 
+                                @enderror
                               </div>
                             </div>
                             <div class="form-group row">

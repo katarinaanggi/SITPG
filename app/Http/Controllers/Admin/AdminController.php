@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Validators\ValidationException;
 
 class AdminController extends Controller
 {
@@ -102,18 +103,18 @@ class AdminController extends Controller
         ]);
         
 		if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->with("tab", "Password");
+            return redirect()->back()->withErrors($validator)->with('tab', 'Password');
 		}
 		else{
             if (!(Hash::check($request->get('oldpassword'), Auth::guard('admin')->user()->password))) {
-                return redirect()->back()->with("error","Password tidak sesuai.")
-                                         ->with("tab", "Password");
+                return redirect()->back()->with('error','Password tidak sesuai.')
+                                         ->with('tab', 'Password');
             }
     
             if(strcmp($request->get('oldpassword'), $request->get('newpassword')) == 0){
-                return redirect()->back()
-                                 ->with("error","Password baru tidak boleh sama dengan password saat ini.")
-                                 ->with("tab", "Password");
+                return back()
+                                 ->with('error','Password baru tidak boleh sama dengan password saat ini.')
+                                 ->with('tab', 'Password');
             }
             //Change Password
             $current_timestamp = Carbon::now()->toDateTimeString();
@@ -121,23 +122,61 @@ class AdminController extends Controller
             $user->password = bcrypt($request->get('newpassword'));
             $user->updated_at = $current_timestamp;
             $user->save();
-            return redirect()->route('user.profile')->with("success","Password berhasil diubah!");
+            return redirect()->route('user.profile')->with('success','Password berhasil diubah!');
         }
     }
 
     function fileImport(Request $request){
-        $file = $request->file('importfile');
-        if ($validExt = Validator::make( [
-                'ext'      => $file,
-                'importfile' => strtolower($file->getClientOriginalExtension()),
-            ],[
-                'importfile'      => 'in:csv,xlsx,xls',
-            ])->fails()) {
-                return redirect()->route('operator.guru')->withInput()->with('file', 'Tipe file tidak didukung');
-        }
+        ini_set('max_execution_time', '3600');
+        set_time_limit(3600);
 
-        Excel::import(new GurusImport, $request->file('file')->store('temp'));
+        $validExt = Validator::make($request->all(),[
+            'importfile' => 'required|mimes:xlx,xls,xlsx|Max:2048'
+        ],[
+            'importfile.required' => 'File harus diisi.',
+            'importfile.mimes' => 'Tipe file tidak didukung.',
+            'importfile.max' => 'File melebihi batas maksimum ukuran file.',
+        ]);
+
+        if ($validExt->fails()) {
+            return redirect()->route('operator.guru')->withInput()->withErrors($validExt)->with('error', 'Import file gagal.')->with('pill', 'import');
+		}
+        // $file = $request->file('importfile');
+        // if ($validExt = Validator::make( [
+        //         'ext'      => $file,
+        //         'importfile' => strtolower($file->getClientOriginalExtension()),
+        //     ],[
+        //         'importfile'      => 'in:xlsx,xls',
+        //         'ext'             => 'max:2048',
+        //     ],[
+        //         'in'              => 'Tipe file tidak didukung',
+        //         'max'             => 'File melebihi kapasitas maksimum',
+        //     ])->fails()) {
+        //         return redirect()->route('operator.guru')->withInput()->withErrors($validExt);
+        // }
+
+        // Excel::import(new GurusImport, $request->file('importfile')->store('temp'));
+        $import = new  GurusImport;
+        $import->import($request->file('importfile')->store('temp'));
+        
+        // if($import->failures()->isNotEmpty()){
+        //     $failures = $import->failures();
+            
+        //     return view('dashboard.guru.guru')->with('error', $failures);
+        // }
         return back()->with('success', 'Berhasil diimport');
+        
+        // try {
+        // } catch (ValidationException $e) {
+        //      $failures = $e->failures();
+             
+        //     foreach ($failures as $failure) {
+        //          $failure->row(); // row that went wrong
+        //          $failure->attribute(); // either heading key (if using heading row concern) or column index
+        //          $failure->errors(); // Actual error messages from Laravel validator
+        //          $failure->values(); // The values of the row that has failed.
+        //     }
+        // }
     }
 
     public function fileExport(){

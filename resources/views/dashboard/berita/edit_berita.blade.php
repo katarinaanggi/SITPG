@@ -45,7 +45,7 @@
     @include('sweetalert::alert')
     <div class="container mt-5">
         <a href="{{route('admin.berita')}}"><i class="bi bi-x-lg"></i></a>
-        <form action="{{ route('admin.update_berita', $berita->id) }}" method="post" enctype="multipart/form-data" autocomplete="off">
+        <form action="{{ route('admin.update_berita', $berita->id) }}" method="post" enctype="multipart/form-data" autocomplete="off" class="needs-validation" novalidate>
             <h3 class="text-center mb-5">Edit Berita</h3>
             @csrf
             @method('PATCH')
@@ -61,14 +61,14 @@
                         <div class="card-body">
                                 <div class="form-group">
                                     <label for="judul">Judul: </label>
-                                    <input type="text" class="form-control" id="judul" name="judul" value="{{ $berita->judul}}">
-                                    <span class="text-danger">@error('judul')*{{$message}} @enderror</span>
+                                    <input type="text" class="form-control" id="judul" name="judul" value="{{ $berita->judul}}" minlength="5" maxlength="50" required>
+                                    <div class="invalid-feedback">@error('judul')*{{ $message }} @else Judul berita harus diisi minimal 5 karakter dan maksimal 50 karakter. @enderror</div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="isi">Isi: </label>
-                                    <textarea type="text" class="form-control" id="isi" name="isi" >{{ $berita->isi}}</textarea>
-                                    <span class="text-danger">@error('isi')*{{$message}} @enderror</span>
+                                    <textarea type="text" class="form-control" id="isi" name="isi" required>{{ $berita->isi}}</textarea>
+                                    <div class="invalid-feedback">@error('isi')*{{ $message }} @else Isi berita harus diisi. @enderror</div>
                                 </div>
                                 
                                 <div class="custom-file">                                    
@@ -78,7 +78,7 @@
                                     <input id="file" name='file' type="file" style="display:none;" onchange="namafile()">
                                     <label id="file-name"></label>
                                     @if ($message = Session::get('file'))
-                                        <span class="text-danger">*{{ $message }}</span>
+                                        <div class="invalid-feedback">*{{ $message }}</div>
                                     @endif
                                 </div>
 
@@ -96,7 +96,7 @@
 
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 
 <!-- filepond validation -->
@@ -109,6 +109,26 @@
 <!-- filepond -->
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
  <script type="text/javascript">
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()
     function submitForm(form) {
         swal({
             title: "Apakah anda yakin?",
