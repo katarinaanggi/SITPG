@@ -138,7 +138,7 @@ class UserManagementController extends Controller
     public function edit($id)
     {
         $cabdin = DB::select('select * from cabdin'); 
-        $user = DB::table('users')->where('id', $id)->first();
+        $user = User::find($id);
         // dd($user);
         return view('dashboard.usermanagement.edit_user', compact('user','cabdin'));
     }

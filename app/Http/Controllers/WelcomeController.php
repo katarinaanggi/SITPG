@@ -18,24 +18,20 @@ class WelcomeController extends Controller
     }
 
     public function search(Request $request){
-        if($request->search == ""){
-            $isempty = "yes";
-            $berita = Berita::orderBy('judul', 'asc')->paginate(20);
-            return view('dashboard.hasil', [
-                'berita' => $berita,
-                'isempty' => $isempty ]);
-        }
-        if($request->ajax()){
-            $isempty = "";
+       if($request->ajax()){
             $berita = DB::table('berita')
                         ->where('judul', 'like', '%'.$request->search.'%')
                         ->orWhere('isi', 'like', '%'.$request->search.'%')
                         ->orWhere('nama_file', 'like', '%'.$request->search.'%')
                         ->orderBy('updated_at')
                         ->get();
-            return view('dashboard.hasil', [
-                'berita' => $berita,
-                'isempty' => $isempty ]);
+            if($request->login == "yes"){
+                return view('dashboard.hasil', [
+                    'berita' => $berita]);
+            }else{
+                return view('search', [
+                    'berita' => $berita]);
+            }
         }
     }
 

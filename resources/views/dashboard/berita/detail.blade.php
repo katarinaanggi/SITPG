@@ -31,7 +31,7 @@
         <div class="article-meta text-center">
             <h1 class="headline">{{ $berita->judul }}</h1>
             <div class="author">
-                <p class="byline">by <b>Administrator</b> {{ $berita->created_at->format('M d, Y') }}</p>
+                <p class="byline">by <b>{{ $berita->admin->name }}</b> {{ $berita->created_at->format('M d, Y') }}</p>
             </div>
         </div>
         <div class="article">

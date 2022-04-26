@@ -79,6 +79,7 @@ class MainBeritaController extends Controller
             $data = $request->input();
 			try{
 				$berita = new Berita;
+                $berita->id_author = $data['author'];
                 $berita->judul = $data['judul'];
                 $berita->isi = $data['isi'];
                 if($request->hasFile('file')){

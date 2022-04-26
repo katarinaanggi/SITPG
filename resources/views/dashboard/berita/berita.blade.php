@@ -32,6 +32,7 @@
                 <table class="table table-inverse table-responsive table-hover" id="beritaTable">
                     <thead class="thead-inverse">
                         <tr>
+                            <th>Author</th>
                             <th>Judul</th>
                             <th>Isi</th>
                             <th>File</th>
@@ -39,8 +40,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($berita as $key => $value)
+                        @foreach ($berita as $value)
                         <tr>
+                            <td>{{ $value->admin->name }}</td>
                             <td><a href="{{ route('operator.detail_berita', $value->id) }}" >{{ $value->judul }}</a></td>
                             <td>
                                 @if(strlen($value->isi) > 75)

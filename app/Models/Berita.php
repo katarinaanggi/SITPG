@@ -2,19 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Berita extends Model
 {
     public $table = "Berita";
     use HasFactory;
     protected $fillable = [
+        'id_author',
         'judul',
         'isi',
         'nama_file',
         'file_path'
     ];
+
+    public function admin() {
+        return $this->belongsTo(Admin::class, 'id_author');
+    }
 
     /**
      * Scope a query to only include popular users.

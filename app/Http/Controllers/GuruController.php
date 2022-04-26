@@ -6,10 +6,12 @@ use Carbon\Carbon;
 use App\Models\Gaji;
 use App\Models\Guru;
 use App\Models\Kota;
+use App\Exports\GurusExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
 class GuruController extends Controller
@@ -295,4 +297,8 @@ class GuruController extends Controller
         DB::delete('delete from gurus');
         return redirect()->route('operator.guru')->with('success','Data berhasil dihapus');
     }
+
+    public function fileExport(){
+        return Excel::download(new GurusExport, 'SITPG_TW_I_2022.xlsx');
+    } 
 }

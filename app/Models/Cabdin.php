@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Kota;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cabdin extends Model
 {
@@ -12,5 +13,9 @@ class Cabdin extends Model
     protected $fillable = [
         'nama',
     ];
+
+    public function kotas() {
+        return $this->hasMany(Kota::class);
+    }
 }
 

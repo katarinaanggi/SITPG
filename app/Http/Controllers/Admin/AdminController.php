@@ -57,6 +57,12 @@ class AdminController extends Controller
         ]);
     }
 
+    public function show(){
+        return view('dashboard.admin.profile',[
+            'title' => "Profile"
+        ]);
+    }
+
     function changeProfile(Request $request, $id){
         $rules = [
             'name' => 'required',
@@ -137,6 +143,7 @@ class AdminController extends Controller
             'importfile.mimes' => 'Tipe file tidak didukung.',
             'importfile.max' => 'File melebihi batas maksimum ukuran file.',
         ]);
+        
 
         if ($validExt->fails()) {
             return redirect()->route('operator.guru')->withInput()->withErrors($validExt)->with('error', 'Import file gagal.')->with('pill', 'import');
@@ -177,9 +184,5 @@ class AdminController extends Controller
         //          $failure->values(); // The values of the row that has failed.
         //     }
         // }
-    }
-
-    public function fileExport(){
-        return Excel::download(new GurusExport, 'SITPG_TW_I_2022.xlsx');
-    }  
+    } 
 }

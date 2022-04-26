@@ -54,7 +54,7 @@ Route::prefix('operator')->name('operator.')->group(function(){
             ->addColumn('action', 'dashboard.guru.action')
             ->make(true);
         })->name('data_guru');
-        Route::get('file-export', [AdminController::class, 'fileExport'])->name('file_export');
+        Route::get('file-export', [GuruController::class, 'fileExport'])->name('file_export');
     });
 });
 
@@ -99,14 +99,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::patch('/update-user/{id}', [UserManagementController::class, 'update'])->name('update_user');
         Route::get('/delete-user/{id}', [UserManagementController::class, 'destroy'])->name('delete_user');
         Route::get('/data-user', function() {
-            return DataTables::of(User::query())
+            return DataTables::of(User::join('kota','users.kota', '=', 'kota.id')->get(['users.*', 'kota.nama_kota']))
                 ->addColumn('action', 'dashboard.userManagement.action')
                 ->make(true);
         })->name('data_user');
         Route::post('/get-kota', [UserManagementController::class, 'getKota'])->name('get_kota');
 
         //Profile
-        Route::view('/profile','dashboard.admin.profile', ['title' => 'Profile'])->name('profile');
+        Route::get('/profile',[AdminController::class, 'show'])->name('profile');
         Route::patch('/save-profile/{id}',[AdminController::class, 'changeProfile'])->name('changeProfile');
         Route::patch('/change-password/{id}',[AdminController::class, 'changePassword'])->name('changePassword');
         

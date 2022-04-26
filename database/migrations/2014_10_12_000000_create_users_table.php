@@ -18,9 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('kota');
+            $table->unsignedBigInteger('kota');
+            $table->foreign('kota')->references('id')->on('kota');
+            $table->unsignedBigInteger('cabdin');
+            $table->foreign('cabdin')->references('id')->on('cabdin');
             $table->string('phone');
-            $table->string('cabdin');
             $table->rememberToken();
             $table->timestamps();
         });

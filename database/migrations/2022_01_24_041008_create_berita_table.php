@@ -15,6 +15,8 @@ class CreateBeritaTable extends Migration
     {
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_author');
+            $table->foreign('id_author')->references('id')->on('admins');
             $table->string('judul');
             $table->text('isi');
             $table->string('nama_file')->nullable();

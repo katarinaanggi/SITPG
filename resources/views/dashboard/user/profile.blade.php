@@ -128,7 +128,7 @@
                                   <select class="form-control choices" id="kota" name="kota" >
                                       <option value="">--pilih wilayah kabupaten/kota--</option>
                                       @foreach($kota as $k)
-                                          <option value="{{ $k->nama_kota }}" {{ Auth::guard('web')->user()->kota == $k->nama_kota ? 'selected' : ''}}>{{ $k->nama_kota}}</option>
+                                          <option value="{{ $k->id }}" {{ Auth::guard('web')->user()->kota == $k->id ? 'selected' : ''}}>{{ $k->nama_kota}}</option>
                                       @endforeach
                                   </select>
                                   @error('kota')
@@ -228,7 +228,7 @@
                                     <select class="form-control choices" id="kota" name="kota" >
                                         <option value="">--pilih wilayah kabupaten/kota--</option>
                                         @foreach($kota as $k)
-                                            <option value="{{ $k->nama_kota }}" {{ Auth::guard('web')->user()->kota == $k->nama_kota ? 'selected' : ''}}>{{ $k->nama_kota}}</option>
+                                            <option value="{{ $k->id }}" {{ Auth::guard('web')->user()->kota == $k->id ? 'selected' : ''}}>{{ $k->nama_kota}}</option>
                                         @endforeach
                                     </select>
                                     @error('kota')

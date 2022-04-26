@@ -29,7 +29,7 @@
         </div>
     </div>
 </div>
-<form action="{{ route('operator.store_guru') }}" method="post">
+<form action="{{ route('operator.store_guru') }}" method="post" class="needs-validation" novalidate id="formvalid">
     @csrf
     {{-- @if ($message = Session::get('error'))
     <div class="alert alert-danger">
@@ -46,9 +46,13 @@
                     <div class="form-group row mb-3">
                         <label for="no_peserta" class="col-sm-3 col-form-label">No. Peserta: </label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="no_peserta" name="no_peserta" value="{{ old('no_peserta') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                            <input type="number" class="form-control" id="no_peserta" name="no_peserta" value="{{ old('no_peserta') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
                             @error('no_peserta')
                                 <div class="text-danger">*{{ $message }}</div>
+                            @else
+                                <span class="invalid-feedback">
+                                    No. Peserta harus diisi.
+                                </span> 
                             @enderror
                         </div>
                     </div>
@@ -56,9 +60,13 @@
                     <div class="form-group row mb-3">
                         <label for="nama" class="col-sm-3 col-form-label">Nama: </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}">
+                            <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}" required>
                             @error('nama')
                                 <div class="text-danger">*{{ $message }}</div>
+                            @else
+                                <span class="invalid-feedback">
+                                    Nama harus diisi.
+                                </span> 
                             @enderror
                         </div>
                     </div>
@@ -66,9 +74,13 @@
                     <div class="form-group row mb-3">
                         <label for="nip" class="col-sm-3 col-form-label">NIP: </label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="nip" name="nip" value="{{ old('nip') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                            <input type="number" class="form-control" id="nip" name="nip" value="{{ old('nip') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
                             @error('nip')
                                 <div class="text-danger">*{{ $message }}</div>
+                            @else
+                                <span class="invalid-feedback">
+                                    NIP harus diisi.
+                                </span> 
                             @enderror
                         </div>
                     </div>
@@ -79,9 +91,13 @@
                             <div class="form-group row mb-3">
                                 <label for="nrg" class="col-sm-3 col-form-label">NRG: </label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="nrg" name="nrg" value="{{ old('nrg') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                    <input type="number" class="form-control" id="nrg" name="nrg" value="{{ old('nrg') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
                                     @error('nrg')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            NRG harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -90,9 +106,13 @@
                             <div class="form-group row mb-3">
                                 <label for="nuptk" class="col-sm-3 col-form-label">NUPTK: </label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="nuptk" name="nuptk" value="{{ old('nuptk') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                    <input type="number" class="form-control" id="nuptk" name="nuptk" value="{{ old('nuptk') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
                                     @error('nuptk')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            NUPTK harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -100,9 +120,13 @@
                             <div class="form-group row mb-3">
                                 <label for="no_sk" class="col-sm-3 col-form-label">No. SK: </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="no_sk" name="no_sk" value="{{ old('no_sk') }}">
+                                    <input type="text" class="form-control" id="no_sk" name="no_sk" value="{{ old('no_sk') }}" required>
                                     @error('no_sk')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            No. SK harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -113,7 +137,7 @@
                                 <div class="col-sm-9">
                                     <label class="form-check">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" id="pengawas" name="jenjang" value="PENGAWAS" {{ (old('jenjang') == 'PENGAWAS') ? 'checked' : ''}}> Pengawas <br/>
+                                            <input type="radio" class="form-check-input" id="pengawas" name="jenjang" value="PENGAWAS" {{ (old('jenjang') == 'PENGAWAS') ? 'checked' : ''}} required> Pengawas <br/>
                                             <input type="radio" class="form-check-input" id="slb" name="jenjang" value="SLB" {{ (old('jenjang') == 'SLB') ? 'checked' : ''}}> SLB <br/>
                                             <input type="radio" class="form-check-input" id="smk" name="jenjang" value="SMK" {{ (old('jenjang') == 'SMK') ? 'checked' : ''}}> SMK <br/>
                                             <input type="radio" class="form-check-input" id="sma" name="jenjang" value="SMA" {{ (old('jenjang') == 'SMA') ? 'checked' : ''}}> SMA <br/>
@@ -121,6 +145,10 @@
                                     </label>
                                     @error('jenjang')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Jenjang harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -128,9 +156,13 @@
                             <div class="form-group row mb-3">
                                 <label for="tempat_tugas" class="col-sm-3 col-form-label">Tempat Tugas: </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="tempat_tugas" name="tempat_tugas" value="{{ old('tempat_tugas') }}">
+                                    <input type="text" class="form-control" id="tempat_tugas" name="tempat_tugas" value="{{ old('tempat_tugas') }}" required>
                                     @error('tempat_tugas')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Tempat tugas harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -138,7 +170,7 @@
                             <div class="form-group row mb-3">
                                 <label for="kota" class="col-sm-3 col-form-label">Kabupaten/Kota: </label>
                                 <div class="col-sm-9">
-                                    <select class="form-control choices" id="kota" name="kota" >
+                                    <select class="form-control choices" id="kota" name="kota" required>
                                         <option value="">--pilih wilayah kabupaten/kota--</option>
                                         @foreach($kota as $k)
                                             <option value="{{ $k->nama_kota }}" {{ old('kota') == $k->nama_kota ? 'selected' : ''}}>{{ $k->nama_kota}}</option>
@@ -146,6 +178,10 @@
                                     </select>
                                     @error('kota')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Kabupaten/Kota harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -156,9 +192,13 @@
                             <div class="form-group row mb-3">
                                 <label for="nama_bank" class="col-sm-3 col-form-label">Nama Bank: </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="nama_bank" name="nama_bank" value="{{ old('nama_bank') }}">
+                                    <input type="text" class="form-control" id="nama_bank" name="nama_bank" value="{{ old('nama_bank') }}" required>
                                     @error('nama_bank')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Nama bank harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -166,9 +206,13 @@
                             <div class="form-group row mb-3">
                                 <label for="kantor_cabang" class="col-sm-3 col-form-label">Kantor Cabang: </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="kantor_cabang" name="kantor_cabang" value="{{ old('kantor_cabang') }}">
+                                    <input type="text" class="form-control" id="kantor_cabang" name="kantor_cabang" value="{{ old('kantor_cabang') }}" required>
                                     @error('kantor_cabang')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Kantor cabang harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -176,9 +220,13 @@
                             <div class="form-group row mb-3">
                                 <label for="no_rek" class="col-sm-3 col-form-label">No. Rekening: </label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="no_rek" name="no_rek" value="{{ old('no_rek') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                    <input type="number" class="form-control" id="no_rek" name="no_rek" value="{{ old('no_rek') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" required>
                                     @error('no_rek')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            No. Rekening harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -186,9 +234,13 @@
                             <div class="form-group row mb-3">
                                 <label for="nama_rek" class="col-sm-3 col-form-label">Nama Rekening: </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="nama_rek" name="nama_rek" value="{{ old('nama_rek') }}">
+                                    <input type="text" class="form-control" id="nama_rek" name="nama_rek" value="{{ old('nama_rek') }}" required>
                                     @error('nama_rek')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Nama Rekening harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -201,7 +253,7 @@
                             <div class="form-group row mb-3">
                                 <label for="pangkat" class="col-sm-3 col-form-label">Pangkat/Golongan: </label>
                                 <div class="col-sm-9">
-                                    <select class="form-control choices" id="pangkat" name="pangkat" >
+                                    <select class="form-control choices" id="pangkat" name="pangkat" required>
                                         <option value="">--pilih pangkat/golongan--</option>
                                         <option value="I/a" {{ old('pangkat') == 'I/a' ? 'selected' : '' }}>I/A</option>
                                         <option value="I/b" {{ old('pangkat') == 'I/b' ? 'selected' : '' }}>I/B</option>
@@ -222,6 +274,10 @@
                                     </select>
                                     @error('pangkat')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Pangkat/Golongan harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -229,9 +285,13 @@
                             <div class="form-group row mb-3">
                                 <label for="masa_kerja" class="col-sm-3 col-form-label">Masa Kerja: </label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="masa_kerja" name="masa_kerja" value="{{ old('masa_kerja') }}">
+                                    <input type="number" class="form-control" id="masa_kerja" name="masa_kerja" value="{{ old('masa_kerja') }}" required>
                                     @error('masa_kerja')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Masa kerja harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -239,9 +299,13 @@
                             <div class="form-group row mb-3">
                                 <label for="gaji_pokok" class="col-sm-3 col-form-label">Gaji Pokok: </label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="gaji_pokok" name="gaji_pokok" value="{{ old('gaji_pokok') }}">
+                                    <input type="number" class="form-control" id="gaji_pokok" name="gaji_pokok" value="{{ old('gaji_pokok') }}" required>
                                     @error('gaji_pokok')
                                         <div class="text-danger">*{{ $message }}</div>
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Gaji pokok harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -252,7 +316,7 @@
                             <div class="form-group row mb-3">
                                 <label for="triw" class="col-sm-3 col-form-label">Triwulan: </label>
                                 <div class="col-sm-9">
-                                    <select class="form-control choices" id="triw" name="triw" >
+                                    <select class="form-control choices" id="triw" name="triw" required>
                                         <option value="">--pilih triwulan--</option>
                                         <option value="1" {{ old('triw') == '1' ? 'selected' : '' }}>I</option>
                                         <option value="2" {{ old('triw') == '2' ? 'selected' : '' }}>II</option>
@@ -261,6 +325,10 @@
                                     </select>
                                     @error('triw')
                                         <div class="text-danger">*{{ $message }}</div>
+                                @else
+                                        <span class="invalid-feedback">
+                                            Triwulan harus diisi.
+                                        </span> 
                                     @enderror
                                 </div>
                             </div>
@@ -397,9 +465,13 @@
                         <div class="form-group row mb-3">
                             <label for="jumlah" class="col-sm-3 col-form-label">Jumlah: </label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="jumlah" name="jumlah" value="{{ old('jumlah') }}">
+                                <input type="number" class="form-control" id="jumlah" name="jumlah" value="{{ old('jumlah') }}" required>
                                 @error('jumlah')
                                     <div class="text-danger">*{{ $message }}</div>
+                                @else
+                                    <span class="invalid-feedback">
+                                        Jumlah harus diisi.
+                                    </span> 
                                 @enderror
                             </div>
                         </div>
@@ -407,9 +479,13 @@
                         <div class="form-group row mb-3">
                             <label for="pajak" class="col-sm-3 col-form-label">Pajak (%): </label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="pajak" name="pajak" value="{{ old('pajak') }}">
+                                <input type="number" class="form-control" id="pajak" name="pajak" value="{{ old('pajak') }}" required>
                                 @error('pajak')
                                     <div class="text-danger">*{{ $message }}</div>
+                                @else
+                                    <span class="invalid-feedback">
+                                        Pajak harus diisi.
+                                    </span> 
                                 @enderror
                             </div>
                         </div>
@@ -427,9 +503,13 @@
                         <div class="form-group row mb-3">
                             <label for="bpjs" class="col-sm-3 col-form-label">BPJS (Max 1%): </label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="bpjs" name="bpjs" value="{{ old('bpjs') }}">
+                                <input type="number" class="form-control" id="bpjs" name="bpjs" value="{{ old('bpjs') }}" required>
                                 @error('bpjs')
                                     <div class="text-danger">*{{ $message }}</div>
+                                @else
+                                    <span class="invalid-feedback">
+                                        BPJS harus diisi.
+                                    </span> 
                                 @enderror
                             </div>
                         </div>
@@ -437,7 +517,7 @@
                         <div class="form-group row mb-3">
                             <label for="jumlah_diterima" class="col-sm-3 col-form-label">Jumlah Diterima: </label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="jumlah_diterima" name="jumlah_diterima" value="{{ old('jumlah_diterima') }}">
+                                <input type="number" class="form-control" id="jumlah_diterima" name="jumlah_diterima" value="{{ old('jumlah_diterima') }}" >
                                 @error('jumlah_diterima')
                                     <div class="text-danger">*{{ $message }}</div>
                                 @enderror

@@ -71,7 +71,11 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="<?php echo e(asset('assets/images/faces/1.jpg')); ?>">
+                                                <?php if(Auth::guard('admin')->check()): ?>
+                                                    <img src="<?php echo e(asset('assets/images/faces/1.jpg')); ?>">
+                                                <?php elseif(Auth::guard('web')->check()): ?>
+                                                    <img src="<?php echo e(asset('assets/images/faces/2.jpg')); ?>"> 
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>

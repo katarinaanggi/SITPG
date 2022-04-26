@@ -1,6 +1,6 @@
-@extends('layouts.main')
 
-@section('page')
+
+<?php $__env->startSection('page'); ?>
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -11,7 +11,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo e(route('admin.home')); ?>">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">User Management</li>
                     </ol>
                 </nav>
@@ -24,7 +24,7 @@
                 <h4 class="card-title">Daftar User</h4>
             </div>
             <div class="card-body">
-                <a class="btn" href="{{ route('admin.add_user') }}">+Add New User</a><br /><br />
+                <a class="btn" href="<?php echo e(route('admin.add_user')); ?>">+Add New User</a><br /><br />
                 <table class="table table-inverse table-responsive table-hover" id="userTable">
                     <thead class="thead-inverse">
                         <tr>
@@ -44,16 +44,16 @@
         </div>
     </section>
 </div>    
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('datatable')
+<?php $__env->startSection('datatable'); ?>
     <script>
         $(document).ready( function () {
             $('#userTable').DataTable(
                 {
                     processing: true,
                     serverSide: true,
-                    ajax: '{!! route('admin.data_user') !!}',
+                    ajax: '<?php echo route('admin.data_user'); ?>',
                     columns: [
                         { data: 'id', name: 'id' },
                         { data: 'name', name: 'name' },
@@ -67,4 +67,5 @@
             );
         } );
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\IF\Semester 5\PBP\Laravel\SITPG\resources\views/dashboard/usermanagement/userManage.blade.php ENDPATH**/ ?>

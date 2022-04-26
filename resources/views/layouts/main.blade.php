@@ -71,7 +71,11 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="{{ asset('assets/images/faces/1.jpg') }}">
+                                                @if (Auth::guard('admin')->check())
+                                                    <img src="{{ asset('assets/images/faces/1.jpg') }}">
+                                                @elseif (Auth::guard('web')->check())
+                                                    <img src="{{ asset('assets/images/faces/2.jpg') }}"> 
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

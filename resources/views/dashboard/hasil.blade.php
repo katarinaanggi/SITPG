@@ -29,11 +29,7 @@
                 </div>
                 @endforeach 
             </div>
-            @if ($isempty == "yes")
-                <div class="d-flex justify-content-center">
-                    {!! $berita->links() !!}
-                </div>
-            @endif
+            
         @else
             <div class="row">
                 @foreach ($berita as $value)
@@ -61,11 +57,7 @@
                 </div>
                 @endforeach 
             </div>
-            @if ($isempty == "yes")
-                <div class="d-flex justify-content-center">
-                    {!! $berita->links() !!}
-                </div>
-            @endif
+            
         @endauth
     @else
         <p class="text-danger" style="display: block; margin-left: auto; margin-right: auto">Berita tidak ditemukan.</p>

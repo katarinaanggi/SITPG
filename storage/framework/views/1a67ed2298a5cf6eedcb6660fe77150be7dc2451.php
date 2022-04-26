@@ -5,21 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.css')); ?>">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.css')); ?>">
     
-    <link rel="stylesheet" href="{{ asset('assets/vendors/toastify/toastify.css') }}">
-    {{-- <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
-    <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script> --}}
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/toastify/toastify.css')); ?>">
+    
 
-    <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css')); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/ungu.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/app.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/ungu.css')); ?>">
 
     <title>Add Berita</title>
     <style>
@@ -47,35 +45,45 @@
 
 <body>
     <div class="container mt-5">
-        <a href="{{route('admin.berita')}}"><i class="bi bi-x-lg"></i></a>
-        <form action="{{ route('admin.store_berita') }}" method="post" enctype="multipart/form-data">
+        <a href="<?php echo e(route('admin.berita')); ?>"><i class="bi bi-x-lg"></i></a>
+        <form action="<?php echo e(route('admin.store_berita')); ?>" method="post" enctype="multipart/form-data">
             <h3 class="text-center mb-5">Add New Berita</h3>
-            @csrf
-            {{-- @if ($message = Session::get('error'))
-                <div class="alert alert-danger">
-                    <strong>{{ $message }}</strong>
-                </div>
-            @endif --}}
+            <?php echo csrf_field(); ?>
+            
 
             <div class="col-12 col-md-12">
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="author" class="form-label">Author : {{ Auth::guard('admin')->user()->name }}</label>
-                                <input type="hidden" class="form-control" id="author" name="author" value="{{ Auth::guard('admin')->user()->id }}" >
+                                <label for="author" class="form-label">Author : <?php echo e(Auth::guard('admin')->user()->name); ?></label>
+                                <input type="hidden" class="form-control" id="author" name="author" value="<?php echo e(Auth::guard('admin')->user()->id); ?>" >
                             </div>
                             
                             <div class="form-group">
                                 <label for="judul" class="form-label">Judul <span class="text-danger">*</span> : </label>
-                                <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}">
-                                <div class="text-danger">@error('judul')*{{$message}} @enderror</div>
+                                <input type="text" class="form-control" id="judul" name="judul" value="<?php echo e(old('judul')); ?>">
+                                <div class="text-danger"><?php $__errorArgs = ['judul'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="isi" class="form-label">Isi <span class="text-danger">*</span> : </label>
-                                <textarea type="text" class="form-control" id="isi" name="isi">{{ old('isi') }}</textarea>
-                                <div class="text-danger">@error('isi')*{{$message}} @enderror</div>
+                                <textarea type="text" class="form-control" id="isi" name="isi"><?php echo e(old('isi')); ?></textarea>
+                                <div class="text-danger"><?php $__errorArgs = ['isi'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></div>
                             </div>
                             
                             <div class="custom-file">                                    
@@ -83,9 +91,9 @@
                                 <i class="bi bi-cloud-upload-fill"> </i>Pilih file disini</label>
                                 <input id="file" name='file' type="file" style="display:none;" onchange="namafile()">
                                 <label id="file-name"></label>
-                                @if ($message = Session::get('file'))
-                                    <span class="text-danger">*{{ $message }}</span>
-                                @endif
+                                <?php if($message = Session::get('file')): ?>
+                                    <span class="text-danger">*<?php echo e($message); ?></span>
+                                <?php endif; ?>
                             </div>
                             
                             <button type="submit" name="submit" class="btn btn-save btn-block mt-4">
@@ -99,8 +107,8 @@
         </form>
     </div>
 
-    <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="<?php echo e(asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap.bundle.min.js')); ?>"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
 
 <!-- filepond validation -->
@@ -108,7 +116,7 @@
 <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
 
 <!-- toastify -->
-<script src="{{ asset('assets/vendors/toastify/toastify.js') }}"></script>
+<script src="<?php echo e(asset('assets/vendors/toastify/toastify.js')); ?>"></script>
 
 <!-- filepond -->
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
@@ -142,7 +150,7 @@
         server: {
             url: '/upload',
             headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
             }
         }
     });
@@ -152,6 +160,6 @@
             console.error( error );
     } );
 </script>
-<script src="{{ asset('assets/js/mazer.js') }}"></script>
+<script src="<?php echo e(asset('assets/js/mazer.js')); ?>"></script>
 </body>
-</html>
+</html><?php /**PATH E:\IF\Semester 5\PBP\Laravel\SITPG\resources\views/dashboard/berita/add_berita.blade.php ENDPATH**/ ?>

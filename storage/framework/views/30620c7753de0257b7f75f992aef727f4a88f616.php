@@ -130,7 +130,9 @@
             $.ajax({
                 type : 'get',
                 url : '<?php echo e(route('search')); ?>',
-                data:{'search':$value},
+                data:{
+                    'search':$value,
+                    'login': "yes"},
                 success:function(data){
                     $('.container').html(data);
                 }

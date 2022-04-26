@@ -429,9 +429,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-save btn-block mt-4" onclick="return confirm('Apakah anda yakin untuk mengubah data ini?')">
-                            Save
-                        </button>
+                        
+                        <a class="btn btn-save btn-block mt-4" id="btnsubmit">Save</a>
+
                     </div>
                 </form>
             </div>
@@ -461,6 +461,22 @@
         var nom = document.getElementById('nom_pajak');
         var bpjs = document.getElementById('bpjs');
         var diterima = document.getElementById('jumlah_diterima');
+
+        $("#").on('click',function(e){
+            swal({
+                title: "Apakah anda yakin?",
+                text: 'Data ini akan diubah secara permanen!',
+                icon: "warning",
+                buttons: ["Cancel", "Yes!"],
+                dangerMode: true,
+            })
+            .then(function(value) {
+                if (value) {
+                    $('#update-guru').submit();
+                }
+            });
+            return false;
+        });
 
         $(".row").keyup(function(){
             jml.value = Number(jan.value) + Number(feb.value) + Number(mar.value) + Number(apr.value) + Number(mei.value) + Number(jun.value) + Number(jul.value) + Number(agu.value) + Number(sep.value) + Number(okt.value) + Number(nov.value) + Number(des.value);

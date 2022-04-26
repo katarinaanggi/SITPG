@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Cabdin;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kota extends Model
 {
@@ -13,8 +15,11 @@ class Kota extends Model
         'nama_kota'
     ];
 
-    public function gurus()
-    {
-        return $this->hasMany(Gurus::class);
+    public function cabdin() {
+        return $this->belongsTo(Cabdin::class);
+    }
+
+    public function users() {
+        return $this->hasMany(User::class);
     }
 }

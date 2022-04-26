@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Berita;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
 {
@@ -23,6 +24,10 @@ class Admin extends Authenticatable
         'phone',
         'password',
     ];
+
+    public function berita() {
+        return $this->hasMany(Berita::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

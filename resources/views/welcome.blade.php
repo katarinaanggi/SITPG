@@ -181,7 +181,7 @@
                 @else 
                   <div class="testimonial-item">
                     <div class="testimonial-text">
-                      <p>Not found.</p>
+                      <p>Tidak ada berita terbaru.</p>
                     </div>
                   </div>
                 @endif 
@@ -292,8 +292,13 @@
                       <div class="contact-us">
                           <div class="contact-address">
                               <p>Jl. Pemuda No.134, Sekayu Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 70132. Gedung D Lt. 2</p>
-                              <p class="phone">Phone: <span>(024-3515301)</span></p>
-                              <p class="email">E-mail: <span>()</span></p>
+                              <p class="operasional">Jam Operasional: 
+                                <span>
+                                  <br>Senin-Kamis pukul 07.00 - 15.30 <br> Jumat pukul 07.30 - 14.00
+                                </span>
+                              </p>
+                              {{-- <p class="phone">Phone: <span>(024-3515301)</span></p> --}}
+                              {{-- <p class="email">E-mail: <span>()</span></p> --}}
                           </div>
                       </div>
                   </div>
@@ -368,7 +373,9 @@
           $.ajax({
               type : 'get',
               url : '{{ route('search') }}',
-              data:{'search':$value},
+              data:{
+                'search':$value,
+                'login': "no" },
               success:function(data){
                   $('.hasilnya').html(data);
               }

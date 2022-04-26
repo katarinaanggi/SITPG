@@ -3,36 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SITPG | {{ $title }}</title>
+    <title>SITPG | <?php echo e($title); ?></title>
 
-    {{-- fonts --}}
+    
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"> 
 
-    {{-- bootstrap --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/bootstrap.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/app.css')); ?>">
 
-    {{-- datatable --}}
+    
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/fc-4.0.1/fh-3.2.1/r-2.2.9/datatables.min.css"/>
     
-    {{-- extra component --}}
-    <link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" />
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg" type="image/x-icon') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
+    
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/choices.js/choices.min.css')); ?>" />
+    <link rel="shortcut icon" href="<?php echo e(asset('assets/images/favicon.svg" type="image/x-icon')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/sweetalert2/sweetalert2.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')); ?>">
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     
-    {{-- css --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/ungu.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">  
     
-    @yield('style')
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/ungu.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">  
+    
+    <?php echo $__env->yieldContent('style'); ?>
 
 </head>
 <body>
-    @include('sweetalert::alert')
+    <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div id="app">
         <div id="main-content">
             <div class="page-heading"> 
@@ -41,26 +41,27 @@
                         <div class="page-title">
                             <div class="row">
                                 <div class="col-12 col-md-6 order-md-1 order-last">
-                                    <a href="{{ URL::previous() }}"><i class="bi bi-arrow-return-left" style="font-size: 20px"></i></a>
+                                    <a href="<?php echo e(URL::previous()); ?>"><i class="bi bi-arrow-return-left" style="font-size: 20px"></i></a>
                                 </div>
                             </div>
                         </div>        
                         
                         <div class="container">
                             <div class="article-meta text-center">
-                                <h1 class="headline">{{ $berita->judul }}</h1>
+                                <h1 class="headline"><?php echo e($berita->judul); ?></h1>
                                 <div class="author">
-                                    <p class="byline">by <b>{{ $berita->admin->name }}</b> {{ $berita->created_at->format('M d, Y') }}</p>
+                                    <p class="byline">by <b><?php echo e($berita->admin->name); ?>,</b> <?php echo e($berita->created_at->format('M d, Y')); ?></p>
                                 </div>
                             </div>
                             <div class="article">
                                 <br>
-                                {!! $berita->isi !!}
+                                <?php echo $berita->isi; ?>
+
                                 <aside>
                                     <blockquote class="bq-short">
-                                        @if ($berita->nama_file)
-                                            <a href="{{ route('downloadFile', $berita->nama_file) }}" class="mr-auto"><b>Download file : {{ substr($berita->nama_file,11,strlen($berita->nama_file)) }}</b></a>
-                                        @endif
+                                        <?php if($berita->nama_file): ?>
+                                            <a href="<?php echo e(route('downloadFile', $berita->nama_file)); ?>" class="mr-auto"><b>Download file : <?php echo e(substr($berita->nama_file,11,strlen($berita->nama_file))); ?></b></a>
+                                        <?php endif; ?>
                                     </blockquote>
                                 </aside>
                             </div>
@@ -81,29 +82,29 @@
             </div>
         </div>
     </div>
-    {{-- extra component --}}
-    <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/mazer.js') }}"></script>
+    
+    <script src="<?php echo e(asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/mazer.js')); ?>"></script>
     <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
-    <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/form-element-select.js') }}"></script>
+    <script src="<?php echo e(asset('assets/vendors/choices.js/choices.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/pages/form-element-select.js')); ?>"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     
-    {{-- bootstrap --}}
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    
+    <script src="<?php echo e(asset('assets/js/bootstrap.bundle.min.js')); ?>"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     
-    {{-- datatable --}}
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/fc-4.0.1/fh-3.2.1/r-2.2.9/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.11.4/dataRender/ellipsis.js"></script>
     
-    @yield('datatable')
+    <?php echo $__env->yieldContent('datatable'); ?>
     
     <script>
         $(document).ready(function() {
@@ -111,11 +112,11 @@
                 var cabdinId = this.value;
                 $('#kota').html('');
                 $.ajax({
-                    url: '{{ route('admin.get_kota') }}?id_cabdin='+cabdinId,
+                    url: '<?php echo e(route('admin.get_kota')); ?>?id_cabdin='+cabdinId,
                     type: "POST",
                     data: {
                         cabdinId: cabdinId,
-                        _token: '{{csrf_token()}}' 
+                        _token: '<?php echo e(csrf_token()); ?>' 
                     },
                     dataType : 'json',
                     success: function(result){
@@ -129,7 +130,7 @@
         });
     </script>
     
-    @yield('script')
+    <?php echo $__env->yieldContent('script'); ?>
 
     <script type="text/javascript">
         // Set delete confirmation alert
@@ -155,4 +156,4 @@
     </script>
         
 </body>
-</html>
+</html><?php /**PATH E:\IF\Semester 5\PBP\Laravel\SITPG\resources\views/detail.blade.php ENDPATH**/ ?>
