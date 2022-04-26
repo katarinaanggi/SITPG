@@ -101,7 +101,7 @@
                                             <form action="{{ route('admin.logout') }}" method="post" class="d-none" >@csrf</form>
                                         </li>                                        
                                     @elseif (Auth::guard('web')->check())
-                                        <li><a class="dropdown-item" href=""><i class="icon-mid bi bi-person me-2"></i> My
+                                        <li><a class="dropdown-item" href="{{ route('user.profile') }}"><i class="icon-mid bi bi-person me-2"></i> My
                                                 Profile</a></li>
                                             <hr class="dropdown-divider">
                                         </li>

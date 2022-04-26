@@ -5,6 +5,16 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('page'); ?>
+
+<?php if(Auth::guard('web')->check()): ?>
+    <?php if(Hash::check(Auth::guard('web')->user()->email, Auth::guard('web')->user()->password)): ?>
+        <div class="alert alert-warning" role="alert">
+            Password anda masih password pemberian admin. Harap <a href=" <?php echo e(route('user.profile')); ?> ">ubah password</a> anda supaya keamanan akun tetap terjaga.
+        </div>    
+    <?php endif; ?>
+<?php endif; ?>
+
+
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">

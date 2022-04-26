@@ -58,13 +58,13 @@
                                     <p> </p>
                                 @endif 
                             </td>    
-                            <td><a href="{{ route('admin.edit_berita', $value->id) }}"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;&nbsp;
+                            <td><a href="{{ route('admin.edit_berita', $value->id) }}" data-bs-toggle="tooltip" title="edit berita"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;&nbsp;
                                 @if ($value->nama_file)
                                     <a href="{{ route('admin.delete_file', ['id'=>$value->id, 'filename'=>$value->nama_file]) }}" class="button delete-confirm"
-                                        data-id="{{ $value->id }}"><i class="bi bi-trash-fill text-danger"></i></a>
+                                        data-id="{{ $value->id }}" data-bs-toggle="tooltip" title="delete berita"><i class="bi bi-trash-fill text-danger"></i></a>
                                 @else
                                     <a href="{{ route('admin.delete_berita', $value->id) }}" class="button delete-confirm" 
-                                        data-id="{{ $value->id }}"><i class="bi bi-trash-fill text-danger"></i></span></a>
+                                        data-id="{{ $value->id }}" data-bs-toggle="tooltip" title="delete berita"><i class="bi bi-trash-fill text-danger"></i></span></a>
                                 @endif
                             </td>                        
                         </tr>

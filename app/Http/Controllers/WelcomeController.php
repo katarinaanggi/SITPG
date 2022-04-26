@@ -37,7 +37,7 @@ class WelcomeController extends Controller
 
     public function detailBerita ($id) {
         $berita = Berita::find($id);
-        return view('detail',[
+        return view('dashboard.detail',[
             'title' => "Detail Berita",
             'berita' => $berita]);
     }

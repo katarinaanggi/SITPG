@@ -98,6 +98,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/edit-user/{id}', [UserManagementController::class, 'edit'])->name('edit_user');
         Route::patch('/update-user/{id}', [UserManagementController::class, 'update'])->name('update_user');
         Route::get('/delete-user/{id}', [UserManagementController::class, 'destroy'])->name('delete_user');
+        Route::get('/reset-user/{id}', [UserManagementController::class, 'reset'])->name('reset_user');
         Route::get('/data-user', function() {
             return DataTables::of(User::join('kota','users.kota', '=', 'kota.id')->get(['users.*', 'kota.nama_kota']))
                 ->addColumn('action', 'dashboard.userManagement.action')

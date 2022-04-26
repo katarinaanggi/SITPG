@@ -211,4 +211,17 @@ class UserManagementController extends Controller
         return redirect()->route('admin.userManagement')->with('success','Data berhasil dihapus');
     }
 
+    /**
+     * Reset password.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function reset($id)
+    {
+        $resetpass = Hash::make(User::find($id)->value('email'));
+        User::where('id','=', $id)->update(['password' => $resetpass]);
+        return redirect()->route('admin.userManagement')->with('success','Password berhasil direset. Password menjadi email dari user tersebut.');
+    }
+
 }

@@ -5,6 +5,16 @@
 @endsection
 
 @section('page')
+
+@if (Auth::guard('web')->check())
+    @if (Hash::check(Auth::guard('web')->user()->email, Auth::guard('web')->user()->password))
+        <div class="alert alert-warning" role="alert">
+            Password anda masih password pemberian admin. Harap <a href=" {{ route('user.profile') }} ">ubah password</a> anda supaya keamanan akun tetap terjaga.
+        </div>    
+    @endif
+@endif
+
+
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">

@@ -12,7 +12,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo e(asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')); ?>">
-        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="<?php echo e(asset('assets/css/landing/bootstrap.min.css')); ?>">
@@ -29,7 +30,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="<?php echo e(asset('assets/css/welcome.css')); ?>">
-    </head>
+    </head> 
     <body >
 
       <!-- Header Section Start -->
@@ -101,8 +102,8 @@
       <!-- Header Section End --> 
 
       <!-- recent Section Start -->
-      <div id="recent" class="section" data-stellar-background-ratio="0.1">
-        <div class="container">
+      <div id="recent" class="section" data-stellar-background-ratio="0.1" style="background-color: #F4FCFA">
+        <div class="container" >
           <div class="row justify-content-md-center">
             <div class="col-md-12">
               <div class="touch-slider owl-carousel owl-theme">
@@ -290,7 +291,6 @@
           <div class="contact-form">
           <div class="container">
               <h3>Bidang Ketenagaan SMK</h3>
-              
               <div class="row">     
                   <div class="col-lg-6 col-sm-6 col-xs-12">
                       <div class="contact-us">
@@ -301,8 +301,6 @@
                                   <br>Senin-Kamis pukul 07.00 - 15.30 <br> Jumat pukul 07.30 - 14.00
                                 </span>
                               </p>
-                              
-                              
                           </div>
                       </div>
                   </div>
@@ -349,43 +347,42 @@
         </div>
       </div>      
 
-    <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="<?php echo e(asset('assets/js/landing/jquery-min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/landing/popper.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/landing/bootstrap.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/landing/jquery.mixitup.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/landing/nivo-lightbox.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/landing/owl.carousel.js')); ?>"></script>    
-    <script src="<?php echo e(asset('assets/js/landing/jquery.stellar.min.js')); ?>"></script>    
-    <script src="<?php echo e(asset('assets/js/landing/jquery.nav.js')); ?>"></script>    
-    <script src="<?php echo e(asset('assets/js/landing/scrolling-nav.js')); ?>"></script>    
-    <script src="<?php echo e(asset('assets/js/landing/jquery.easing.min.js')); ?>"></script>    
-    
-    <script src="<?php echo e(asset('assets/js/landing/jquery.slicknav.js')); ?>"></script>     
-    <script src="<?php echo e(asset('assets/js/landing/wow.js')); ?>"></script>   
-    <script src="<?php echo e(asset('assets/js/landing/jquery.vide.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/landing/jquery.counterup.min.js')); ?>"></script>    
-    <script src="<?php echo e(asset('assets/js/landing/jquery.magnific-popup.min.js')); ?>"></script>    
-    <script src="<?php echo e(asset('assets/js/landing/waypoints.min.js')); ?>"></script>    
-    <script src="<?php echo e(asset('assets/js/landing/form-validator.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/landing/contact-form-script.js')); ?>"></script>   
-    <script src="<?php echo e(asset('assets/js/landing/main.js')); ?>"></script>
+      <!-- jQuery first, then Tether, then Bootstrap JS. -->
+      <script src="<?php echo e(asset('assets/js/landing/jquery-min.js')); ?>"></script>
+      <script src="<?php echo e(asset('assets/js/landing/popper.min.js')); ?>"></script>
+      <script src="<?php echo e(asset('assets/js/landing/bootstrap.min.js')); ?>"></script>
+      <script src="<?php echo e(asset('assets/js/landing/jquery.mixitup.js')); ?>"></script>
+      <script src="<?php echo e(asset('assets/js/landing/nivo-lightbox.js')); ?>"></script>
+      <script src="<?php echo e(asset('assets/js/landing/owl.carousel.js')); ?>"></script>    
+      <script src="<?php echo e(asset('assets/js/landing/jquery.stellar.min.js')); ?>"></script>    
+      <script src="<?php echo e(asset('assets/js/landing/jquery.nav.js')); ?>"></script>    
+      <script src="<?php echo e(asset('assets/js/landing/scrolling-nav.js')); ?>"></script>    
+      <script src="<?php echo e(asset('assets/js/landing/jquery.easing.min.js')); ?>"></script>    
+      <script src="<?php echo e(asset('assets/js/landing/jquery.slicknav.js')); ?>"></script>     
+      <script src="<?php echo e(asset('assets/js/landing/wow.js')); ?>"></script>   
+      <script src="<?php echo e(asset('assets/js/landing/jquery.vide.js')); ?>"></script>
+      <script src="<?php echo e(asset('assets/js/landing/jquery.counterup.min.js')); ?>"></script>    
+      <script src="<?php echo e(asset('assets/js/landing/jquery.magnific-popup.min.js')); ?>"></script>    
+      <script src="<?php echo e(asset('assets/js/landing/waypoints.min.js')); ?>"></script>    
+      <script src="<?php echo e(asset('assets/js/landing/form-validator.min.js')); ?>"></script>
+      <script src="<?php echo e(asset('assets/js/landing/contact-form-script.js')); ?>"></script>   
+      <script src="<?php echo e(asset('assets/js/landing/main.js')); ?>"></script>
 
-    <script type="text/javascript">
-      $('#search').on('keyup',function(){
-          $value=$(this).val();
-          $.ajax({
-              type : 'get',
-              url : '<?php echo e(route('search')); ?>',
-              data:{
-                'search':$value,
-                'login': "no" },
-              success:function(data){
-                  $('.hasilnya').html(data);
-              }
-          });
-      })
-    </script>
+      <script type="text/javascript">
+        $('#search').on('keyup',function(){
+            $value=$(this).val();
+            $.ajax({
+                type : 'get',
+                url : '<?php echo e(route('search')); ?>',
+                data:{
+                  'search':$value,
+                  'login': "no" },
+                success:function(data){
+                    $('.hasilnya').html(data);
+                }
+            });
+        })
+      </script>
     </body>
 </html>
 <?php /**PATH E:\IF\Semester 5\PBP\Laravel\SITPG\resources\views/welcome.blade.php ENDPATH**/ ?>

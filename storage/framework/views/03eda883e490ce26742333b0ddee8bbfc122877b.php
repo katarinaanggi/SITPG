@@ -50,7 +50,7 @@
                             <div class="article-meta text-center">
                                 <h1 class="headline"><?php echo e($berita->judul); ?></h1>
                                 <div class="author">
-                                    <p class="byline">by <b><?php echo e($berita->admin->name); ?>,</b> <?php echo e($berita->created_at->format('M d, Y')); ?></p>
+                                    <p class="byline">by <b><?php echo e($berita->admin->name); ?></b> <?php echo e($berita->created_at->format('M d, Y')); ?></p>
                                 </div>
                             </div>
                             <div class="article">
@@ -156,4 +156,4 @@
     </script>
         
 </body>
-</html><?php /**PATH E:\IF\Semester 5\PBP\Laravel\SITPG\resources\views/detail.blade.php ENDPATH**/ ?>
+</html><?php /**PATH E:\IF\Semester 5\PBP\Laravel\SITPG\resources\views/dashboard/detail.blade.php ENDPATH**/ ?>

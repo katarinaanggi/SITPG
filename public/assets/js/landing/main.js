@@ -66,7 +66,7 @@
    ========================================================================== */
     var owl = $(".touch-slider");
     owl.owlCarousel({
-      navigation: false,
+      navigation: true,
       pagination: true,
       slideSpeed: 1000,
       stopOnHover: true,
@@ -78,8 +78,8 @@
       itemsMobile: [479, 1]
     });
 
-    $('.touch-slider').find('.owl-prev').html('<i class="fa fa-chevron-left"></i>');
-    $('.touch-slider').find('.owl-next').html('<i class="fa fa-chevron-right"></i>');
+    $('.touch-slider').find('.owl-prev').html('<i class="bi bi-chevron-left"></i>');
+    $('.touch-slider').find('.owl-next').html('<i class="bi bi-chevron-right"></i>');
 
 /* 
    Sticky Nav

@@ -240,28 +240,12 @@
                                 <div class="form-group row mb-3">
                                     <label for="gaji_pokok" class="col-sm-3 col-form-label">Gaji Pokok: </label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="gaji_pokok" name="gaji_pokok" value="{{ $guru->gaji_pokok }}">
+                                        <input type="number" class="form-control itungan" id="gaji_pokok" name="gaji_pokok" value="{{ $guru->gaji_pokok }}">
                                         @error('gaji_pokok')
                                             <div class="text-danger">*{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
-
-                                {{-- <div class="form-group row mb-3">
-                                    <label for="triw" class="col-sm-3 col-form-label">Triwulan: </label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control choices" id="triw" name="triw" >
-                                            <option value="">--pilih triwulan--</option>
-                                            <option value="1" {{ old('triw') == '1' ? 'selected' : '' }}>I</option>
-                                            <option value="2" {{ old('triw') == '2' ? 'selected' : '' }}>II</option>
-                                            <option value="3" {{ old('triw') == '3' ? 'selected' : '' }}>III</option>
-                                            <option value="4" {{ old('triw') == '4' ? 'selected' : '' }}>IV</option>
-                                        </select>
-                                        @error('triw')
-                                            <div class="text-danger">*{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div> --}}
                             </div>
 
                             <div class="col">
@@ -288,21 +272,21 @@
                                         <div class="form-group row mb-3">
                                             <label for="jan" class="col-sm-4 col-form-label">Januari: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="jan" name="jan" value="{{ $guru->jan }}">
+                                                <input type="number" class="form-control itungan " id="jan" name="jan" value="{{ $guru->jan }}">
                                             </div>
                                         </div>
                     
                                         <div class="form-group row mb-3">
                                             <label for="feb" class="col-sm-4 col-form-label">Februari: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="feb" name="feb" value="{{ $guru->feb }}">
+                                                <input type="number" class="form-control itungan" id="feb" name="feb" value="{{ $guru->feb }}">
                                             </div>
                                         </div>
                     
                                         <div class="form-group row mb-3">
                                             <label for="mar" class="col-sm-4 col-form-label">Maret: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="mar" name="mar" value="{{ $guru->mar }}">
+                                                <input type="number" class="form-control itungan" id="mar" name="mar" value="{{ $guru->mar }}">
                                             </div>
                                         </div>
                                     </div>
@@ -310,21 +294,21 @@
                                         <div class="form-group row mb-3">
                                             <label for="apr" class="col-sm-4 col-form-label">April: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="apr" name="apr" value="{{ $guru->apr }}">
+                                                <input type="number" class="form-control itungan" id="apr" name="apr" value="{{ $guru->apr }}">
                                             </div>
                                         </div>
                     
                                         <div class="form-group row mb-3">
                                             <label for="mei" class="col-sm-4 col-form-label">Mei: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="mei" name="mei" value="{{ $guru->mei }}">
+                                                <input type="number" class="form-control itungan" id="mei" name="mei" value="{{ $guru->mei }}">
                                             </div>
                                         </div>
                     
                                         <div class="form-group row mb-3">
                                             <label for="jun" class="col-sm-4 col-form-label">Juni: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="jun" name="jun" value="{{$guru->jun }}">
+                                                <input type="number" class="form-control itungan" id="jun" name="jun" value="{{$guru->jun }}">
                                             </div>
                                         </div>
                                     </div>
@@ -332,21 +316,21 @@
                                         <div class="form-group row mb-3">
                                             <label for="jul" class="col-sm-4 col-form-label">Juli: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="jul" name="jul" value="{{ $guru->jul }}">
+                                                <input type="number" class="form-control itungan" id="jul" name="jul" value="{{ $guru->jul }}">
                                             </div>
                                         </div>
                     
                                         <div class="form-group row mb-3">
                                             <label for="agu" class="col-sm-4 col-form-label">Agustus: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="agu" name="agu" value="{{ $guru->agu }}">
+                                                <input type="number" class="form-control itungan" id="agu" name="agu" value="{{ $guru->agu }}">
                                             </div>
                                         </div>
                     
                                         <div class="form-group row mb-3">
                                             <label for="sep" class="col-sm-4 col-form-label">September: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="sep" name="sep" value="{{ $guru->sep }}">
+                                                <input type="number" class="form-control itungan" id="sep" name="sep" value="{{ $guru->sep }}">
                                             </div>
                                         </div>
                                     </div>
@@ -354,21 +338,21 @@
                                         <div class="form-group row mb-3">
                                             <label for="okt" class="col-sm-4 col-form-label">Oktober: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="okt" name="okt" value="{{ $guru->okt }}">
+                                                <input type="number" class="form-control itungan" id="okt" name="okt" value="{{ $guru->okt }}">
                                             </div>
                                         </div>
                     
                                         <div class="form-group row mb-3">
                                             <label for="nov" class="col-sm-4 col-form-label">November: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="nov" name="nov" value="{{ $guru->nov }}">
+                                                <input type="number" class="form-control itungan" id="nov" name="nov" value="{{ $guru->nov }}">
                                             </div>
                                         </div>
                     
                                         <div class="form-group row mb-3">
                                             <label for="des" class="col-sm-4 col-form-label">Desember: </label>
                                             <div class="col-sm-8">
-                                                <input type="number" class="form-control" id="des" name="des" value="{{ $guru->des }}">
+                                                <input type="number" class="form-control itungan" id="des" name="des" value="{{ $guru->des }}">
                                             </div>
                                         </div>
                                     </div>
@@ -378,7 +362,7 @@
                             <code><hr></code>
                         </div>
 
-                        <div class="row">
+                        <div class="itungitung">
                             <div class="form-group row mb-3">
                                 <label for="jumlah" class="col-sm-3 col-form-label">Jumlah: </label>
                                 <div class="col-sm-9">
@@ -462,7 +446,7 @@
         var bpjs = document.getElementById('bpjs');
         var diterima = document.getElementById('jumlah_diterima');
 
-        $("#").on('click',function(e){
+        $("#btnsubmit").on('click',function(e){
             swal({
                 title: "Apakah anda yakin?",
                 text: 'Data ini akan diubah secara permanen!',
@@ -478,8 +462,44 @@
             return false;
         });
 
-        $(".row").keyup(function(){
-            jml.value = Number(jan.value) + Number(feb.value) + Number(mar.value) + Number(apr.value) + Number(mei.value) + Number(jun.value) + Number(jul.value) + Number(agu.value) + Number(sep.value) + Number(okt.value) + Number(nov.value) + Number(des.value);
+        if(jan.value != "" && feb.value != "" && mar.value != "") {
+            var TW = 1;
+        }
+        else if(apr.value != "" && mei.value != "" && jun.value != "") {
+            var TW = 2;
+        }
+        else if(jul.value != "" && agu.value != "" && sep.value != "") {
+            var TW = 3;
+        }
+        else if(okt.value != "" && nov.value != "" && des.value != "") {
+            var TW = 4;
+        }
+        else{
+            var TW = 5;
+        }
+
+        $(".itungan").keyup(function(){
+            switch(TW){
+                case 1:
+                    jan.value = feb.value = mar.value = Number(gapok.value);
+                    jml.value = Number(jan.value) + Number(feb.value) + Number(mar.value) + Number(apr.value) + Number(mei.value) + Number(jun.value) + Number(jul.value) + Number(agu.value) + Number(sep.value) + Number(okt.value) + Number(nov.value) + Number(des.value);
+                    break;
+                case 2:
+                    apr.value = mei.value = jun.value = Number(gapok.value);
+                    jml.value = Number(jan.value) + Number(feb.value) + Number(mar.value) + Number(apr.value) + Number(mei.value) + Number(jun.value) + Number(jul.value) + Number(agu.value) + Number(sep.value) + Number(okt.value) + Number(nov.value) + Number(des.value);
+                    break;
+                case 3:
+                    jul.value = agu.value = sep.value = Number(gapok.value);
+                    jml.value = Number(jan.value) + Number(feb.value) + Number(mar.value) + Number(apr.value) + Number(mei.value) + Number(jun.value) + Number(jul.value) + Number(agu.value) + Number(sep.value) + Number(okt.value) + Number(nov.value) + Number(des.value);
+                    break;
+                case 4:
+                    okt.value = nov.value = des.value = Number(gapok.value);
+                    jml.value = Number(jan.value) + Number(feb.value) + Number(mar.value) + Number(apr.value) + Number(mei.value) + Number(jun.value) + Number(jul.value) + Number(agu.value) + Number(sep.value) + Number(okt.value) + Number(nov.value) + Number(des.value);
+                    break;
+            }
+        }); 
+
+        $(".itungitung").keyup(function(){
             nom.value = jml.value*pajak.value/100;
             diterima.value = Number(jml.value) - Number(nom.value) - Number(bpjs.value);
         }); 

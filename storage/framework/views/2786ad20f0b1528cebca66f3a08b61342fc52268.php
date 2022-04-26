@@ -101,7 +101,7 @@
                                             <form action="<?php echo e(route('admin.logout')); ?>" method="post" class="d-none" ><?php echo csrf_field(); ?></form>
                                         </li>                                        
                                     <?php elseif(Auth::guard('web')->check()): ?>
-                                        <li><a class="dropdown-item" href=""><i class="icon-mid bi bi-person me-2"></i> My
+                                        <li><a class="dropdown-item" href="<?php echo e(route('user.profile')); ?>"><i class="icon-mid bi bi-person me-2"></i> My
                                                 Profile</a></li>
                                             <hr class="dropdown-divider">
                                         </li>

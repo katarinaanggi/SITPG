@@ -59,13 +59,13 @@
                                     <p> </p>
                                 <?php endif; ?> 
                             </td>    
-                            <td><a href="<?php echo e(route('admin.edit_berita', $value->id)); ?>"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;&nbsp;
+                            <td><a href="<?php echo e(route('admin.edit_berita', $value->id)); ?>" data-bs-toggle="tooltip" title="edit berita"><i class="bi bi-pencil-square text-warning"></i></a>&nbsp;&nbsp;
                                 <?php if($value->nama_file): ?>
                                     <a href="<?php echo e(route('admin.delete_file', ['id'=>$value->id, 'filename'=>$value->nama_file])); ?>" class="button delete-confirm"
-                                        data-id="<?php echo e($value->id); ?>"><i class="bi bi-trash-fill text-danger"></i></a>
+                                        data-id="<?php echo e($value->id); ?>" data-bs-toggle="tooltip" title="delete berita"><i class="bi bi-trash-fill text-danger"></i></a>
                                 <?php else: ?>
                                     <a href="<?php echo e(route('admin.delete_berita', $value->id)); ?>" class="button delete-confirm" 
-                                        data-id="<?php echo e($value->id); ?>"><i class="bi bi-trash-fill text-danger"></i></span></a>
+                                        data-id="<?php echo e($value->id); ?>" data-bs-toggle="tooltip" title="delete berita"><i class="bi bi-trash-fill text-danger"></i></span></a>
                                 <?php endif; ?>
                             </td>                        
                         </tr>
