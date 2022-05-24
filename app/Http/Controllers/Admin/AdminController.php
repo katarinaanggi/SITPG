@@ -128,7 +128,7 @@ class AdminController extends Controller
             $user->password = bcrypt($request->get('newpassword'));
             $user->updated_at = $current_timestamp;
             $user->save();
-            return redirect()->route('user.profile')->with('success','Password berhasil diubah!');
+            return redirect()->route('admin.profile')->with('success','Password berhasil diubah!');
         }
     }
 

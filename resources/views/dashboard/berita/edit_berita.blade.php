@@ -61,14 +61,26 @@
                         <div class="card-body">
                                 <div class="form-group">
                                     <label for="judul">Judul: </label>
-                                    <input type="text" class="form-control" id="judul" name="judul" value="{{ $berita->judul}}" minlength="5" maxlength="50" required>
-                                    <div class="invalid-feedback">@error('judul')*{{ $message }} @else Judul berita harus diisi minimal 5 karakter dan maksimal 50 karakter. @enderror</div>
+                                    <input type="text" class="form-control" id="judul" name="judul" value="{{ $berita->judul}}" minlength="5" maxlength="255" required>
+                                    @error('judul') 
+                                        <span class="text-danger">*{{$message}}</span>  
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Judul harus diisi minimal 5 karakter dan maksimal 50 karakter.
+                                        </span> 
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="isi">Isi: </label>
                                     <textarea type="text" class="form-control" id="isi" name="isi" required>{{ $berita->isi}}</textarea>
-                                    <div class="invalid-feedback">@error('isi')*{{ $message }} @else Isi berita harus diisi. @enderror</div>
+                                    @error('isi') 
+                                        <span class="text-danger">*{{$message}}</span>  
+                                    @else
+                                        <span class="invalid-feedback">
+                                            Isi berita harus diisi.
+                                        </span> 
+                                    @enderror
                                 </div>
                                 
                                 <div class="custom-file">                                    

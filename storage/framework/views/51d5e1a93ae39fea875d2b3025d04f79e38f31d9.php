@@ -57,28 +57,40 @@
                         <div class="card-body">
                                 <div class="form-group">
                                     <label for="judul">Judul: </label>
-                                    <input type="text" class="form-control" id="judul" name="judul" value="<?php echo e($berita->judul); ?>" minlength="5" maxlength="50" required>
-                                    <div class="invalid-feedback"><?php $__errorArgs = ['judul'];
+                                    <input type="text" class="form-control" id="judul" name="judul" value="<?php echo e($berita->judul); ?>" minlength="5" maxlength="255" required>
+                                    <?php $__errorArgs = ['judul'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php else: ?> Judul berita harus diisi minimal 5 karakter dan maksimal 50 karakter. <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                        <span class="text-danger">*<?php echo e($message); ?></span>  
+                                    <?php else: ?>
+                                        <span class="invalid-feedback">
+                                            Judul harus diisi minimal 5 karakter dan maksimal 50 karakter.
+                                        </span> 
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></div>
+unset($__errorArgs, $__bag); ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="isi">Isi: </label>
                                     <textarea type="text" class="form-control" id="isi" name="isi" required><?php echo e($berita->isi); ?></textarea>
-                                    <div class="invalid-feedback"><?php $__errorArgs = ['isi'];
+                                    <?php $__errorArgs = ['isi'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>*<?php echo e($message); ?> <?php else: ?> Isi berita harus diisi. <?php unset($message);
+$message = $__bag->first($__errorArgs[0]); ?> 
+                                        <span class="text-danger">*<?php echo e($message); ?></span>  
+                                    <?php else: ?>
+                                        <span class="invalid-feedback">
+                                            Isi berita harus diisi.
+                                        </span> 
+                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?></div>
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 
                                 <div class="custom-file">                                    
