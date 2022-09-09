@@ -125,7 +125,7 @@ figcaption {
 
 #news:hover {
     transform: rotate(0);
-    color: var(--aqua);
+    color: var(--army);
 }
 
 #news:before {
@@ -146,11 +146,11 @@ figcaption {
 }
 
 #news:hover .date {
-    color: var(--aqua)
+    color: var(--army)
 }
 
 #news:hover .card-content .card-body h4 a, #news:hover .card-footer a i {
-    color: var(--aqua) !important
+    color: var(--army) !important
 }
 
 #news .card-content .card-body h4 a, #news .card-footer a i {
@@ -165,6 +165,10 @@ figcaption {
 
 #news:hover #cf {
     background-color: var(--hover);
+}
+
+#news:hover #cf button {
+    background-color: var(--army);
 }
 
 .tags {
@@ -187,7 +191,7 @@ figcaption {
 }
 
 #news:hover .tags .tag {
-    background: var(--aqua);
+    background: var(--army);
     color: var(--bg)
 }
 
@@ -223,7 +227,8 @@ figcaption {
 
 #searchq:focus {
     margin-left: 0%;
-    width: 900px;
+    width: 100%;
+    /* width: 900px; */
 }
 
 .form__icon {

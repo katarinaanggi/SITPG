@@ -290,7 +290,7 @@
       <section id="contact" class="section" data-stellar-background-ratio="-0.2">      
           <div class="contact-form">
           <div class="container">
-              <h3>Bidang Ketenagaan SMK</h3>
+              <h3>Bidang Ketenagaan</h3>
               <div class="row">     
                   <div class="col-lg-6 col-sm-6 col-xs-12">
                       <div class="contact-us">

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">    
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/styles.css') }}">    
 @endsection
 
 @section('page')
@@ -37,35 +37,33 @@
         <div class="card-content">
             <div class="card-body text-center">
                 <div class="tags">
-                        <div class="tag">New!</div>
-                    </div>
-                    <h4 class="card-title">
-                        <a href="{{ route('operator.detail_berita', $cari[0]->id) }}">{{ $cari[0]->judul }}</a>
-                    </h4>
-                    <p class="card-text isinya">
-                        @if(strlen($cari[0]->isi) > 500)
-                        {!! substr($cari[0]->isi,0,500) !!}. . .
-                        @else
-                            {!! $cari[0]->isi !!}
-                        @endif
-                    </p>
-                    <div class="date">{{ \Carbon\Carbon::parse($cari[0]->created_at)->diffForHumans() }}</div>
+                    <div class="tag">New!</div>
                 </div>
-            </div>
-            <div id="cf" class="card-footer d-flex">
-                
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#viewDetails" data-bs-backdrop="false">
-                        Read More
-                    </button>
-                    
-                    @if ($cari[0]->nama_file)
-                    <a href="{{ route('downloadFile', $cari[0]->nama_file) }}" data-bs-toggle="tooltip" title={{$cari[0]->nama_file}}>
-                        <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
-                    </a>
-                @endif 
+                <h4 class="card-title">
+                    <a href="{{ route('operator.detail_berita', $cari[0]->id) }}">{{ $cari[0]->judul }}</a>
+                </h4>
+                <p class="card-text isinya">
+                    @if(strlen($cari[0]->isi) > 500)
+                    {!! substr($cari[0]->isi,0,500) !!}. . .
+                    @else
+                        {!! $cari[0]->isi !!}
+                    @endif
+                </p>
+                <div class="date">{{ \Carbon\Carbon::parse($cari[0]->created_at)->diffForHumans() }}</div>
             </div>
         </div>
+        <div id="cf" class="card-footer d-flex">
+            <button type="button" class="btn readmore" data-bs-toggle="modal" data-bs-target="#viewDetails" data-bs-backdrop="false">
+                Read More
+            </button>
+            
+            @if ($cari[0]->nama_file)
+            <a href="{{ route('downloadFile', $cari[0]->nama_file) }}" data-bs-toggle="tooltip" title={{$cari[0]->nama_file}}>
+                <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
+            </a>
+        @endif 
+    </div>
+</div>
         <!-- Modal -->
         <div class="modal fade" id="viewDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -93,7 +91,7 @@
     <p class="text-center">Not Found</p> 
     @endif
     
-    <i class="bi-search form__icon"></i>
+    {{-- <i class="bi-search form__icon"></i> --}}
     <input type="text" class="searchq form__input" id="searchq" placeholder="Search.." name="search">
     <section class="wrapper">
         <div class="container">

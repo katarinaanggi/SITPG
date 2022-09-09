@@ -11,7 +11,7 @@ class WelcomeController extends Controller
 {
     public function index() {
         $cari = Berita::latest("updated_at")->get();
-        $berita = Berita::orderBy('judul', 'asc')->paginate(20);
+        $berita = Berita::orderBy('judul', 'asc')->paginate(2);
         return view('welcome',[
             'berita' => $berita,
             'cari' => $cari]);

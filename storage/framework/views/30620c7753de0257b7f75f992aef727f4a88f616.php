@@ -1,7 +1,7 @@
 
 
 <?php $__env->startSection('style'); ?>
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">    
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/styles.css')); ?>">    
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('page'); ?>
@@ -37,36 +37,34 @@
         <div class="card-content">
             <div class="card-body text-center">
                 <div class="tags">
-                        <div class="tag">New!</div>
-                    </div>
-                    <h4 class="card-title">
-                        <a href="<?php echo e(route('operator.detail_berita', $cari[0]->id)); ?>"><?php echo e($cari[0]->judul); ?></a>
-                    </h4>
-                    <p class="card-text isinya">
-                        <?php if(strlen($cari[0]->isi) > 500): ?>
-                        <?php echo substr($cari[0]->isi,0,500); ?>. . .
-                        <?php else: ?>
-                            <?php echo $cari[0]->isi; ?>
-
-                        <?php endif; ?>
-                    </p>
-                    <div class="date"><?php echo e(\Carbon\Carbon::parse($cari[0]->created_at)->diffForHumans()); ?></div>
+                    <div class="tag">New!</div>
                 </div>
-            </div>
-            <div id="cf" class="card-footer d-flex">
-                
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#viewDetails" data-bs-backdrop="false">
-                        Read More
-                    </button>
-                    
-                    <?php if($cari[0]->nama_file): ?>
-                    <a href="<?php echo e(route('downloadFile', $cari[0]->nama_file)); ?>" data-bs-toggle="tooltip" title=<?php echo e($cari[0]->nama_file); ?>>
-                        <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
-                    </a>
-                <?php endif; ?> 
+                <h4 class="card-title">
+                    <a href="<?php echo e(route('operator.detail_berita', $cari[0]->id)); ?>"><?php echo e($cari[0]->judul); ?></a>
+                </h4>
+                <p class="card-text isinya">
+                    <?php if(strlen($cari[0]->isi) > 500): ?>
+                    <?php echo substr($cari[0]->isi,0,500); ?>. . .
+                    <?php else: ?>
+                        <?php echo $cari[0]->isi; ?>
+
+                    <?php endif; ?>
+                </p>
+                <div class="date"><?php echo e(\Carbon\Carbon::parse($cari[0]->created_at)->diffForHumans()); ?></div>
             </div>
         </div>
+        <div id="cf" class="card-footer d-flex">
+            <button type="button" class="btn readmore" data-bs-toggle="modal" data-bs-target="#viewDetails" data-bs-backdrop="false">
+                Read More
+            </button>
+            
+            <?php if($cari[0]->nama_file): ?>
+            <a href="<?php echo e(route('downloadFile', $cari[0]->nama_file)); ?>" data-bs-toggle="tooltip" title=<?php echo e($cari[0]->nama_file); ?>>
+                <i class="bi bi-cloud-arrow-down-fill float-right" id="donwnloadfile" style="font-size:26px; "></i>
+            </a>
+        <?php endif; ?> 
+    </div>
+</div>
         <!-- Modal -->
         <div class="modal fade" id="viewDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -94,7 +92,7 @@
     <p class="text-center">Not Found</p> 
     <?php endif; ?>
     
-    <i class="bi-search form__icon"></i>
+    
     <input type="text" class="searchq form__input" id="searchq" placeholder="Search.." name="search">
     <section class="wrapper">
         <div class="container">

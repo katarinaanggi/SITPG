@@ -223,7 +223,7 @@
                                     <ul>
                                         <li>Ukuran file tidak boleh lebih dari 2MB.</li>
                                         <li>Ekstensi yang diperbolehkan hanya xlsx dan xls.</li>
-                                        <li>Data yang dimasukkan tidak boleh lebih dari 10.000 data. Jika terdapat data lebih dari 10.000, diharapkan dipecah terlebih dahulu.</li>
+                                        
                                         <li>Sheet dalam file maksimal 1 sheet.</li>
                                         <li>Penamaan header file sebaiknya sama seperti contoh di bawah ini.</li>
                                         <div class="shot-item">
@@ -331,7 +331,7 @@
                                     <ul>
                                         <li>Ukuran file tidak boleh lebih dari 2MB.</li>
                                         <li>Ekstensi yang diperbolehkan hanya xlsx dan xls.</li>
-                                        <li>Data yang dimasukkan tidak boleh lebih dari 10.000 data. Jika terdapat data lebih dari 10.000, diharapkan dipecah terlebih dahulu.</li>
+                                        
                                         <li>Sheet dalam file maksimal 1 sheet.</li>
                                         <li>Penamaan header file sebaiknya sama seperti contoh di bawah ini.</li>
                                         <div class="shot-item">
